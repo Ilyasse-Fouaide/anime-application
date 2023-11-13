@@ -1,10 +1,11 @@
 import React from 'react';
+import RouterComp from './components/RouterComp'
 
 function App() {
 
   return (
     <>
-      <div className="text-red-500">Hello</div>
+      <RouterComp />
     </>
   )
 }

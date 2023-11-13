@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from './pages/NavBar'
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
 
 function RouterComp() {
   return (
-    <div>RouterComp</div>
+    <RouterProvider router={router} />
   )
 }
 
