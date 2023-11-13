@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from './pages/NavBar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home';
+import Hero from './pages/Hero';
 
 const router = createBrowserRouter([
   {
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Hero />
       },
     ]
   }
