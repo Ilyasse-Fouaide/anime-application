@@ -71,7 +71,7 @@ const dropDownVariants = {
 
 const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
   return (
-    <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked && 'bg-zinc-950'}`} onClick={handleClick}>
+    <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked ? 'bg-zinc-950' : ''}`} onClick={handleClick}>
       {children}
     </li>
   );
