@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
+import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 
 interface AnimeData {
   trailer: {
@@ -82,10 +83,13 @@ function Hero() {
               )}
               <div className='mt-1 text-[14px] text-zinc-200 leading-6'>{anime.synopsis.split("").splice(0, 300).join("") + "..."}</div>
             </div>
-            <div className=''>
-              <div className='bg-[#DD4854] text-zinc-950 font-semibold uppercase inline-flex items-center py-[10px] px-[20px] cursor-pointer'>
+            <div className='flex'>
+              <div className='bg-[#DD4854] mr-3 text-zinc-950 font-semibold uppercase inline-flex items-center py-[7px] px-[20px] cursor-pointer'>
                 <IoIosPlay className="mr-2 text-[23px]" />
-                Start Watching
+                Watch episode
+              </div>
+              <div className='py-[7px] px-[6px] bg-transparent border-2 border-[#DD4854] text-[26px] text-[#DD4854] cursor-pointer'>
+                <IoBookmarkOutline />
               </div>
             </div>
             <div className='flex items-center mt-[60px]'>
