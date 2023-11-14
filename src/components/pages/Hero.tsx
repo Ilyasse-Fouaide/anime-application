@@ -66,21 +66,26 @@ function Hero() {
   }
 
   return (
-    <div className='relative w-full h-[60vh] bg-zinc-950 overflow-x-hidden'>
+    <div className='relative w-full h-[60vh]  overflow-x-hidden'>
       <div className='z-[10] absolute top-0 bottom-0 left-0 w-[2000px] bg-gradient-to-r from-zinc-950'></div>
       <div className='z-[10] absolute bottom-0 right-0 left-0 w-full h-[500px] bg-gradient-to-t from-zinc-950'></div>
       {animeData && animeData.map((anime, key) =>
         <div className={`absolute inset-0 transition-opacity bg-no-repeat bg-cover ${key === index ? 'opacity-100' : 'opacity-0'}`} key={key} style={{ backgroundImage: `url('${anime.trailer.images.maximum_image_url}')` }}>
-          <div className='absolute top-1/2 -translate-y-1/2 left-0 z-[10] px-[65px] max-w-3xl'>
-            <div className='text-[55px] text-zinc-50 font-medium tracking-tighter leading-[60px]'>{anime.title}</div>
-            {anime.genres.map((genre, key) =>
-              <span className='mt-[15px] text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
-            )}
-            <div className='mt-[15px] text-[14px] text-zinc-200 leading-6'>{anime.synopsis.split("").splice(0, 300).join("") + "..."}</div>
+          <div className='absolute h-[500px] flex flex-col justify-between top-1/2 -translate-y-1/2 left-0 z-[10] px-[65px] max-w-3xl'>
+            <div className='text-[55px] text-zinc-50 font-medium tracking-tighter mt-[70px] leading-[60px]'>{anime.title}</div>
+            <div>
+              {anime.genres.map((genre, key) =>
+                <span className='text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
+              )}
+              <div className='mt-1 text-[14px] text-zinc-200 leading-6'>{anime.synopsis.split("").splice(0, 300).join("") + "..."}</div>
+              <div className='mt-10'>
+                <div className='bg-[#DD4854] text-zinc-950 font-semibold uppercase inline-block py-[6px] px-[16px]'>Start Watching</div>
+              </div>
+            </div>
             <div className='flex items-center mt-[60px]'>
               {["", "", "", "", "", ""].map((_el, key) =>
-                <div className={`relative mr-3 h-[10px] transition-all duration-150 bg-zinc-500 rounded-full ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key}>
-                  <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854]  rounded-full ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`} onClick={() => goTo(key)}></div>
+                <div className={`relative mr-3 h-[10px] transition-all duration-150 bg-zinc-500 cursor-pointer rounded-full overflow-hidden ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key} onClick={() => goTo(key)}>
+                  <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854] cursor-pointer rounded-full ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
                 </div>
               )}
             </div>
