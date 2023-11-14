@@ -6,13 +6,14 @@ import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 
 
-type ComponentTypes = {
-  children: React.ReactNode
-}
+interface ComponentTypes {
+  children: React.ReactNode;
+  handleClick?: (event: any) => void;
+};
 
-const NavElement = ({ children }: ComponentTypes): JSX.Element => {
+const NavElement = ({ children, handleClick }: ComponentTypes): JSX.Element => {
   return (
-    <li className='group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950'>
+    <li className='group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950' onClick={handleClick}>
       {children}
     </li>
   );
@@ -25,6 +26,11 @@ const InputElement = (): JSX.Element => {
 }
 
 function NavBar() {
+  const [isClicked, setIsClicked] = React.useState<boolean>(false);
+
+  const handleClick = (): void => {
+    console.log("Clicked")
+  }
 
   return (
     <div>
@@ -36,7 +42,7 @@ function NavBar() {
 
         <nav className='w-full flex justify-between'>
           <ul className='h-full flex'>
-            <NavElement>
+            <NavElement handleClick={handleClick}>
               <span className='group-hover:text-white'>Browse</span>
               <div className='pl-1 text-white'>
                 <RiArrowDropDownLine className="text-[24px]" />
