@@ -116,10 +116,10 @@ function Hero() {
           </div>
         </div>
       )}
-      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer text-[36px]' onClick={handleNext}>
+      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer text-[30px]' onClick={handleNext}>
         <IoIosArrowForward />
       </div>
-      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 left-0 flex items-center justify-center cursor-pointer text-[36px]' onClick={handlePrev}>
+      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 left-0 flex items-center justify-center cursor-pointer text-[30px]' onClick={handlePrev}>
         <IoIosArrowBack />
       </div>
     </div>
