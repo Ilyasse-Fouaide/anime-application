@@ -8,12 +8,13 @@ import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline"
 
 interface ComponentTypes {
   children: React.ReactNode;
-  handleClick?: (event: any) => void;
+  handleClick?: (event?: any) => void;
+  isClicked?: boolean;
 };
 
-const NavElement = ({ children, handleClick }: ComponentTypes): JSX.Element => {
+const NavElement = ({ children, handleClick, isClicked }: ComponentTypes): JSX.Element => {
   return (
-    <li className='group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950' onClick={handleClick}>
+    <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked && 'bg-zinc-950'}`} onClick={handleClick}>
       {children}
     </li>
   );
@@ -29,7 +30,7 @@ function NavBar() {
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
 
   const handleClick = (): void => {
-    console.log("Clicked")
+    setIsClicked(!isClicked);
   }
 
   return (
@@ -42,11 +43,14 @@ function NavBar() {
 
         <nav className='w-full flex justify-between'>
           <ul className='h-full flex'>
-            <NavElement handleClick={handleClick}>
+            <NavElement handleClick={handleClick} isClicked={isClicked}>
               <span className='group-hover:text-white'>Browse</span>
               <div className='pl-1 text-white'>
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
+              {isClicked &&
+                <div className='absolute left-0 top-full w-[500px] h-[200px] bg-zinc-800 cursor-default'></div>
+              }
             </NavElement>
             <NavElement>
               <span className='group-hover:text-white'>Manga</span>
