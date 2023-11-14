@@ -1,6 +1,8 @@
 import React from 'react'
 import shurikenLogo from '../../assets/shuriken-01.svg';
 import { Outlet } from 'react-router-dom'
+import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLine";
+
 
 type ComponentTypes = {
   children: React.ReactNode
@@ -26,13 +28,16 @@ function NavBar() {
         <nav className='w-full flex justify-between'>
           <ul className='h-full flex'>
             <NavElement>
-              <a href="">Browse</a>
+              <span>Browse</span>
+              <div className='pl-1 text-white'>
+                <RiArrowDropDownLine className="w-[24px] h-[24px]" />
+              </div>
             </NavElement>
             <NavElement>
-              <a href="">Manga</a>
+              <span>Manga</span>
             </NavElement>
             <NavElement>
-              <a href="">News</a>
+              <span>News</span>
             </NavElement>
           </ul>
           <div className='flex h-full'>
