@@ -160,7 +160,7 @@ function NavBar() {
         </nav>
 
       </div>
-      <div className={`${isClicked && 'opacity-50'}`}>
+      <div className={`${isClicked ? 'opacity-50' : ''}`}>
         <Outlet />
       </div>
     </div>
