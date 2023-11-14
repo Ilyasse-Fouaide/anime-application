@@ -30,12 +30,18 @@ function NavBar() {
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
 
   const handleClick = (): void => {
+    const bodyElement: HTMLBodyElement | null = document.querySelector('body');
     setIsClicked(!isClicked);
+    if (!isClicked) {
+      bodyElement?.classList.add('overflow-hidden')
+    } else {
+      bodyElement?.classList.remove('overflow-hidden')
+    }
   }
 
   return (
     <div>
-      <div className='w-full h-[60px] bg-zinc-800 px-[65px] flex'>
+      <div className='sticky top-0 w-full h-[60px] bg-zinc-800 px-[65px] flex'>
 
         <a href='' className='w-[170px] px-[18px] h-full flex justify-center items-center'>
           <img src={shurikenLogo} alt="Shuriken Logo" className='w-full' />
@@ -49,7 +55,7 @@ function NavBar() {
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
               {isClicked &&
-                <div className='absolute left-0 top-full w-[500px] h-[200px] bg-zinc-800 cursor-default'></div>
+                <div className='absolute left-0 top-full w-[500px] h-[200px] bg-zinc-800 rounded-b-md cursor-default'></div>
               }
             </NavElement>
             <NavElement>
@@ -71,7 +77,10 @@ function NavBar() {
         </nav>
 
       </div>
-      <Outlet />
+      <div className={`${isClicked && 'opacity-50'}`}>
+        <Outlet />
+      </div>
+      <div className={`h-[500vh]`}></div>
     </div>
   )
 }
