@@ -71,11 +71,11 @@ function Hero() {
   }
 
   return (
-    <div className='relative w-full h-[60vh]  overflow-x-hidden'>
+    <div className='relative w-full h-[600px] overflow-x-hidden'>
       <div className='z-[10] absolute top-0 bottom-0 left-0 w-[2000px] bg-gradient-to-r from-zinc-950'></div>
       <div className='z-[10] absolute bottom-0 right-0 left-0 w-full h-[500px] bg-gradient-to-t from-zinc-950'></div>
       {animeData && animeData.map((anime, key) =>
-        <div className={`absolute inset-0  bg-no-repeat bg-cover bg-top ${key === index ? 'opacity-100' : 'opacity-0'}`} key={key} style={{ backgroundImage: `url('${anime.trailer.images.maximum_image_url}')` }}>
+        <div className={`absolute inset-0 bg-no-repeat bg-cover bg-top ${key === index ? 'opacity-100' : 'opacity-0'}`} key={key} style={{ backgroundImage: `url('${anime.trailer.images.maximum_image_url}')` }}>
           <div className='absolute h-[500px] flex flex-col justify-between top-1/2 -translate-y-1/2 left-0 z-[10] px-[65px] max-w-3xl'>
             <div className='text-[55px] text-zinc-50 font-medium tracking-tighter mt-[70px] leading-[60px]'>
               {anime.title.length >= 20 ? anime.title.split("").splice(0, 20).join("") + "..." : anime.title}
