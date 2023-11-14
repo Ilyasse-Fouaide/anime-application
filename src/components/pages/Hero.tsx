@@ -51,7 +51,7 @@ function Hero() {
   React.useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
 
@@ -73,6 +73,13 @@ function Hero() {
               <span className='mt-[15px] text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
             )}
             <div className='mt-[15px] text-[14px] text-zinc-200 leading-6'>{anime.synopsis.split("").splice(0, 300).join("") + "..."}</div>
+            <div className='flex items-center mt-[60px]'>
+              {["", "", "", "", "", ""].map((_el, key) =>
+                <div className={`relative mr-3 h-[10px] transition-all duration-150 bg-zinc-500 rounded-full ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key}>
+                  <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854]  rounded-full ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
