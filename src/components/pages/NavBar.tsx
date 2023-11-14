@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLine";
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 interface NavElementType {
@@ -44,7 +45,16 @@ const search: Search[] = [
   { search: 'Alphabetic' },
   { search: 'Simulcast Season' },
   { search: 'Characters' },
-]
+];
+
+const variants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
+  }
+}
 
 const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
   return (
@@ -88,28 +98,30 @@ function NavBar() {
               <div className='pl-1 text-white'>
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
-              {isClicked &&
-                <div className='absolute left-0 top-full w-[862px] py-[10px] text-[14px] text-zinc-50 bg-zinc-950 rounded-b-md flex justify-center pointer-events-auto'>
-                  <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
-                    <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
-                    {search.map(({ search }, key) =>
-                      <>
-                        <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{search}</div>
-                      </>
-                    )}
-                  </div>
-                  <div className='w-full'>
-                    <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Genre</div>
-                    <div className='grid grid-cols-3'>
-                      {genres.map(({ genre }, key) =>
+              <AnimatePresence>
+                {isClicked &&
+                  <motion.div variants={variants} initial="hidden" animate="visible" exit="hidden" className='absolute left-0 top-full w-[862px] py-[10px] text-[14px] text-zinc-50 bg-zinc-950 rounded-b-md flex justify-center pointer-events-auto'>
+                    <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
+                      <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
+                      {search.map(({ search }, key) =>
                         <>
-                          <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</div>
+                          <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{search}</div>
                         </>
                       )}
                     </div>
-                  </div>
-                </div>
-              }
+                    <div className='w-full'>
+                      <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Genre</div>
+                      <div className='grid grid-cols-3'>
+                        {genres.map(({ genre }, key) =>
+                          <>
+                            <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                }
+              </AnimatePresence>
             </NavElement>
             <NavElement>
               <span className='group-hover:text-white'>Manga</span>
