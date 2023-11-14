@@ -18,7 +18,14 @@ const NavElement = ({ children }: ComponentTypes): JSX.Element => {
   );
 };
 
+const InputElement = (): JSX.Element => {
+  return (
+    <input type="text" className='w-[420px] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm' />
+  )
+}
+
 function NavBar() {
+
   return (
     <div>
       <div className='w-full h-[60px] bg-zinc-800 px-[65px] flex'>
@@ -44,7 +51,7 @@ function NavBar() {
           </ul>
           <div className='flex h-full'>
             <div className='relative px-[18px] flex items-center'>
-              <input type="text" className='w-[420px] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm' />
+              <InputElement />
               <IoSearch className="text-[18px] absolute top-1/2 -translate-y-1/2 left-7 cursor-pointer" />
             </div>
             <NavElement>
