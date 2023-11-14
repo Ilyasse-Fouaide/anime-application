@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
@@ -13,6 +13,8 @@ interface AnimeData {
 
 function Hero() {
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [index, setIndex] = useState<number>(0);
 
   React.useEffect(() => {
     const fetchAnime = () => {
@@ -20,16 +22,22 @@ function Hero() {
         .then((response) => {
           console.log(response.data.data[0]);
           setAnimeData(response.data.data);
+          setLoading(false);
         })
         .catch((error) => {
           if (error.message === "Network Error") {
             console.log("Network Error")
           }
           console.log(error)
+          setLoading(false);
         });
     }
     fetchAnime();
   }, []);
+
+  if (loading) {
+    return "Loading ...";
+  }
 
   return (
     <div className='relative w-full h-[calc(75vh)] bg-slate-950'>
