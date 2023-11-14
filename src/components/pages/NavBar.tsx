@@ -6,13 +6,13 @@ import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 
 
-interface ComponentTypes {
+interface NavElementType {
   children: React.ReactNode;
   handleClick?: (event?: any) => void;
   isClicked?: boolean;
 };
 
-const NavElement = ({ children, handleClick, isClicked }: ComponentTypes): JSX.Element => {
+const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
   return (
     <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked && 'bg-zinc-950'}`} onClick={handleClick}>
       {children}
