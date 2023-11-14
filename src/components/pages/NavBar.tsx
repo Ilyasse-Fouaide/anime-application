@@ -8,7 +8,7 @@ type ComponentTypes = {
 
 const NavElement = ({ children }: ComponentTypes): JSX.Element => {
   return (
-    <li className='px-[18px] flex items-center cursor-pointer hover:bg-zinc-950'>
+    <li className='relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950'>
       {children}
     </li>
   );
