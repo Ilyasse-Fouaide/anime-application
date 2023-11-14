@@ -87,12 +87,8 @@ function Hero() {
                 {anime.type}
               </span>
               <span className='text-[13px] text-zinc-400 inline-block mr-5' key={key}>
-                {anime.duration === "Unknown" ? "Unknown" :
-                  <>
-                    <FiClock className="mr-1 inline" />
-                    {anime.duration.split("").splice(0, 2).join("") + " min"}
-                  </>
-                }
+                <FiClock className="mr-1 inline" />
+                {anime.duration === "Unknown" ? "Unknown" : anime.duration.split("").splice(0, 2).join("") + " min"}
               </span>
               {anime.genres.map((genre, key) =>
                 <span className='text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
