@@ -8,7 +8,8 @@ interface AnimeData {
     images: {
       maximum_image_url: string
     }
-  }
+  },
+  title: string
 }
 
 function Hero() {
@@ -52,7 +53,7 @@ function Hero() {
     <div className='relative w-full h-[calc(75vh)] bg-slate-950'>
       {animeData && animeData.map((anime, key) =>
         <div className={`absolute inset-0 transition-opacity duration-150 ${key === index ? 'opacity-100' : 'opacity-0'}`}>
-          <img src={anime.trailer.images.maximum_image_url} className={`w-full h-full object-center pointer-events-none`} alt="Anime trailer" />
+          <img src={anime.trailer.images.maximum_image_url} className={`w-full h-full object-center pointer-events-none`} alt={anime.title} />
         </div>
       )}
 
