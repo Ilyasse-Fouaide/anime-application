@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
+import { FiClock } from "@react-icons/all-files/fi/FiClock";
 
 interface AnimeData {
   trailer: {
@@ -16,6 +17,8 @@ interface AnimeData {
     name: string,
   }[],
   synopsis: string,
+  type: string,
+  duration: string
 }
 
 function Hero() {
@@ -77,12 +80,26 @@ function Hero() {
             <div className='text-[55px] text-zinc-50 font-medium tracking-tighter mt-[70px] leading-[60px]'>
               {anime.title.length >= 20 ? anime.title.split("").splice(0, 20).join("") + "..." : anime.title}
             </div>
-            <div className='flex-grow mt-10'>
+
+            <div className='flex-grow  mt-10'>
+              <span className='text-[13px] text-zinc-400 inline-block items-center mr-5' key={key}>
+                <IoIosPlay className="mr-1 inline" />
+                {anime.type}
+              </span>
+              <span className='text-[13px] text-zinc-400 inline-block mr-5' key={key}>
+                {anime.duration === "Unknown" ? "Unknown" :
+                  <>
+                    <FiClock className="mr-1 inline" />
+                    {anime.duration.split("").splice(0, 2).join("") + " min"}
+                  </>
+                }
+              </span>
               {anime.genres.map((genre, key) =>
                 <span className='text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
               )}
               <div className='mt-1 text-[14px] text-zinc-200 leading-6'>{anime.synopsis.split("").splice(0, 300).join("") + "..."}</div>
             </div>
+
             <div className='flex'>
               <div className='bg-[#DD4854] mr-3 text-zinc-950 font-semibold uppercase inline-flex items-center py-[7px] px-[20px] cursor-pointer'>
                 <IoIosPlay className="mr-2 text-[23px]" />
@@ -92,6 +109,7 @@ function Hero() {
                 <IoBookmarkOutline />
               </div>
             </div>
+
             <div className='flex items-center mt-[60px]'>
               {["", "", "", "", "", ""].map((_el, key) =>
                 <div className={`relative mr-3 h-[10px] transition-all duration-300 bg-zinc-500 cursor-pointer rounded-full overflow-hidden ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key} onClick={() => goTo(key)}>
