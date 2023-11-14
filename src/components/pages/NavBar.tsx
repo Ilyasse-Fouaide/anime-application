@@ -98,7 +98,7 @@ function NavBar() {
 
   return (
     <div>
-      <div className='sticky top-0 w-full h-[60px] bg-zinc-800 px-[65px] flex'>
+      <div className='z-[999] sticky top-0 w-full h-[60px] bg-zinc-800 px-[65px] flex'>
 
         <nav className='w-full flex justify-center md:justify-between'>
           <div className='flex'>
@@ -160,7 +160,7 @@ function NavBar() {
         </nav>
 
       </div>
-      <div className={`${isClicked ? 'opacity-50' : ''}`}>
+      <div className={`-z-[999] transition-opacity ${isClicked ? 'opacity-20' : ''}`}>
         <Outlet />
       </div>
     </div>
