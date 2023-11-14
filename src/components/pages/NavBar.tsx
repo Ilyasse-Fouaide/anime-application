@@ -12,6 +12,28 @@ interface NavElementType {
   isClicked?: boolean;
 };
 
+interface Genre {
+  genre: string,
+}
+
+const genres: Genre[] = [
+  { genre: 'actions' },
+  { genre: 'Music' },
+  { genre: 'Shonen' },
+  { genre: 'Adventure' },
+  { genre: 'Romance' },
+  { genre: 'Slice of life' },
+  { genre: 'Comedy' },
+  { genre: 'Sci-Fi' },
+  { genre: 'Sports' },
+  { genre: 'Drama' },
+  { genre: 'Seinen' },
+  { genre: 'Supernatural' },
+  { genre: 'Fantasy' },
+  { genre: 'Shojo' },
+  { genre: 'Thriller' },
+]
+
 const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
   return (
     <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked && 'bg-zinc-950'}`} onClick={handleClick}>
@@ -55,7 +77,26 @@ function NavBar() {
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
               {isClicked &&
-                <div className='absolute left-0 top-full w-[500px] h-[200px] bg-zinc-800 rounded-b-md cursor-default'></div>
+                <div className='z[999] absolute left-0 top-full w-[862px] py-[10px] text-[14px] text-zinc-50 bg-zinc-950 rounded-b-md flex justify-center cursor-default'>
+                  <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
+                    <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
+                    {["Popular", "New", "Alphabetic", "Simulcast Season", "Characters"].map((item, key) =>
+                      <>
+                        <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{item}</div>
+                      </>
+                    )}
+                  </div>
+                  <div className='w-full'>
+                    <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Genre</div>
+                    <div className='grid grid-cols-3'>
+                      {genres.map(({ genre }, key) =>
+                        <>
+                          <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
               }
             </NavElement>
             <NavElement>
@@ -80,7 +121,6 @@ function NavBar() {
       <div className={`${isClicked && 'opacity-50'}`}>
         <Outlet />
       </div>
-      <div className={`h-[500vh]`}></div>
     </div>
   )
 }
