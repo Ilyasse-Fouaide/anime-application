@@ -16,6 +16,10 @@ interface Genre {
   genre: string,
 }
 
+interface Search {
+  search: string,
+}
+
 const genres: Genre[] = [
   { genre: 'actions' },
   { genre: 'Music' },
@@ -32,6 +36,14 @@ const genres: Genre[] = [
   { genre: 'Fantasy' },
   { genre: 'Shojo' },
   { genre: 'Thriller' },
+];
+
+const search: Search[] = [
+  { search: 'Popular' },
+  { search: 'New' },
+  { search: 'Alphabetic' },
+  { search: 'Simulcast Season' },
+  { search: 'Characters' },
 ]
 
 const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
@@ -77,12 +89,12 @@ function NavBar() {
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
               {isClicked &&
-                <div className='z[999] absolute left-0 top-full w-[862px] py-[10px] text-[14px] text-zinc-50 bg-zinc-950 rounded-b-md flex justify-center cursor-default'>
+                <div className='absolute left-0 top-full w-[862px] py-[10px] text-[14px] text-zinc-50 bg-zinc-950 rounded-b-md flex justify-center pointer-events-auto'>
                   <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
                     <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
-                    {["Popular", "New", "Alphabetic", "Simulcast Season", "Characters"].map((item, key) =>
+                    {search.map(({ search }, key) =>
                       <>
-                        <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{item}</div>
+                        <div className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{search}</div>
                       </>
                     )}
                   </div>
