@@ -5,8 +5,6 @@ import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLi
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { AnimatePresence, motion } from 'framer-motion';
-import { stagger } from 'framer-motion/dom';
-
 
 interface NavElementType {
   children: React.ReactNode;
@@ -55,11 +53,14 @@ const dropDownVariants = {
   },
   visible: {
     opacity: 1,
-    y: 0
+    y: 0,
+    transition: {
+      staggerChildren: 0.01
+    }
   },
   exit: {
     opacity: 0,
-    y: 10
+    y: 10,
   }
 }
 
@@ -117,14 +118,16 @@ function NavBar() {
                     <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
                       <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
                       {search.map(({ search }, key) =>
-                        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.05 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key} onClick={() => console.log(key)}>{search}</motion.div>
+                        <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key} onClick={() => console.log(key)}>{search}</motion.div>
+                        // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.05 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key} onClick={() => console.log(key)}>{search}</motion.div>
                       )}
                     </div>
                     <div className='w-full'>
                       <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Genre</div>
                       <div className='grid grid-cols-3'>
                         {genres.map(({ genre }, key) =>
-                          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.03 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
+                          <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
+                          // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.03 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
                         )}
                       </div>
                     </div>
