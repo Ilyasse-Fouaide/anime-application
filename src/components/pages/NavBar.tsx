@@ -160,7 +160,7 @@ function NavBar() {
         </nav>
 
       </div>
-      <div className={`-z-[999] transition-opacity ${isClicked ? 'opacity-20' : ''}`}>
+      <div className={`-z-[999] transition-opacity ${isClicked ? 'opacity-40' : ''}`}>
         <Outlet />
       </div>
     </div>
