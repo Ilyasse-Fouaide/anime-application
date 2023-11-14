@@ -30,6 +30,10 @@ function Hero() {
     setIndex(index === 0 ? limit - 1 : index - 1);
   }
 
+  const goTo = (i: number) => {
+    setIndex(i);
+  }
+
   React.useEffect(() => {
     const fetchAnime = () => {
       axios.get(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=${limit}`)
@@ -76,7 +80,7 @@ function Hero() {
             <div className='flex items-center mt-[60px]'>
               {["", "", "", "", "", ""].map((_el, key) =>
                 <div className={`relative mr-3 h-[10px] transition-all duration-150 bg-zinc-500 rounded-full ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key}>
-                  <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854]  rounded-full ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
+                  <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854]  rounded-full ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`} onClick={() => goTo(key)}></div>
                 </div>
               )}
             </div>
