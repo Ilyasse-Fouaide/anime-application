@@ -37,16 +37,16 @@ function NavBar() {
         <nav className='w-full flex justify-between'>
           <ul className='h-full flex'>
             <NavElement>
-              <span>Browse</span>
+              <span className='group-hover:text-white'>Browse</span>
               <div className='pl-1 text-white'>
                 <RiArrowDropDownLine className="text-[24px]" />
               </div>
             </NavElement>
             <NavElement>
-              <span>Manga</span>
+              <span className='group-hover:text-white'>Manga</span>
             </NavElement>
             <NavElement>
-              <span>News</span>
+              <span className='group-hover:text-white'>News</span>
             </NavElement>
           </ul>
           <div className='flex h-full'>
