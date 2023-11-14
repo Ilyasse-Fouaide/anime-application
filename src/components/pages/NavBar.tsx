@@ -2,6 +2,8 @@ import React from 'react'
 import shurikenLogo from '../../assets/shuriken-01.svg';
 import { Outlet } from 'react-router-dom'
 import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLine";
+import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
+import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 
 
 type ComponentTypes = {
@@ -10,7 +12,7 @@ type ComponentTypes = {
 
 const NavElement = ({ children }: ComponentTypes): JSX.Element => {
   return (
-    <li className='relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950'>
+    <li className='group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950'>
       {children}
     </li>
   );
@@ -30,7 +32,7 @@ function NavBar() {
             <NavElement>
               <span>Browse</span>
               <div className='pl-1 text-white'>
-                <RiArrowDropDownLine className="w-[24px] h-[24px]" />
+                <RiArrowDropDownLine className="text-[24px]" />
               </div>
             </NavElement>
             <NavElement>
@@ -41,8 +43,13 @@ function NavBar() {
             </NavElement>
           </ul>
           <div className='flex h-full'>
-            <NavElement>Serach</NavElement>
-            <NavElement>Save</NavElement>
+            <div className='relative px-[18px] flex items-center'>
+              <input type="text" className='w-[420px] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm' />
+              <IoSearch className="text-[18px] absolute top-1/2 -translate-y-1/2 left-7 cursor-pointer" />
+            </div>
+            <NavElement>
+              <IoBookmarkOutline className="text-[24px] group-hover:text-white" />
+            </NavElement>
           </div>
         </nav>
 
