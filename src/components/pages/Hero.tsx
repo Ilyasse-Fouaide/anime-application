@@ -50,23 +50,25 @@ const ImageTrailer = ({ children, className, trailer }: (ImageTrailer)) => {
 const HeroContent = ({ title, type, duration, genres, synopsis, index, goTo }: AnimeData & { index: number, goTo: (k: number) => void }) => {
   return (
     <div className='absolute h-[500px] flex flex-col justify-between top-1/2 -translate-y-1/2 left-0 z-[10] px-[65px] max-w-3xl'>
-      <div className='text-[55px] text-zinc-50 font-medium tracking-tighter mt-[70px] leading-[60px]'>
+      <div className='text-[30px] sm:text-[40px] md:text-[55px] text-zinc-50 font-medium tracking-tighter mt-[70px] leading-[60px]'>
         {title.length >= 20 ? title.split("").splice(0, 20).join("") + "..." : title}
       </div>
 
-      <div className='flex-grow  mt-10'>
-        <span className='text-[13px] text-zinc-400 inline-block items-center mr-5'>
+      <div className='flex-grow mt-10 text-[12px] sm:text-[13px]'>
+        <span className=' text-zinc-400 inline-block items-center mr-5'>
           <IoIosPlay className="mr-1 inline" />
           {type}
         </span>
-        <span className='text-[13px] text-zinc-400 inline-block mr-5'>
+        <span className='text-zinc-400 inline-block mr-5'>
           <FiClock className="mr-1 inline" />
           {duration === "Unknown" ? "Unknown" : duration.split("").splice(0, 2).join("") + " min"}
         </span>
         {genres.map((genre, key) =>
-          <span className='text-[13px] text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
+          <span className='text-zinc-400 inline-block mr-2' key={key}>{genre.name}</span>
         )}
-        <div className='mt-1 text-[14px] text-zinc-200 leading-6'>{synopsis.split("").splice(0, 300).join("") + "..."}</div>
+        <div className='hidden md:block mt-1 text-[14px] text-zinc-200 leading-6'>
+          {synopsis.split("").splice(0, 300).join("") + "..."}
+        </div>
       </div>
 
       <div className='flex'>
@@ -140,21 +142,23 @@ function Hero() {
   }
 
   return (
-    <HeroContainer>
-      <div className='z-[10] absolute top-0 bottom-0 left-0 w-[2000px] bg-gradient-to-r from-zinc-950'></div>
-      <div className='z-[10] absolute bottom-0 right-0 left-0 w-full h-[500px] bg-gradient-to-t from-zinc-950'></div>
-      {animeData && animeData.map(({ title, type, duration, genres, synopsis, trailer }, key) =>
-        <ImageTrailer className={`${key === index ? 'opacity-100' : 'opacity-0'}`} trailer={trailer} key={`${key}-${title}`}>
-          <HeroContent title={title} type={type} duration={duration} genres={genres} synopsis={synopsis} index={index} goTo={goTo} />
-        </ImageTrailer>
+    <div className='relative w-full h-[950px] lg:h-[600px]'>
+      {animeData && animeData.map(({ trailer }, key) =>
+        <div className={`absolute inset-0 flex flex-col-reverse lg:flex-row duration-1000 ${key === index ? 'opacity-100' : 'opacity-0'}`}>
+          <div className='bg-red-950 w-full h-1/2 lg:w-1/2 lg:h-full flex items-start justify-center lg:items-center'>
+            <div className=''>
+
+            </div>
+          </div>
+          <div className='w-full h-full'>
+            <div className='relative w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
+              <div className='absolute inset-0 bg-gradient-to-r from-zinc-950 hidden lg:block'></div>
+              <div className='absolute inset-0 bg-gradient-to-t from-zinc-950'></div>
+            </div>
+          </div>
+        </div>
       )}
-      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer text-[30px]' onClick={handleNext}>
-        <IoIosArrowForward />
-      </div>
-      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 left-0 flex items-center justify-center cursor-pointer text-[30px]' onClick={handlePrev}>
-        <IoIosArrowBack />
-      </div>
-    </HeroContainer>
+    </div>
   )
 }
 
