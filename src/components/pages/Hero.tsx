@@ -5,6 +5,7 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
+import { FaArrowDown } from "@react-icons/all-files/fa/FaArrowDown";
 import Skeleton from "./Sleleton";
 import Slide from './Slide';
 
@@ -121,7 +122,7 @@ function Hero() {
                   </div>
                 </div>
 
-                <div className='w-full lg:w-[140%] lg:block text-center lg:text-left mt-2' ref={synopsisRef}>
+                <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-2' ref={synopsisRef}>
                   <div className='w-full h-[72px]'>
                     {window.innerWidth > 1600 ?
                       <>
@@ -177,6 +178,9 @@ function Hero() {
         </div>
         <div className='hidden lg:block z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
           <IoIosArrowForward />
+        </div>
+        <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] left-[45%] border-2 border-[#DD4854]/60 rounded-full flex items-center justify-center text-[20px] text-[#DD4854] animate-bounce'>
+          <FaArrowDown />
         </div>
       </div>
       <Slide />
