@@ -145,7 +145,6 @@ function Hero() {
       {animeData && animeData.map(({ title, type, duration, genres, synopsis, trailer }, key) =>
         <ImageTrailer className={`${key === index ? 'opacity-100' : 'opacity-0'}`} trailer={trailer} key={`${key}-${title}`}>
           <HeroContent title={title} type={type} duration={duration} genres={genres} synopsis={synopsis} index={index} goTo={goTo} />
-
         </ImageTrailer>
       )}
       <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer text-[30px]' onClick={handleNext}>

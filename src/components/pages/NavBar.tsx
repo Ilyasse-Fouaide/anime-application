@@ -5,6 +5,7 @@ import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLi
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { AnimatePresence, motion } from 'framer-motion';
+import Skeleton from './Sleleton';
 
 interface NavElementType {
   children: React.ReactNode;
@@ -162,6 +163,7 @@ function NavBar() {
       </div>
       <div className={`-z-[999] transition-opacity ${isClicked ? 'opacity-40' : ''}`}>
         <Outlet />
+        <Skeleton />
       </div>
     </div>
   )
