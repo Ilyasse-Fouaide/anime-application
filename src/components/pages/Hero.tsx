@@ -121,14 +121,29 @@ function Hero() {
 
               <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-1' ref={synopsisRef}>
                 <div className='w-full h-[72px]'>
-
-                  {synopsis.length <= 200 ?
+                  {window.innerWidth > 1024 ?
                     <>
-                      {synopsis}
+                      {synopsis.length <= 100 ?
+                        <>
+                          {synopsis}
+                        </>
+                        :
+                        <>
+                          {synopsis.split("").splice(0, 100).join("") + "..."}
+                        </>
+                      }
                     </>
                     :
                     <>
-                      {synopsis.split("").splice(0, 200).join("") + "..."}
+                      {synopsis.length <= 200 ?
+                        <>
+                          {synopsis}
+                        </>
+                        :
+                        <>
+                          {synopsis.split("").splice(0, 200).join("") + "..."}
+                        </>
+                      }
                     </>
                   }
                 </div>
@@ -155,10 +170,10 @@ function Hero() {
           </div>
         </div>
       )}
-      <div className='z-10 absolute top-1/2 left-0 -translate-y-1/2 text-[30px] py-10 pl-4 cursor-pointer hover:opacity-50'>
+      <div className='z-10 absolute top-1/2 left-0 -translate-y-1/2 text-[30px] py-10 pl-4 cursor-pointer hover:opacity-50' onClick={handlePrev}>
         <IoIosArrowBack />
       </div>
-      <div className='z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50'>
+      <div className='z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
         <IoIosArrowForward />
       </div>
     </div>
