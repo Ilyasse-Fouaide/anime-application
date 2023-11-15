@@ -151,8 +151,11 @@ function Hero() {
           </div>
         </div>
       )}
-      <div className='absolute top-1/2 -translate-y-1/2'>
+      <div className='z-10 absolute top-1/2 left-0 -translate-y-1/2 text-[30px] py-10 pl-4 cursor-pointer hover:opacity-50'>
         <IoIosArrowBack />
+      </div>
+      <div className='z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50'>
+        <IoIosArrowForward />
       </div>
     </div>
   )
