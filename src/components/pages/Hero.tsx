@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
@@ -28,6 +28,7 @@ function Hero() {
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [index, setIndex] = useState<number>(0);
+  const synopsisRef = useRef<HTMLDivElement | null>(null);
 
   const handleNext = () => {
     setIndex(index === limit - 1 ? 0 : index + 1);
@@ -66,7 +67,7 @@ function Hero() {
 
     return () => clearInterval(interval);
 
-  }, [index])
+  }, [index]);
 
   if (loading) {
     return <Skeleton />;
@@ -118,16 +119,19 @@ function Hero() {
                 </div>
               </div>
 
-              <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-1'>
-                {synopsis.length <= 200 ?
-                  <>
-                    {synopsis}
-                  </>
-                  :
-                  <>
-                    {synopsis.split("").splice(0, 200).join("") + "..."}
-                  </>
-                }
+              <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-1 bg-slate-300' ref={synopsisRef}>
+                <div className='w-full h-[72px]'>
+
+                  {synopsis.length <= 200 ?
+                    <>
+                      {synopsis}
+                    </>
+                    :
+                    <>
+                      {synopsis.split("").splice(0, 200).join("") + "..."}
+                    </>
+                  }
+                </div>
               </div>
 
               <div className='flex justify-center lg:justify-start mt-10'>
