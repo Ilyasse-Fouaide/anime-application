@@ -5,3 +5,7 @@
 * {
   /* outline: 1px solid red */
 }
+
+.swiper-button-disabled {
+  @apply hidden
+}
