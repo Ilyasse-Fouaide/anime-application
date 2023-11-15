@@ -20,7 +20,7 @@ const Sleleton = () => {
         </div>
         <div className='flex items-center mt-[60px]'>
           {["", "", "", "", "", ""].map((_el, key) =>
-            <div className={`relative mr-3 h-[10px] transition-all duration-300 bg-zinc-800 cursor-pointer rounded-full overflow-hidden ${key === 0 ? "w-[60px]" : "w-[20px]"}`}>
+            <div className={`relative mr-3 h-[10px] transition-all duration-300 bg-zinc-800 cursor-pointer rounded-full overflow-hidden ${key === 0 ? "w-[60px]" : "w-[20px]"}`} key={key}>
               <div className={`absolute left-0 bottom-0 top-0 cursor-pointer`}></div>
             </div>
           )}
