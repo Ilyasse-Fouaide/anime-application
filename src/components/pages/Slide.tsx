@@ -13,6 +13,10 @@ function Slide() {
             spaceBetween: 30,
             slidesPerView: 1
           },
+          640: {
+            spaceBetween: 30,
+            slidesPerView: 2
+          },
           768: {
             spaceBetween: 30,
             slidesPerView: 3

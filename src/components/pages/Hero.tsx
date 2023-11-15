@@ -76,16 +76,16 @@ function Hero() {
 
   return (
     <>
-      <div className='relative w-full h-[950px] lg:h-[600px]'>
+      <div className='relative w-full h-[900px] lg:h-[600px]'>
         {animeData && animeData.map(({ trailer, title, type, duration, genres, synopsis }, key) =>
           <div className={`absolute inset-0 flex flex-col lg:flex-row-reverse duration-500 ${key === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} key={key}>
-            <div className='w-full h-1/3 lg:h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
+            <div className='w-full h-1/2 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
               <div className='relative w-full h-full'>
                 <div className='absolute inset-0 bg-gradient-to-r from-zinc-950 hidden lg:block'></div>
                 <div className='absolute inset-0 bg-gradient-to-t from-zinc-950'></div>
               </div>
             </div>
-            <div className='bg-transparent w-full lg:w-1/2 lg:h-full flex items-start justify-center lg:items-center mb-24 -mt-20 lg:-mt-0 z-10'>
+            <div className='w-full lg:w-1/2 lg:h-full flex items-start justify-center lg:items-center -mt-20 lg:mt-0 z-10'>
 
               <div className='w-full pl-[25px] pr-[25px] lg:pl-[65px] lg:pr-0'>
                 <h1 className='text-[26px] md:text-[50px] w-full lg:w-[200%] tracking-tighter text-center lg:text-left font-semibold leading-[1]'>
@@ -101,7 +101,7 @@ function Hero() {
                   }
                 </h1>
 
-                <div className='w-full lg:w-[200%] flex flex-col sm:flex-row items-center justify-center lg:justify-start text-zinc-500 text-[12px] lg:text-[14px] mt-3 lg:mt-10'>
+                <div className='w-full lg:w-[200%] flex flex-col sm:flex-row items-center justify-center lg:justify-start text-zinc-500 text-[14px] mt-10'>
                   <div className='text-center lg:text-left mr-5'>
                     <IoIosPlay className="mr-1 inline" />
                     {type}
@@ -121,7 +121,7 @@ function Hero() {
                   </div>
                 </div>
 
-                <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-1' ref={synopsisRef}>
+                <div className='w-full lg:w-[140%] lg:block text-center lg:text-left mt-2' ref={synopsisRef}>
                   <div className='w-full h-[72px]'>
                     {window.innerWidth > 1600 ?
                       <>
@@ -172,10 +172,10 @@ function Hero() {
             </div>
           </div>
         )}
-        <div className='z-10 absolute top-1/2 left-0 -translate-y-1/2 text-[30px] py-10 pl-4 cursor-pointer hover:opacity-50' onClick={handlePrev}>
+        <div className='hidden lg:block z-10 absolute top-1/2 left-0 -translate-y-1/2 text-[30px] py-10 pl-4 cursor-pointer hover:opacity-50' onClick={handlePrev}>
           <IoIosArrowBack />
         </div>
-        <div className='z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
+        <div className='hidden lg:block z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
           <IoIosArrowForward />
         </div>
       </div>
