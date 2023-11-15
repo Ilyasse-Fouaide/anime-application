@@ -4,7 +4,7 @@ import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 import { Navigation } from 'swiper/modules';
-import "swiper/css/navigation";
+import 'swiper/css/autoplay';
 
 import 'swiper/css';
 
@@ -50,8 +50,8 @@ function Slide() {
         className='px-[65px]'
       >
         {["", "", "", "", "", "", "", "", "", ""].map((_el, key) =>
-          <SwiperSlide className='bg-green-500 w-[100px] h-[100px]' key={key}>
-            1
+          <SwiperSlide className='bg-zinc-800 w-[100px] h-[100px]' key={key}>
+
           </SwiperSlide>
         )}
       </Swiper>
