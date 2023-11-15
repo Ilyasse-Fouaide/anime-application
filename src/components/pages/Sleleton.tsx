@@ -1,4 +1,6 @@
 import _React from 'react'
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 const Sleleton = () => {
   return (
@@ -23,6 +25,12 @@ const Sleleton = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-center cursor-pointer text-[30px] text-zinc-700' >
+        <IoIosArrowForward />
+      </div>
+      <div className='z-[15] py-14 px-2 absolute top-1/2 -translate-y-1/2 left-0 flex items-center justify-center cursor-pointer text-[30px] text-zinc-700'>
+        <IoIosArrowBack />
       </div>
     </div>
   )
