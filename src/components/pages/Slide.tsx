@@ -7,7 +7,7 @@ import 'swiper/css';
 
 function Slide() {
   return (
-    <div className='bg-slate-500 relative'>
+    <div className='relative'>
       <Swiper
         breakpoints={{
           0: {
