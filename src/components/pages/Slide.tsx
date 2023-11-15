@@ -1,13 +1,14 @@
 import _React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 import 'swiper/css';
 
 function Slide() {
   return (
-    <div >
+    <div className='bg-slate-500 relative'>
       <Swiper
-        // allowTouchMove={false}
         breakpoints={{
           0: {
             spaceBetween: 30,
@@ -34,7 +35,7 @@ function Slide() {
             slidesPerView: 6
           },
         }}
-        className='bg-slate-50 pl-[65px] pr-[65px]'
+        className='px-[65px]'
       >
         {["", "", "", "", "", "", "", "", "", ""].map((_el, key) =>
           <SwiperSlide className='bg-green-500 w-[100px] h-[100px]' key={key}>
@@ -42,6 +43,12 @@ function Slide() {
           </SwiperSlide>
         )}
       </Swiper>
+      <div className='z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]'>
+        <IoIosArrowBack />
+      </div>
+      <div className='z-10 absolute top-0 bottom-0 right-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]'>
+        <IoIosArrowForward />
+      </div>
     </div>
   )
 }
