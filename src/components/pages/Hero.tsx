@@ -5,6 +5,7 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
+import Skeleton from "./Sleleton";
 
 interface Children {
   children: React.ReactNode
@@ -135,7 +136,7 @@ function Hero() {
   }, [index])
 
   if (loading) {
-    return "Loading ...";
+    return <Skeleton />;
   }
 
   return (
