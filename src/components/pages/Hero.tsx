@@ -80,7 +80,7 @@ function Hero() {
       <div className='relative w-full h-[900px] lg:h-[600px]'>
         {animeData && animeData.map(({ trailer, title, type, duration, genres, synopsis }, key) =>
           <div className={`absolute inset-0 flex flex-col lg:flex-row-reverse duration-500 ${key === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} key={key}>
-            <div className='w-full h-1/2 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
+            <div className='w-full h-1/2 lg:h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
               <div className='relative w-full h-full'>
                 <div className='absolute inset-0 bg-gradient-to-r from-zinc-950 hidden lg:block'></div>
                 <div className='absolute inset-0 bg-gradient-to-t from-zinc-950'></div>
