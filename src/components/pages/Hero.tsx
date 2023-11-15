@@ -73,6 +73,8 @@ function Hero() {
     return <Skeleton />;
   }
 
+  console.log(window.innerWidth)
+
   return (
     <div className='relative w-full h-[950px] lg:h-[600px]'>
       {animeData && animeData.map(({ trailer, title, type, duration, genres, synopsis }, key) =>
@@ -121,19 +123,7 @@ function Hero() {
 
               <div className='w-full lg:w-[140%] hidden lg:block text-center lg:text-left mt-1' ref={synopsisRef}>
                 <div className='w-full h-[72px]'>
-                  {window.innerWidth > 1024 ?
-                    <>
-                      {synopsis.length <= 100 ?
-                        <>
-                          {synopsis}
-                        </>
-                        :
-                        <>
-                          {synopsis.split("").splice(0, 100).join("") + "..."}
-                        </>
-                      }
-                    </>
-                    :
+                  {window.innerWidth > 1600 ?
                     <>
                       {synopsis.length <= 200 ?
                         <>
@@ -142,6 +132,18 @@ function Hero() {
                         :
                         <>
                           {synopsis.split("").splice(0, 200).join("") + "..."}
+                        </>
+                      }
+                    </>
+                    :
+                    <>
+                      {synopsis.length <= 100 ?
+                        <>
+                          {synopsis}
+                        </>
+                        :
+                        <>
+                          {synopsis.split("").splice(0, 100).join("") + "..."}
                         </>
                       }
                     </>
