@@ -143,11 +143,58 @@ function Hero() {
 
   return (
     <div className='relative w-full h-[950px] lg:h-[600px]'>
-      {animeData && animeData.map(({ trailer }, key) =>
-        <div className={`absolute inset-0 flex flex-col-reverse lg:flex-row duration-1000 ${key === index ? 'opacity-100' : 'opacity-0'}`}>
-          <div className='bg-red-950 w-full h-1/2 lg:w-1/2 lg:h-full flex items-start justify-center lg:items-center'>
-            <div className=''>
+      {animeData && animeData.map(({ trailer, title, type, duration, genres, synopsis }, key) =>
+        <div className={`absolute inset-0 flex flex-col-reverse lg:flex-row duration-1000 ${key === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
+          <div className='bg-zinc-950 w-full lg:w-1/2 lg:h-full flex items-start justify-center lg:items-center mb-24'>
 
+            <div className='w-full pl-[25px] pr-[25px] lg:pl-[65px] lg:pr-0'>
+              <h1 className='text-[50px] w-full tracking-tighter text-center lg:text-left font-semibold leading-[1]'>{title}</h1>
+
+              <div className='flex items-center justify-center lg:justify-start text-zinc-500 text-[14px] mt-3 lg:mt-10'>
+                <div className='text-center lg:text-left mr-5'>{type}</div>
+                <div className='text-center lg:text-left mr-5'>
+                  {duration === "Unknown" ? "Unknown" :
+                    <>
+                      {duration.split("").splice(0, 2).join("") + " min"}
+                    </>
+                  }
+                </div>
+                <div className='text-center lg:text-left flex items-center justify-center'>
+                  {genres.map((genre, key) =>
+                    <div className='mr-2' key={key}>{genre.name}</div>
+                  )}
+                </div>
+              </div>
+
+              <div className='hidden lg:block text-center lg:text-left mt-1'>
+                {synopsis.length <= 200 ?
+                  <>
+                    {synopsis}
+                  </>
+                  :
+                  <>
+                    {synopsis.split("").splice(0, 200).join("") + "..."}
+                  </>
+                }
+              </div>
+
+              <div className='flex justify-center lg:justify-start mt-10'>
+                <div className='flex items-center uppercase py-[8px] px-[15px] bg-[#DD4854] font-semibold text-zinc-950 cursor-pointer mr-2'>
+                  <IoIosPlay className="mr-2 text-[23px]" />
+                  watch episode
+                </div>
+                <div className='py-[7px] px-[6px] bg-transparent border-2 border-[#DD4854] text-[26px] text-[#DD4854] cursor-pointer hover:bg-[#DD4854] hover:text-zinc-950 transition-colors'>
+                  <IoBookmarkOutline />
+                </div>
+              </div>
+
+              <div className='flex items-center justify-center lg:justify-start mt-16'>
+                {["", "", "", "", "", ""].map((_el, key) =>
+                  <div className={`group relative mr-3 h-[10px] transition-all duration-300 bg-zinc-500 hover:bg-[#DD4854]/70 cursor-pointer rounded-full overflow-hidden ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key} onClick={() => goTo(key)}>
+                    <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854] cursor-pointer ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className='w-full h-full'>
