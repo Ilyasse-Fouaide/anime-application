@@ -10,12 +10,13 @@ interface Children {
   children: React.ReactNode
 }
 
-interface AnimeData {
+interface Trailer {
   trailer: {
-    images: {
-      maximum_image_url: string
-    }
-  },
+    images: { maximum_image_url: string }
+  }
+}
+
+interface AnimeData extends Trailer {
   title: string,
   genres: {
     name: string,
@@ -25,11 +26,8 @@ interface AnimeData {
   duration: string
 }
 
-interface ImageTrailer extends Children {
+interface ImageTrailer extends Children, Trailer {
   className: string,
-  trailer: {
-    images: { maximum_image_url: string }
-  }
 }
 
 const HeroContainer = ({ children, }: Children) => {
