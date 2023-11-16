@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
+import numeral from "numeral";
+
 
 import { AnimeData } from '../Types/types';
 
@@ -33,6 +35,14 @@ function Slide() {
     };
     fetchAnime();
   }, []);
+
+  const formatNumber = (num: number): number => {
+    if (num >= 1000 && num < 1000000) {
+      return numeral(num).format('0a')
+    } else {
+      return numeral(num).format('0.0a')
+    }
+  }
 
   return (
     <div className='relative select-none'>
@@ -107,7 +117,7 @@ function Slide() {
                   <h3 className='text-sm text-zinc-50 font-medium'>{title}</h3>
                   <div className='text-[13px] text-zinc-400 font-semibold mt-3'>
                     <span className='mr-2'>{score}</span>
-                    <span className='mr-2'>{scored_by}</span>
+                    <span className='mr-2'>{formatNumber(scored_by)}</span>
                   </div>
                 </div>
               </div>
