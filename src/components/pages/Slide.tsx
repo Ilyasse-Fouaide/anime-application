@@ -71,14 +71,22 @@ function Slide() {
         }}
         className='px-[65px]'
       >
-        {animeData && animeData.map(({ images, title, type }, key) =>
+        {animeData && animeData.map(({ images, title, type, themes }, key: number) =>
           <SwiperSlide className='' key={key}>
             <div className='w-full h-[333px]'>
               <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover' />
             </div>
             <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>
-            <div>
-              <p className='text-xs text-zinc-400 mt-3'>{type}</p>
+            <div className='text-xs text-zinc-400 mt-3 flex items-center'>
+              <p className='mr-2'>{type}</p>
+              <div className='w-[2px] h-[10px] bg-zinc-500 mr-2'></div>
+              <div className='flex items-center'>
+                {themes.map((theme, key: number) =>
+                  <p className='mr-1' key={key}>
+                    {theme.name}
+                  </p>
+                )}
+              </div>
             </div>
           </SwiperSlide>
         )}
