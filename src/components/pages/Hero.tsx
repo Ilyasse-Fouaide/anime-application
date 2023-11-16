@@ -73,9 +73,9 @@ function Hero() {
             </div>
             <div
               style={{ '--image-url': `url('${trailer?.images.maximum_image_url}')` }}
-              className={`relative w-full lg:w-1/2 h-full flex items-center justify-center lg:items-center lg:mt-0 z-10 bg-[image:var(--image-url)] lg:bg-none bg-cover bg-center bg-no-repeat`}
+              className={`relative w-full lg:w-1/2 h-full flex items-end justify-center lg:items-center lg:mt-0 z-10 bg-[image:var(--image-url)] lg:bg-none bg-cover bg-center bg-no-repeat`}
             >
-              <div className='-z-10 absolute inset-0 bg-gradient-to-t from-zinc-950 from-50%'></div>
+              <div className='-z-10 absolute inset-0 bg-gradient-to-t from-zinc-950 '></div>
 
               <div className='w-full pl-[25px] pr-[25px] lg:pl-[65px] lg:pr-0'>
                 <h1 className='text-[35px] sm:text-[50px] text-zinc-50 w-full lg:w-[200%] tracking-tighter text-center lg:text-left font-semibold leading-[1]'>
@@ -92,11 +92,11 @@ function Hero() {
                 </h1>
 
                 <div className='w-full lg:w-[200%] flex flex-col sm:flex-row items-center justify-center lg:justify-start text-zinc-400 text-[14px] mt-10'>
-                  <div className='text-center lg:text-left mr-5'>
+                  <div className='text-center lg:text-left mr-5 flex items-center'>
                     <IoIosPlay className="mr-1 inline" />
                     {type}
                   </div>
-                  <div className='text-center lg:text-left mr-5'>
+                  <div className='text-center lg:text-left mr-5 flex items-center'>
                     <FiClock className="mr-1 inline" />
                     {duration === "Unknown" ? "Unknown" :
                       <>
