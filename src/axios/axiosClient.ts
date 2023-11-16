@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  // baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: 'https://api.jikan.moe/v4',
 });
 
 axiosClient.interceptors.request.use(
-  (config) => {
-    return config
+  (request) => {
+    return request
   },
   (error) => {
     return Promise.reject(error);
@@ -25,7 +26,7 @@ axiosClient.interceptors.response.use(
 export function getRequest(url: string) {
   const CancelToken = axios.CancelToken.source();
 
-  return axiosClient(`${url}`, { cancelToken: CancelToken.token }).then(response => response);
+  return axiosClient.get(`/${url}`, { cancelToken: CancelToken.token }).then(response => response);
 }
 
 export default axiosClient;

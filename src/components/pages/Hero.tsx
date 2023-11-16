@@ -31,7 +31,7 @@ function Hero() {
 
   React.useEffect(() => {
     const fetchAnime = () => {
-      getRequest(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=${limit}`)
+      getRequest(`top/anime?filter=airing&limit=${limit}`)
         .then((response) => {
           setAnimeData(response.data.data);
           setLoading(false);
