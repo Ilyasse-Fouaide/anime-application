@@ -35,7 +35,7 @@ function Slide() {
   }, []);
 
   return (
-    <div className='relative'>
+    <div className='relative select-none'>
       <Swiper
         modules={[Navigation]}
         breakpoints={{
@@ -72,8 +72,8 @@ function Slide() {
         className='px-[65px]'
       >
         {animeData && animeData.map((anime, key) =>
-          <SwiperSlide className='bg-zinc-800 w-[100px]' key={key}>
-            <img src={anime.images.jpg.large_image_url} alt="" />
+          <SwiperSlide className='bg-green-800 h-[333px]' key={key}>
+            <img src={anime.images.jpg.large_image_url} alt={anime.title} className='w-full h-full object-cover' />
           </SwiperSlide>
         )}
       </Swiper>
