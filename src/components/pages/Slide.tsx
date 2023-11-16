@@ -82,7 +82,7 @@ function Slide() {
         className='px-[20px] lg:px-[65px]'
       >
         {animeData &&
-          animeData.map(({ images, title, type, themes, episodes, score, scored_by }, key: number) => (
+          animeData.map(({ images, title, type, themes, episodes, score, scored_by, synopsis }, key: number) => (
             <SwiperSlide className='relative group overflow-hidden cursor-pointer' key={key}>
               <div className='w-full aspect-[2/3]'>
                 <img
@@ -114,11 +114,22 @@ function Slide() {
               </div>
               <div className='z-10 absolute inset-0 bg-black transition-transform translate-y-full group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
                 <div className='w-full h-full bg-zinc-900/[.96] p-3'>
-                  <h3 className='text-sm text-zinc-50 font-medium'>{title}</h3>
-                  <div className='text-[13px] text-zinc-400 font-semibold mt-3'>
-                    <span className='mr-2'>{score}</span>
-                    <span className='mr-2'>{formatNumber(scored_by)}</span>
+                  <h3 className='text-[14px] text-zinc-50 font-medium'>{title}</h3>
+                  <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
+                    <div>{score} by ({formatNumber(scored_by)})</div>
                   </div>
+                  <div className='text-[13px] text-zinc-400 font-medium'>{episodes} Espisodes</div>
+                  <p className='text-[13px] leading-[17px] text-zinc-50 font-medium mt-3'>
+                    {synopsis.length <= 200 ?
+                      <>
+                        {synopsis}
+                      </>
+                      :
+                      <>
+                        {synopsis.split("").splice(0, 200).join("") + "..."}
+                      </>
+                    }
+                  </p>
                 </div>
               </div>
             </SwiperSlide>
