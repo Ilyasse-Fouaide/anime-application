@@ -72,8 +72,8 @@ function Slide() {
         className='px-[20px] lg:px-[65px]'
       >
         {animeData &&
-          animeData.map(({ images, title, type, themes, episodes }, key: number) => (
-            <SwiperSlide className='relative cursor-pointer' key={key}>
+          animeData.map(({ images, title, type, themes, episodes, score, scored_by }, key: number) => (
+            <SwiperSlide className='relative group overflow-hidden cursor-pointer' key={key}>
               <div className='w-full aspect-[2/3]'>
                 <img
                   src={images.jpg.large_image_url}
@@ -95,12 +95,21 @@ function Slide() {
                       ))}
                     </>
                   ) : (
-                    <p>UNKNOWN</p>
+                    <p>NA</p>
                   )}
                 </div>
               </div>
-              <div className='absolute top-0 left-0'>
-                <div className='text-[11px] font-bold text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
+              <div className='z-0 absolute top-2 left-2 shadow-2xl shadow-white'>
+                <div className='text-[13px] font-medium text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
+              </div>
+              <div className='z-10 absolute inset-0 bg-black transition-transform translate-y-full group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
+                <div className='w-full h-full bg-zinc-900/[.96] p-3'>
+                  <h3 className='text-sm text-zinc-50 font-medium'>{title}</h3>
+                  <div className='text-[13px] text-zinc-400 font-semibold mt-3'>
+                    <span className='mr-2'>{score}</span>
+                    <span className='mr-2'>{scored_by}</span>
+                  </div>
+                </div>
               </div>
             </SwiperSlide>
           ))}
