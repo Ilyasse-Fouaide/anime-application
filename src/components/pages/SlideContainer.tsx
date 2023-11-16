@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
-import axios from 'axios';
-import axiosClient, { getRequest } from '../../axios/axiosClient';
+import { getRequest } from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
