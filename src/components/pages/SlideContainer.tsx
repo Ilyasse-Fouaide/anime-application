@@ -27,8 +27,9 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   const preRef = useRef(null);
 
   React.useEffect(() => {
+    const ConcelToken = axios.CancelToken.source();
     const fetchAnime = () => {
-      axiosClient.get(api)
+      axiosClient.get(api, { cancelToken: ConcelToken.token })
         .then(({ data }) => {
           setAnimeData(data.data);
           isLoading(false);
@@ -46,6 +47,9 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           // }
           isLoading(false);
         });
+      if (ConcelToken) {
+        console.log("Canceled")
+      }
     };
 
     fetchAnime();
