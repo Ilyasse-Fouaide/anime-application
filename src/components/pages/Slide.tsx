@@ -81,11 +81,17 @@ function Slide() {
               <p className='mr-2'>{type}</p>
               <div className='w-[2px] h-[10px] bg-zinc-500 mr-2'></div>
               <div className='flex items-center'>
-                {themes.map((theme, key: number) =>
-                  <p className='mr-1' key={key}>
-                    {theme.name}
+                {themes.length !== 0 ?
+                  <>
+                    {themes.map((theme, key: number) =>
+                      <p className='mr-1' key={key}>{theme.name}</p>
+                    )}
+                  </>
+                  :
+                  <p>
+                    UNKNOWN
                   </p>
-                )}
+                }
               </div>
             </div>
           </SwiperSlide>

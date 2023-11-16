@@ -18,6 +18,6 @@ export interface AnimeData extends Trailer {
     }
   },
   themes: {
-    name: string | null
+    name: string
   }[]
 }
