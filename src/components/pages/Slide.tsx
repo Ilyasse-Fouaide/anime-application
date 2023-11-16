@@ -23,6 +23,7 @@ function Slide() {
       axios.get(`https://api.jikan.moe/v4/seasons/now?filter=${filter}`)
         .then(({ data }) => {
           console.log(data);
+          setAnimeData(data.data);
           isLoading(false);
         })
         .catch((error) => {
@@ -40,7 +41,7 @@ function Slide() {
         breakpoints={{
           0: {
             spaceBetween: 30,
-            slidesPerView: 1
+            slidesPerView: 2
           },
           640: {
             spaceBetween: 30,
@@ -70,9 +71,9 @@ function Slide() {
         }}
         className='px-[65px]'
       >
-        {["", "", "", "", "", "", "", "", "", ""].map((_el, key) =>
-          <SwiperSlide className='bg-zinc-800 w-[100px] h-[100px]' key={key}>
-
+        {animeData && animeData.map((anime, key) =>
+          <SwiperSlide className='bg-zinc-800 w-[100px]' key={key}>
+            <img src={anime.images.jpg.large_image_url} alt="" />
           </SwiperSlide>
         )}
       </Swiper>

@@ -11,5 +11,10 @@ export interface AnimeData extends Trailer {
   }[],
   synopsis: string,
   type: string,
-  duration: string
+  duration: string,
+  images: {
+    jpg: {
+      large_image_url: string
+    }
+  }
 }
