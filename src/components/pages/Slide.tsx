@@ -36,7 +36,7 @@ function Slide() {
     fetchAnime();
   }, []);
 
-  const formatNumber = (num: number): number => {
+  const formatNumber = (num: number): string => {
     if (num >= 1000 && num < 1000000) {
       return numeral(num).format('0a')
     } else {
