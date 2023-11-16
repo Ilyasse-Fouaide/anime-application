@@ -9,3 +9,9 @@
 .swiper-button-disabled {
   @apply hidden
 }
+
+@media (min-width: 1024px) {
+  .hidden-bg {
+    background-image: none
+  }
+}
