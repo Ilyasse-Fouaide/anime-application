@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: 'https://api.jikan.moe/v4/',
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 axiosClient.interceptors.request.use(
