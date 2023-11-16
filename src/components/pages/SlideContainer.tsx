@@ -45,11 +45,13 @@ function SlideContainer({ api, header, paragraph }: SlideContainer) {
     return "Loading ...";
   }
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num: number): string | number => {
     if (num >= 1000 && num < 1000000) {
       return numeral(num).format('0a')
-    } else {
+    } else if (num > 1000000) {
       return numeral(num).format('0.0a')
+    } else {
+      return num;
     }
   }
 
@@ -131,18 +133,24 @@ function SlideContainer({ api, header, paragraph }: SlideContainer) {
                   <div className='w-full h-full bg-zinc-900/[.96] p-3'>
                     <h3 className='text-[14px] text-zinc-50 font-medium'>{title}</h3>
                     <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
-                      <div>{score} by ({formatNumber(scored_by)})</div>
+                      <div>{score ? score : "NA"} by {scored_by ? `(${formatNumber(scored_by)})` : "NA"}</div>
                     </div>
                     <div className='text-[13px] text-zinc-400 font-medium'>{episodes} Espisodes</div>
                     <p className='text-[13px] leading-[17px] text-zinc-50 font-medium mt-3'>
-                      {synopsis.length <= 200 ?
+                      {synopsis ?
                         <>
-                          {synopsis}
+                          {synopsis.length <= 200 ?
+                            <>
+                              {synopsis}
+                            </>
+                            :
+                            <>
+                              {synopsis.split("").splice(0, 200).join("") + "..."}
+                            </>
+                          }
                         </>
                         :
-                        <>
-                          {synopsis.split("").splice(0, 200).join("") + "..."}
-                        </>
+                        <>No Description Availabled</>
                       }
                     </p>
                   </div>
