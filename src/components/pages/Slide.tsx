@@ -35,7 +35,7 @@ function Slide() {
   }, []);
 
   return (
-    <div className='relative mt-20 lg:mt-0 select-none'>
+    <div className='relative select-none'>
       <Swiper
         modules={[Navigation]}
         breakpoints={{
@@ -72,7 +72,7 @@ function Slide() {
         className='px-[20px] lg:px-[65px]'
       >
         {animeData &&
-          animeData.map(({ images, title, type, themes }, key: number) => (
+          animeData.map(({ images, title, type, themes, episodes }, key: number) => (
             <SwiperSlide className='relative cursor-pointer' key={key}>
               <div className='w-full aspect-[2/3]'>
                 <img
@@ -99,19 +99,21 @@ function Slide() {
                   )}
                 </div>
               </div>
-              <div className='absolute top-0'>adas</div>
+              <div className='absolute top-0 left-0'>
+                <div className='text-[11px] font-bold text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
+              </div>
             </SwiperSlide>
           ))}
 
       </Swiper>
       {/* Adding The arrow and shadows */}
-      <div className='hidden group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 md:flex items-center justify-center cursor-pointer text-[26px]' ref={preRef}>
+      <div className='group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px] disabled:text-red-500' ref={preRef}>
         <IoIosArrowBack />
-        <div className='-z-10 absolute top-0 bottom-0 left-0 w-[200%] bg-gradient-to-r from-zinc-950/50 group-hover:from-zinc-950/90'></div>
+        <div className='-z-10 absolute top-0 bottom-0 left-0 w-[200%] bg-gradient-to-r from-zinc-950/80 group-hover:from-zinc-950/90'></div>
       </div>
-      <div className='hidden group z-10 absolute top-0 bottom-0 right-0 w-[65px] h-full text-zinc-50 md:flex items-center justify-center cursor-pointer text-[26px]' ref={nextRef}>
+      <div className='group z-10 absolute top-0 bottom-0 right-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={nextRef}>
         <IoIosArrowForward />
-        <div className='-z-10 absolute top-0 bottom-0 right-0 w-[200%] bg-gradient-to-l from-zinc-950/50 group-hover:from-zinc-950/90'></div>
+        <div className='-z-10 absolute top-0 bottom-0 right-0 w-[200%] bg-gradient-to-l from-zinc-950/80 group-hover:from-zinc-950/90'></div>
       </div>
     </div>
   )

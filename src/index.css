@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --red: #DD4854
+}
+
 * {
   /* outline: 1px solid red */
 }

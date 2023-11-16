@@ -19,5 +19,6 @@ export interface AnimeData extends Trailer {
   },
   themes: {
     name: string
-  }[]
+  }[],
+  episodes: number
 }

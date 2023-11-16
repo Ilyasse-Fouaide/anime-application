@@ -172,7 +172,9 @@ function Hero() {
           <FaArrowDown />
         </div>
       </div>
-      <Slide />
+      <div className='mt-20 lg:mt-0'>
+        <Slide />
+      </div>
     </>
   )
 }
