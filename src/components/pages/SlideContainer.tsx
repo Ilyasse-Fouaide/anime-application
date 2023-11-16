@@ -37,7 +37,14 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           isLoading(false);
         });
     };
-    fetchAnime();
+
+    const delay = (seconds: number) => {
+      setTimeout(() => {
+        fetchAnime();
+      }, seconds)
+    }
+
+    delay(1000);
   }, []);
 
   if (loading) {

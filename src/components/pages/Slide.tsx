@@ -1,4 +1,4 @@
-import _React from 'react'
+import React from 'react'
 import SlideContainer, { SlideContainerType } from './SlideContainer'
 
 function Slide() {
@@ -13,7 +13,7 @@ function Slide() {
       header: "Anime Watch Recommendations",
       paragraph: "Discover the top picks for new and ongoing series here!",
     }
-  ]
+  ];
 
   return (
     <>
