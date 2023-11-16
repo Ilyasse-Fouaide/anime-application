@@ -13,13 +13,13 @@ import 'swiper/css/autoplay';
 
 import 'swiper/css';
 
-interface SlideContainer {
+export interface SlideContainerType {
   api: string,
   header: string,
   paragraph: string,
 }
 
-function SlideContainer({ api, header, paragraph }: SlideContainer) {
+function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
   const [loading, isLoading] = React.useState<boolean>(true);
   const nextRef = useRef(null);
@@ -29,7 +29,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainer) {
     const fetchAnime = () => {
       axios.get(api)
         .then(({ data }) => {
-          console.log(data);
           setAnimeData(data.data);
           isLoading(false);
         })
@@ -56,7 +55,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainer) {
   }
 
   return (
-    <>
+    <div className='mb-20'>
       <div className='px-[20px] lg:px-[65px] mb-[16px]'>
         <h2 className='text-[20px] md:text-[25px] text-white font-bold'>{header}</h2>
         <p className='text-sm md:text-base text-zinc-400 mt-[8px]'>{paragraph}</p>
@@ -169,7 +168,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainer) {
           <div className='-z-10 absolute top-0 bottom-0 right-0 w-[200%] bg-gradient-to-l from-zinc-950/80 group-hover:from-zinc-950/90'></div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
