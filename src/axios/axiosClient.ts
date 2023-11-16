@@ -22,4 +22,8 @@ axiosClient.interceptors.response.use(
   }
 )
 
+export function getRequest(url: string) {
+  return axiosClient(`${url}`).then(response => response);
+}
+
 export default axiosClient;

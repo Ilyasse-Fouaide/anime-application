@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import axios from 'axios';
-import axiosClient from '../../axios/axiosClient';
+import axiosClient, { getRequest } from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
@@ -27,9 +27,8 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   const preRef = useRef(null);
 
   React.useEffect(() => {
-    const ConcelToken = axios.CancelToken.source();
     const fetchAnime = () => {
-      axiosClient.get(api, { cancelToken: ConcelToken.token })
+      getRequest(api)
         .then(({ data }) => {
           setAnimeData(data.data);
           isLoading(false);
@@ -47,9 +46,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           // }
           isLoading(false);
         });
-      if (ConcelToken) {
-        console.log("Canceled")
-      }
     };
 
     fetchAnime();
