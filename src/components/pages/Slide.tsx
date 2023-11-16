@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
@@ -11,9 +12,26 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 
 function Slide() {
+  const filter = "tv"
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
+  const [loading, isLoading] = React.useState<boolean>(true);
   const nextRef = useRef(null);
   const preRef = useRef(null);
+
+  React.useEffect(() => {
+    const fetchAnime = () => {
+      axios.get(`https://api.jikan.moe/v4/seasons/now?filter=${filter}`)
+        .then(({ data }) => {
+          console.log(data);
+          isLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          isLoading(false);
+        });
+    };
+    fetchAnime();
+  }, []);
 
   return (
     <div className='relative'>
