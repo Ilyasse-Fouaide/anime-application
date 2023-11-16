@@ -9,6 +9,7 @@ import { FaArrowDown } from "@react-icons/all-files/fa/FaArrowDown";
 import Skeleton from "./Sleleton";
 import Slide from './Slide';
 import { AnimeData } from '../Types/types';
+import axiosClient from '../../axios/axiosClient';
 
 function Hero() {
   const limit: number = 6
@@ -31,7 +32,7 @@ function Hero() {
 
   React.useEffect(() => {
     const fetchAnime = () => {
-      axios.get(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=${limit}`)
+      axiosClient.get(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=${limit}`)
         .then((response) => {
           setAnimeData(response.data.data);
           setLoading(false);

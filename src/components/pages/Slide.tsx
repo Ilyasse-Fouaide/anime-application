@@ -1,4 +1,4 @@
-import React from 'react'
+import _React from 'react'
 import SlideContainer, { SlideContainerType } from './SlideContainer'
 
 function Slide() {

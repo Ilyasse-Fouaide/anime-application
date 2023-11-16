@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import axios from 'axios';
+import axiosClient from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
@@ -27,24 +28,28 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
 
   React.useEffect(() => {
     const fetchAnime = () => {
-      axios.get(api)
+      axiosClient.get(api)
         .then(({ data }) => {
           setAnimeData(data.data);
           isLoading(false);
         })
         .catch((error) => {
           console.log(error);
+          // if (error.response && error.response.status === 429) {
+          //   const delay = (seconds: number) => {
+          //     setTimeout(() => {
+          //       fetchAnime();
+          //     }, seconds)
+          //   }
+
+          //   delay(1000);
+          // }
           isLoading(false);
         });
     };
 
-    const delay = (seconds: number) => {
-      setTimeout(() => {
-        fetchAnime();
-      }, seconds)
-    }
+    fetchAnime();
 
-    delay(1000);
   }, []);
 
   if (loading) {
