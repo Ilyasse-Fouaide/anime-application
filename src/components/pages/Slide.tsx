@@ -71,9 +71,15 @@ function Slide() {
         }}
         className='px-[65px]'
       >
-        {animeData && animeData.map((anime, key) =>
-          <SwiperSlide className='bg-green-800 h-[333px]' key={key}>
-            <img src={anime.images.jpg.large_image_url} alt={anime.title} className='w-full h-full object-cover' />
+        {animeData && animeData.map(({ images, title, type }, key) =>
+          <SwiperSlide className='' key={key}>
+            <div className='w-full h-[333px]'>
+              <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover' />
+            </div>
+            <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>
+            <div>
+              <p className='text-xs text-zinc-400 mt-3'>{type}</p>
+            </div>
           </SwiperSlide>
         )}
       </Swiper>
