@@ -1,7 +1,9 @@
-import _React, { useRef } from 'react'
+import React, { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
+
+import { AnimeData } from '../Types/types';
 
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/autoplay';
@@ -9,6 +11,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 
 function Slide() {
+  const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
   const nextRef = useRef(null);
   const preRef = useRef(null);
 
