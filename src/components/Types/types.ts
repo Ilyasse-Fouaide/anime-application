@@ -16,5 +16,8 @@ export interface AnimeData extends Trailer {
     jpg: {
       large_image_url: string
     }
-  }
+  },
+  themes: {
+    name: string | null
+  }[]
 }
