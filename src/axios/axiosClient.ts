@@ -24,9 +24,8 @@ axiosClient.interceptors.response.use(
 )
 
 export function getRequest(url: string) {
-  const CancelToken = axios.CancelToken.source();
 
-  return axiosClient.get(`/${url}`, { cancelToken: CancelToken.token }).then(response => response);
+  return axiosClient.get(`/${url}`).then(response => response);
 }
 
 export default axiosClient;

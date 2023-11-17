@@ -34,15 +34,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
         })
         .catch((error) => {
           console.log(error);
-          // if (error.response && error.response.status === 429) {
-          //   const delay = (seconds: number) => {
-          //     setTimeout(() => {
-          //       fetchAnime();
-          //     }, seconds)
-          //   }
-
-          //   delay(1000);
-          // }
           isLoading(false);
         });
     };
@@ -135,7 +126,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
                     )}
                   </div>
                 </div>
-                <div className='z-0 absolute top-2 left-2 shadow-2xl shadow-white'>
+                <div className='z-0 absolute top-2 left-2 shadow-2xl shadow-white border-2 border-yellow-200'>
                   <div className='text-[13px] font-medium text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
                 </div>
                 {/* // ! More info ------------------------------------------ */}
@@ -170,7 +161,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
 
         </Swiper>
         {/* Adding The arrow and shadows */}
-        <div className='group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px] disabled:text-red-500' ref={preRef}>
+        <div className='group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={preRef}>
           <IoIosArrowBack />
           <div className='-z-10 absolute top-0 bottom-0 left-0 w-[200%] bg-gradient-to-r from-zinc-950/80 group-hover:from-zinc-950/90'></div>
         </div>
