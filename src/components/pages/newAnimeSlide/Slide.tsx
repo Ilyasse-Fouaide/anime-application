@@ -1,6 +1,16 @@
+import React from 'react';
 import SlideContainer, { SlideContainerType } from '../SlideContainer'
 
 function Slide() {
+  const [show, isShow] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      isShow(true);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [])
+
   const slideData: SlideContainerType[] = [
     {
       api: `seasons/now?filter=tv&page=1`,
@@ -17,7 +27,15 @@ function Slide() {
   return (
     <>
       {slideData.map(({ api, header, paragraph }, key) =>
-        <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
+        <div key={key}>
+          {key === 0 ?
+            <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
+            :
+            <>
+              {show && key === 1 && <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />}
+            </>
+          }
+        </div>
       )}
     </>
   )
