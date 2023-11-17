@@ -11,7 +11,7 @@ function Slide() {
       api: `top/anime?type=tv&filter=bypopularity`,
       header: "Anime Watch Recommendations",
       paragraph: "Discover the top picks for new and ongoing series here!",
-    }
+    },
   ];
 
   return (

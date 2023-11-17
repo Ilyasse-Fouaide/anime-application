@@ -12,11 +12,12 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css/autoplay';
 
 import 'swiper/css';
+import axios from 'axios';
 
 export interface SlideContainerType {
   api: string,
-  header: string,
-  paragraph: string,
+  header?: string,
+  paragraph?: string,
 }
 
 function SlideContainer({ api, header, paragraph }: SlideContainerType) {
@@ -26,19 +27,27 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   const preRef = useRef(null);
 
   React.useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
+
     const fetchAnime = () => {
-      getRequest(api)
+      getRequest(api, cancelToken.token)
         .then(({ data }) => {
           setAnimeData(data.data);
           isLoading(false);
         })
         .catch((error) => {
-          console.log(error);
+          if (axios.isCancel(error)) {
+            console.error("axios error: ", error.message);
+          } else {
+            console.error(error);
+          }
           isLoading(false);
         });
     };
 
     fetchAnime();
+
+    return () => cancelToken.cancel("Canceled")
 
   }, []);
 

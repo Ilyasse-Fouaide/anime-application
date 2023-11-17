@@ -6,7 +6,6 @@ import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline"
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
 import { FaArrowDown } from "@react-icons/all-files/fa/FaArrowDown";
 import Skeleton from "./Sleleton";
-import Slide from './newAnimeSlide/Slide';
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 
@@ -171,9 +170,6 @@ function Hero() {
         <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] right-1/2 translate-x-1/2 border-2 border-[#DD4854]/60 rounded-full flex items-center justify-center text-[20px] text-[#DD4854]'>
           <FaArrowDown />
         </div>
-      </div>
-      <div className='mt-20 lg:mt-0'>
-        <Slide />
       </div>
     </>
   )
