@@ -6,7 +6,7 @@ import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline"
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
 import { FaArrowDown } from "@react-icons/all-files/fa/FaArrowDown";
 import Skeleton from "./Sleleton";
-import Slide from './Slide';
+import Slide from './newAnimeSlide/Slide';
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 

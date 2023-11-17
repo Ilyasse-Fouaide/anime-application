@@ -1,5 +1,4 @@
-import React, { Suspense } from 'react'
-import SlideContainer, { SlideContainerType } from './SlideContainer'
+import SlideContainer, { SlideContainerType } from '../SlideContainer'
 
 function Slide() {
   const slideData: SlideContainerType[] = [
@@ -15,12 +14,12 @@ function Slide() {
     }
   ];
 
-  const api = `seasons/now?filter=tv&page=1`;
-  const header = "Season 2023 Latest Simulcasts"
-  const paragraph = "Explore the Best New Releases & Ongoing Simulcasts!";
-
   return (
-    <SlideContainer api={slideData[0].api} header={slideData[0].header} paragraph={slideData[0].paragraph} />
+    <>
+      {slideData.map(({ api, header, paragraph }, key) =>
+        <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
+      )}
+    </>
   )
 }
 
