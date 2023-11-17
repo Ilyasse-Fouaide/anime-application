@@ -1,7 +1,5 @@
 import React, { Suspense } from 'react'
-import { SlideContainerType } from './SlideContainer'
-
-const SlideContainer = React.lazy(() => import('./SlideContainer'));
+import SlideContainer, { SlideContainerType } from './SlideContainer'
 
 function Slide() {
   const slideData: SlideContainerType[] = [
@@ -22,9 +20,7 @@ function Slide() {
   const paragraph = "Explore the Best New Releases & Ongoing Simulcasts!";
 
   return (
-    <Suspense fallback={"Suspense"}>
-      <SlideContainer api={api} header={header} paragraph={paragraph} />
-    </Suspense>
+    <SlideContainer api={slideData[0].api} header={slideData[0].header} paragraph={slideData[0].paragraph} />
   )
 }
 
