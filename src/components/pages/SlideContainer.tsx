@@ -115,13 +115,13 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           {animeData &&
             animeData.map(({ images, title, type, themes, episodes, score, scored_by, synopsis }, key: number) => (
               <SwiperSlide className='relative group overflow-hidden cursor-pointer' key={key}>
-                <div className='w-full aspect-[2/3]'>
-                  <img
+                <div className='w-full aspect-[2/3] bg-no-repeat bg-cover' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
+                  {/* <img
                     src={images.jpg.large_image_url}
                     alt={title}
                     loading='lazy'
                     className='object-cover w-full h-full'
-                  />
+                  /> */}
                 </div>
                 <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>
                 <div className='text-xs text-zinc-400 mt-3 flex items-center'>
