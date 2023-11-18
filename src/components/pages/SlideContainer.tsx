@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React from 'react'
+import axios from 'axios';
 import { getRequest } from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
-import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import numeral from "numeral";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { AnimeData } from '../Types/types';
 
@@ -12,7 +12,6 @@ import 'swiper/css/autoplay';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import axios from 'axios';
 
 export interface SlideContainerType {
   api: string,
@@ -64,7 +63,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   }
 
   return (
-    <div className='mb-20'>
+    <div className='mt-20 mb-0 lg:mt-0 lg:mb-20'>
       <div className='px-[20px] lg:px-[65px] mb-[16px]'>
         <h2 className='text-[20px] md:text-[25px] text-white font-bold'>{header}</h2>
         <p className='text-sm md:text-base text-zinc-400 mt-[8px]'>{paragraph}</p>
@@ -75,35 +74,41 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           navigation={{
             enabled: true
           }}
+          slidesPerGroup={6}
           breakpoints={{
             0: {
               spaceBetween: 10,
               slidesPerView: 2,
               navigation: {
                 enabled: false
-              }
+              },
+              slidesPerGroup: 2
             },
             640: {
               spaceBetween: 30,
               slidesPerView: 3,
               navigation: {
                 enabled: false
-              }
+              },
+              slidesPerGroup: 3
             },
             768: {
               spaceBetween: 30,
               slidesPerView: 4,
               navigation: {
                 enabled: false
-              }
+              },
+              slidesPerGroup: 4,
             },
             1024: {
               spaceBetween: 30,
-              slidesPerView: 4
+              slidesPerView: 4,
+              slidesPerGroup: 4,
             },
             1280: {
               spaceBetween: 30,
-              slidesPerView: 5
+              slidesPerView: 5,
+              slidesPerGroup: 5,
             },
             1536: {
               spaceBetween: 30,
@@ -115,13 +120,13 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           {animeData &&
             animeData.map(({ images, title, type, themes, episodes, score, scored_by, synopsis }, key: number) => (
               <SwiperSlide className='relative group overflow-hidden cursor-pointer' key={key}>
-                <div className='w-full aspect-[2/3] bg-no-repeat bg-cover' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
-                  {/* <img
+                <div className='w-full aspect-[2/3]'>
+                  <img
                     src={images.jpg.large_image_url}
                     alt={title}
                     loading='lazy'
                     className='object-cover w-full h-full'
-                  /> */}
+                  />
                 </div>
                 <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>
                 <div className='text-xs text-zinc-400 mt-3 flex items-center'>
@@ -145,7 +150,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
                   <div className='text-[13px] font-medium text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
                 </div>
                 {/* // ! More info ------------------------------------------ */}
-                <div className='z-10 hidden lg:block absolute inset-0 bg-black transition-transform translate-y-full group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
+                <div className='z-10 hidden lg:block absolute inset-0 bg-black transition-transform translate-y-[105%] group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
                   <div className='w-full h-full bg-zinc-900/[.96] p-3'>
                     <h3 className='text-[14px] text-zinc-50 font-medium'>{title}</h3>
                     <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
@@ -155,15 +160,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
                     <p className='text-[13px] leading-[17px] text-zinc-50 font-medium mt-3'>
                       {synopsis ?
                         <>
-                          {synopsis.length <= 200 ?
-                            <>
-                              {synopsis}
-                            </>
-                            :
-                            <>
-                              {synopsis.split("").splice(0, 200).join("") + "..."}
-                            </>
-                          }
+                          {synopsis.split("").splice(0, 200).join("") + "..."}
                         </>
                         :
                         <>No Description Availabled</>

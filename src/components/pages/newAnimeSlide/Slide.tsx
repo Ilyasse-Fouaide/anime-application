@@ -18,9 +18,9 @@ function Slide() {
       paragraph: "Explore the Best New Releases & Ongoing Simulcasts!",
     },
     {
-      api: `top/anime?type=tv&filter=bypopularity`,
+      api: `seasons/2022/fall`,
       header: "Anime Watch Recommendations",
-      paragraph: "Discover the top picks for new and ongoing series here!",
+      paragraph: "Discover the top picks the popular series here!",
     },
   ];
 
