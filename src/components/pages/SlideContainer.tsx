@@ -5,13 +5,13 @@ import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import numeral from "numeral";
 
-
 import { AnimeData } from '../Types/types';
 
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/autoplay';
 
 import 'swiper/css';
+import 'swiper/css/navigation';
 import axios from 'axios';
 
 export interface SlideContainerType {
@@ -23,8 +23,9 @@ export interface SlideContainerType {
 function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
   const [loading, isLoading] = React.useState<boolean>(true);
-  const nextRef = useRef(null);
-  const preRef = useRef(null);
+  const swiperRef = useRef<any>(null);
+  const nextRef = useRef<any>(null);
+  const preRef = useRef<any>(null);
 
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
@@ -51,10 +52,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
 
   }, []);
 
-  if (loading) {
-    return "Loading ...";
-  }
-
   const formatNumber = (num: number): string | number => {
     if (num >= 1000 && num < 1000000) {
       return numeral(num).format('0a')
@@ -63,6 +60,18 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
     } else {
       return num;
     }
+  }
+
+  const handlePrevClick = () => {
+    swiperRef.current.slidePrev();
+  };
+
+  const handleNextClick = () => {
+    swiperRef.current.slideNext();
+  };
+
+  if (loading) {
+    return "Loading ...";
   }
 
   return (
@@ -100,11 +109,12 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
               slidesPerView: 6
             },
           }}
-          navigation={{
-            nextEl: nextRef.current,
-            prevEl: preRef.current,
-            disabledClass: 'swiper-button-disabled'
-          }}
+          // navigation={{
+          //   nextEl: nextRef.current,
+          //   prevEl: preRef.current,
+          //   hiddenClass: 'swiper-button-hidden'
+          // }}
+          navigation={true}
           className='px-[20px] lg:px-[65px]'
         >
           {animeData &&
@@ -114,6 +124,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
                   <img
                     src={images.jpg.large_image_url}
                     alt={title}
+                    loading='lazy'
                     className='object-cover w-full h-full'
                   />
                 </div>
@@ -170,14 +181,14 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
 
         </Swiper>
         {/* Adding The arrow and shadows */}
-        <div className='group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={preRef}>
+        {/* <div className='group z-10 absolute top-0 bottom-0 left-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={preRef} onClick={handlePrevClick}>
           <IoIosArrowBack />
           <div className='-z-10 absolute top-0 bottom-0 left-0 w-[200%] bg-gradient-to-r from-zinc-950/80 group-hover:from-zinc-950/90'></div>
         </div>
-        <div className='group z-10 absolute top-0 bottom-0 right-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={nextRef}>
+        <div className='group z-10 absolute top-0 bottom-0 right-0 w-[65px] h-full text-zinc-50 flex items-center justify-center cursor-pointer text-[26px]' ref={nextRef} onClick={handleNextClick}>
           <IoIosArrowForward />
           <div className='-z-10 absolute top-0 bottom-0 right-0 w-[200%] bg-gradient-to-l from-zinc-950/80 group-hover:from-zinc-950/90'></div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

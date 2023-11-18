@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Hero from './Hero';
 import Slide from './newAnimeSlide/Slide';
 
 function Container() {
-  const [showSlide, setShowSlide] = useState(false);
+  const [showSlide, setShowSlide] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timeout = setTimeout(() => {
       setShowSlide(true);
     }, 1000);
