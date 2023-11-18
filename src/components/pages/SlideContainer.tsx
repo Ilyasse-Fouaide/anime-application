@@ -83,18 +83,30 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
       <div className='relative select-none'>
         <Swiper
           modules={[Navigation]}
+          navigation={{
+            enabled: true
+          }}
           breakpoints={{
             0: {
               spaceBetween: 10,
-              slidesPerView: 2
+              slidesPerView: 2,
+              navigation: {
+                enabled: false
+              }
             },
             640: {
               spaceBetween: 30,
-              slidesPerView: 3
+              slidesPerView: 3,
+              navigation: {
+                enabled: false
+              }
             },
             768: {
               spaceBetween: 30,
-              slidesPerView: 4
+              slidesPerView: 4,
+              navigation: {
+                enabled: false
+              }
             },
             1024: {
               spaceBetween: 30,
@@ -109,12 +121,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
               slidesPerView: 6
             },
           }}
-          // navigation={{
-          //   nextEl: nextRef.current,
-          //   prevEl: preRef.current,
-          //   hiddenClass: 'swiper-button-hidden'
-          // }}
-          navigation={true}
           className='px-[20px] lg:px-[65px]'
         >
           {animeData &&
