@@ -28,13 +28,7 @@ function Slide() {
     <>
       {slideData.map(({ api, header, paragraph }, key) =>
         <div key={key}>
-          {key === 0 ?
-            <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
-            :
-            <>
-              {show && key === 1 && <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />}
-            </>
-          }
+          <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
         </div>
       )}
     </>

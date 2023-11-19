@@ -1,11 +1,17 @@
 import axios from "axios";
+import axiosRateLimit from "axios-rate-limit";
 
 const axiosClient = axios.create({
   // baseURL: import.meta.env.VITE_BASE_URL,
   baseURL: 'https://api.jikan.moe/v4',
 });
 
-axiosClient.interceptors.request.use(
+const rateLimitedAxios = axiosRateLimit(axiosClient, {
+  maxRequests: 1, // Maximum number of requests allowed
+  perMilliseconds: 1000, // in milliseconds
+});
+
+rateLimitedAxios.interceptors.request.use(
   (request) => {
     return request
   },
@@ -14,7 +20,7 @@ axiosClient.interceptors.request.use(
   }
 )
 
-axiosClient.interceptors.response.use(
+rateLimitedAxios.interceptors.response.use(
   (response) => {
     return response
   },
@@ -28,7 +34,7 @@ axiosClient.interceptors.response.use(
 
 export function getRequest(url: string, source?: any) {
 
-  return axiosClient.get(`/${url}`, { cancelToken: source }).then(response => response);
+  return rateLimitedAxios.get(`/${url}`, { cancelToken: source }).then(response => response);
 }
 
-export default axiosClient;
+export default rateLimitedAxios;
