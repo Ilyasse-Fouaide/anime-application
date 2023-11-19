@@ -4,7 +4,7 @@ export interface Trailer {
   }
 }
 
-export interface CardInfo {
+export interface CardInfoTypes {
   images: {
     jpg: {
       large_image_url: string
@@ -17,14 +17,14 @@ export interface CardInfo {
   title: string,
 }
 
-export interface Card extends CardInfo {
+export interface CardTypes extends CardInfoTypes {
   type: string,
   themes: {
     name: string
   }[],
 }
 
-export interface AnimeData extends Trailer, Card {
+export interface AnimeData extends Trailer, CardTypes {
   genres: {
     name: string,
   }[],

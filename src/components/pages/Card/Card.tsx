@@ -1,7 +1,7 @@
-import { Card } from '../../Types/types'
+import { CardTypes } from '../../Types/types'
 import CardInfo from './CardInfo'
 
-function Card({ images, title, type, themes, episodes, score, scored_by, synopsis }: Card) {
+function Card({ images, title, type, themes, episodes, score, scored_by, synopsis }: CardTypes) {
 
   return (
     <>

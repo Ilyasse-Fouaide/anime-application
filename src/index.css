@@ -11,11 +11,11 @@
 }
 
 .swiper-button-next {
-  @apply right-0
+  @apply right-0 bg-gradient-to-l from-zinc-950/60
 }
 
 .swiper-button-prev {
-  @apply left-0
+  @apply left-0 bg-gradient-to-r from-zinc-950/60
 }
 
 .swiper-button-next, 

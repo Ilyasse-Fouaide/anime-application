@@ -1,7 +1,7 @@
-import { CardInfo } from '../../Types/types'
+import { CardInfoTypes } from '../../Types/types'
 import numeral from "numeral";
 
-function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardInfo) {
+function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardInfoTypes) {
   const formatNumber = (num: number): string | number => {
     if (num >= 1000 && num < 1000000) {
       return numeral(num).format('0a')
