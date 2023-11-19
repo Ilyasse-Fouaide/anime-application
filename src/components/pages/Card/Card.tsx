@@ -1,7 +1,7 @@
-import { AnimeData } from '../../Types/types'
+import { Card } from '../../Types/types'
 import CardInfo from './CardInfo'
 
-function Card({ images, title, type, themes, episodes, score, scored_by, synopsis }: AnimeData) {
+function Card({ images, title, type, themes, episodes, score, scored_by, synopsis }: Card) {
 
   return (
     <>
