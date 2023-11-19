@@ -24,3 +24,23 @@ export interface AnimeData extends Trailer {
   score: number,
   scored_by: number
 }
+
+export interface CardInfo {
+  images: {
+    jpg: {
+      large_image_url: string
+    }
+  },
+  score: number,
+  scored_by: number,
+  synopsis: string,
+  episodes: number,
+  title: string,
+}
+
+export interface Card extends CardInfo {
+  type: string,
+  themes: {
+    name: string
+  }[],
+}

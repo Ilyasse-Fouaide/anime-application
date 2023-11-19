@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios';
 import { getRequest } from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
-import numeral from "numeral";
 
 import { AnimeData } from '../Types/types';
 
@@ -47,16 +46,6 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
     return () => cancelToken.cancel("Canceled")
 
   }, []);
-
-  const formatNumber = (num: number): string | number => {
-    if (num >= 1000 && num < 1000000) {
-      return numeral(num).format('0a')
-    } else if (num > 1000000) {
-      return numeral(num).format('0.0a')
-    } else {
-      return num;
-    }
-  }
 
   if (loading) {
     return "Loading ...";
