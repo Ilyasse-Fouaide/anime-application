@@ -25,6 +25,7 @@ export interface CardTypes extends CardInfoTypes {
 }
 
 export interface GenresType {
+  mal_id: number
   name: string,
   count: number,
 }

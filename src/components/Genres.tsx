@@ -33,10 +33,10 @@ const genreRelated: { id: number, image: any, color: string }[] = [
   { id: 22, image: Love_Is_War, color: "#F09305" },
   { id: 23, image: Classroom_of_the_elit, color: "#0E31F0" },
   { id: 27, image: Naruto, color: "#7E0EF0" },
-  { id: 36, image: Violet_evergarden, color: "#340FF0" },
-  { id: 13, image: Vinland_Saga, color: "#CA1FF0" },
+  { id: 36, image: Violet_evergarden, color: "#100480" },
+  { id: 13, image: Vinland_Saga, color: "#1984E0" },
   { id: 37, image: Attack_on_Titan, color: "#0E78F0" },
-  { id: 18, image: Code_Geass, color: "#0080F0" },
+  { id: 18, image: Code_Geass, color: "#5B51E0" },
   { id: 42, image: Monster, color: "#F0620C" },
   { id: 51, image: Doraemon, color: "#DB7E0B" },
 ];
@@ -45,6 +45,7 @@ const GenreCard = ({ name, count, mal_id }: GenresType) => {
 
   return (
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='relative w-full aspect-[3/2] rounded-lg overflow-hidden' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
+
       <p className='relative p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
         {name.length >= 12 ?
           <>
@@ -59,6 +60,7 @@ const GenreCard = ({ name, count, mal_id }: GenresType) => {
       <div className='z-10 min-[280px]:w-[100px] min-[320px]:w-[150px] min-[425px]:w-[190px] lg:w-[150px] aspect-square rounded-md overflow-hidden absolute -bottom-7 -right-7 rotate-[30deg] shadow-2xl shadow-zinc-950/60'>
         <div className='w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${genreRelated.find((el) => el.id === mal_id)?.image}')` }}></div>
       </div>
+
     </motion.div>
   )
 }
