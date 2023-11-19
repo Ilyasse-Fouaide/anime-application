@@ -1,8 +1,9 @@
 import React from 'react'
 import { getRequest } from '../axios/axiosClient';
+import { GenresType } from './Types/types';
 
 function Genres() {
-  const [genres, setGenres] = React.useState([]);
+  const [genres, setGenres] = React.useState<GenresType[]>([]);
 
   React.useEffect(() => {
     getRequest('genres/anime')
