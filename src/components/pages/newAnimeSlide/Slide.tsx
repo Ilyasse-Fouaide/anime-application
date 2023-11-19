@@ -1,15 +1,7 @@
-import React from 'react';
+import _React from 'react';
 import SlideContainer, { SlideContainerType } from '../SlideContainer'
 
 function Slide() {
-  const [show, isShow] = React.useState(false);
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      isShow(true);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [])
 
   const slideData: SlideContainerType[] = [
     {
