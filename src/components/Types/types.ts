@@ -4,27 +4,6 @@ export interface Trailer {
   }
 }
 
-export interface AnimeData extends Trailer {
-  title: string,
-  genres: {
-    name: string,
-  }[],
-  synopsis: string,
-  type: string,
-  duration: string,
-  images: {
-    jpg: {
-      large_image_url: string
-    }
-  },
-  themes: {
-    name: string
-  }[],
-  episodes: number,
-  score: number,
-  scored_by: number
-}
-
 export interface CardInfo {
   images: {
     jpg: {
@@ -43,4 +22,11 @@ export interface Card extends CardInfo {
   themes: {
     name: string
   }[],
+}
+
+export interface AnimeData extends Trailer, Card {
+  genres: {
+    name: string,
+  }[],
+  duration: string,
 }
