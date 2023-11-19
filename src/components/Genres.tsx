@@ -21,7 +21,7 @@ import Code_Geass from "../assets/images/Code_Geass.jpg"
 import Monster from "../assets/images/Monster.jpg"
 import Doraemon from "../assets/images/Doraemon.jpg"
 
-const genreRelated = [
+const genreRelated: { id: number, image: any }[] = [
   { id: 4, image: gintama },
   { id: 15, image: boku_no_hero },
   { id: 10, image: kimetsu_no_yaiba },
@@ -42,6 +42,7 @@ const genreRelated = [
 ];
 
 const GenreCard = ({ name, count, mal_id }: GenresType) => {
+
   return (
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='bg-[var(--red)] relative w-full aspect-square rounded-lg flex items-end'>
       <p className='z-10 relative bg-[var(--red)] p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words'>
@@ -55,7 +56,9 @@ const GenreCard = ({ name, count, mal_id }: GenresType) => {
         {" "}
         <span className='text-base'>{`(${count})`}</span>
       </p>
-      <div className='absolute border-[8px] border-zinc-50 w-[85%] h-[85%] top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'></div>
+      <div className='absolute border-[8px] border-zinc-50 w-[85%] h-[85%] top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+        <div className='w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${genreRelated.find((el) => el.id === mal_id)?.image}')` }}></div>
+      </div>
     </motion.div>
   )
 }
