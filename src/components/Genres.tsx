@@ -44,8 +44,8 @@ const genreRelated: { id: number, image: any }[] = [
 const GenreCard = ({ name, count, mal_id }: GenresType) => {
 
   return (
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='bg-[var(--red)] relative w-full aspect-square rounded-lg flex items-end'>
-      <p className='z-10 relative bg-[var(--red)] p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words'>
+    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='bg-[var(--red)] relative w-full aspect-[3/2] rounded-lg overflow-hidden'>
+      <p className='relative bg-[var(--red)] p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit'>
         {name.length >= 12 ?
           <>
             {name.split("").splice(0, 12).join("")}...
@@ -56,7 +56,7 @@ const GenreCard = ({ name, count, mal_id }: GenresType) => {
         {" "}
         <span className='text-base'>{`(${count})`}</span>
       </p>
-      <div className='absolute border-[8px] border-zinc-50 w-[85%] h-[85%] top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+      <div className='z-10 min-[280px]:w-[100px] min-[320px]:w-[150px] min-[425px]:w-[190px] lg:w-[150px] aspect-square rounded-md overflow-hidden absolute -bottom-7 -right-7 rotate-[30deg] shadow-2xl shadow-zinc-950/60'>
         <div className='w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${genreRelated.find((el) => el.id === mal_id)?.image}')` }}></div>
       </div>
     </motion.div>
