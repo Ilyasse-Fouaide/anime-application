@@ -21,31 +21,31 @@ import Code_Geass from "../assets/images/Code_Geass.jpg"
 import Monster from "../assets/images/Monster.jpg"
 import Doraemon from "../assets/images/Doraemon.jpg"
 
-const genreRelated: { id: number, image: any }[] = [
-  { id: 4, image: gintama },
-  { id: 15, image: boku_no_hero },
-  { id: 10, image: kimetsu_no_yaiba },
-  { id: 1, image: jujutsu },
-  { id: 2, image: one_piece },
-  { id: 19, image: Your_Lie_in_April },
-  { id: 24, image: Neon_Genesis_Evangelion },
-  { id: 8, image: Grave_of_the_Fireflies },
-  { id: 22, image: Love_Is_War },
-  { id: 23, image: Classroom_of_the_elit },
-  { id: 27, image: Naruto },
-  { id: 36, image: Violet_evergarden },
-  { id: 13, image: Vinland_Saga },
-  { id: 37, image: Attack_on_Titan },
-  { id: 18, image: Code_Geass },
-  { id: 42, image: Monster },
-  { id: 51, image: Doraemon },
+const genreRelated: { id: number, image: any, color: string }[] = [
+  { id: 4, image: gintama, color: "#BA00D2" },
+  { id: 15, image: boku_no_hero, color: "#F00003" },
+  { id: 10, image: kimetsu_no_yaiba, color: "#F00093" },
+  { id: 1, image: jujutsu, color: "#A13EF0" },
+  { id: 2, image: one_piece, color: "#F02900" },
+  { id: 19, image: Your_Lie_in_April, color: "#F01600" },
+  { id: 24, image: Neon_Genesis_Evangelion, color: "#F06A00" },
+  { id: 8, image: Grave_of_the_Fireflies, color: "#F00044" },
+  { id: 22, image: Love_Is_War, color: "#F09305" },
+  { id: 23, image: Classroom_of_the_elit, color: "#0E31F0" },
+  { id: 27, image: Naruto, color: "#7E0EF0" },
+  { id: 36, image: Violet_evergarden, color: "#340FF0" },
+  { id: 13, image: Vinland_Saga, color: "#CA1FF0" },
+  { id: 37, image: Attack_on_Titan, color: "#0E78F0" },
+  { id: 18, image: Code_Geass, color: "#0080F0" },
+  { id: 42, image: Monster, color: "#F0620C" },
+  { id: 51, image: Doraemon, color: "#DB7E0B" },
 ];
 
 const GenreCard = ({ name, count, mal_id }: GenresType) => {
 
   return (
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='bg-[var(--red)] relative w-full aspect-[3/2] rounded-lg overflow-hidden'>
-      <p className='relative bg-[var(--red)] p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit'>
+    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='relative w-full aspect-[3/2] rounded-lg overflow-hidden' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
+      <p className='relative p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
         {name.length >= 12 ?
           <>
             {name.split("").splice(0, 12).join("")}...
