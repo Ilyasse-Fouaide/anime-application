@@ -3,7 +3,6 @@ import axios from 'axios';
 import { getRequest } from '../../axios/axiosClient';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import numeral from "numeral";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { AnimeData } from '../Types/types';
 
