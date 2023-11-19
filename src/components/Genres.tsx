@@ -31,7 +31,8 @@ function Genres() {
         {filterArray && filterArray.map(({ name, count }, key) =>
           <div className='bg-[var(--red)] relative w-full aspect-square rounded-lg flex items-end' key={key}>
             <p className='z-10 relative bg-[var(--red)] p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words'>
-              {name}
+              {name.split("").splice(0, 12).join("")}
+              {" "}
               <span className='text-base'>{`(${count})`}</span>
             </p>
             <div className='absolute border-[8px] border-zinc-50 w-[85%] h-[85%] top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'></div>
