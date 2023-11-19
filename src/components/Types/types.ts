@@ -26,7 +26,7 @@ export interface CardTypes extends CardInfoTypes {
 
 export interface GenresType {
   name: string,
-  count?: number,
+  count: number,
 }
 
 export interface AnimeData extends Trailer, CardTypes {
