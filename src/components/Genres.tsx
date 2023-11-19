@@ -9,15 +9,15 @@ function Genres() {
     getRequest('genres/anime')
       .then(({ data }) => {
         console.log(data);
-        setGenres(data)
+        setGenres(data.data)
       })
   }, []);
 
   return (
-    <div className='bg-red-500 h-5 mt-20 mb-0 lg:mt-0 lg:mb-20'>
-      <div className='w-full flex justify-center'>
-        <div className='font-medium'>Still looking for Anime to watch?</div>
-      </div>
+    <div className='mt-20 mb-0 lg:mt-0 lg:mb-20'>
+      {genres && genres.map(({ name, count }, key) =>
+        <div>{name}</div>
+      )}
     </div>
   )
 }
