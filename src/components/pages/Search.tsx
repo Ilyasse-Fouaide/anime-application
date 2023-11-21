@@ -61,7 +61,7 @@ function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
     const index = recentSearch.findIndex((el: any) => el.mal_id === mal_id);
     if (index !== -1) {
       recentSearch.splice(index, 1);
-      return localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
     };
   };
 
@@ -70,9 +70,11 @@ function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
       <div className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
         {sliceText(title, 20)}
       </div>
-      <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600' onClick={() => removeItem(mal_id)}>
-        <MdClose className="w-[20px] h-[20px]" />
-      </div>
+      <form onSubmit={() => removeItem(mal_id)}>
+        <button className='h-full flex items-center cursor-pointer px-1 hover:bg-zinc-600'>
+          <MdClose className="w-[20px] h-[20px]" />
+        </button>
+      </form>
     </div>
   )
 }
@@ -168,8 +170,8 @@ function Search() {
                     <h2 className='text-2xl font-medium text-white'>Series</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
-                        <div onClick={() => addRecentSearch(mal_id, title)}>
-                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                        <div onClick={() => addRecentSearch(mal_id, title)} key={key} >
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} />
                         </div>
                       )}
                     </div>
@@ -178,8 +180,8 @@ function Search() {
                     <h2 className='text-2xl font-medium text-white'>Moives</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
-                        <div onClick={() => addRecentSearch(mal_id, title)}>
-                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                        <div onClick={() => addRecentSearch(mal_id, title)} key={key} >
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} />
                         </div>
                       )}
                     </div>
