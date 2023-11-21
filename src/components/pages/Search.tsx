@@ -53,6 +53,19 @@ function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTyp
   )
 }
 
+function RecentSearch({ title }: { title: string }) {
+  return (
+    <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
+      <div className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
+        {sliceText(title, 20)}
+      </div>
+      <div className='flex items-center cursor-pointer px-2 hover:bg-zinc-600'>
+        <MdClose className="w-[20px] h-[20px]" />
+      </div>
+    </div>
+  )
+}
+
 function Search() {
   const [inputValue, setInputValue] = React.useState("");
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
@@ -163,14 +176,7 @@ function Search() {
         <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
           <div className='flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
             {RECENT_SEARCH.map(({ title }: any, key: number) =>
-              <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer' key={key}>
-                <div className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
-                  {title}
-                </div>
-                <div className='flex items-center cursor-pointer px-2 hover:bg-zinc-600'>
-                  <MdClose className="w-[20px] h-[20px]" />
-                </div>
-              </div>
+              <RecentSearch title={title} key={key} />
             )}
           </div>
         </div>
