@@ -79,7 +79,7 @@ const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.E
 
 const InputElement = (): JSX.Element => {
   return (
-    <Link to={'search'}>
+    <Link to={`search`}>
       <input type="text" placeholder='Search Anime...' className='w-[250] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm cursor-pointer' />
     </Link>
   )

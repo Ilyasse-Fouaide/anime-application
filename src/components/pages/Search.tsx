@@ -2,7 +2,9 @@ import React from 'react'
 
 function Search() {
   return (
-    <div>Search</div>
+    <div className='bg-zinc-900 py-[32px] flex justify-center'>
+      <input type="text" placeholder='Search...' className='py-1 w-[900px] text-3xl font-semibold bg-transparent border-b-2 transition-colors border-b-zinc-600 focus:border-b-[var(--red)] outline-none' />
+    </div>
   )
 }
 
