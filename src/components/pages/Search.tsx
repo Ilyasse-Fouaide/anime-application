@@ -108,13 +108,14 @@ function Search() {
     }
   }, [debouncedValue]);
 
+  const fetchRecentSearch = () => {
+    let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+    setRecentSearchData(RECENT_SEARCH);
+  }
+
   React.useEffect(() => {
-    const fetchRecentSearch = () => {
-      let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
-      setRecentSearchData(RECENT_SEARCH);
-    }
     fetchRecentSearch();
-  }, [recentSearchData]);
+  }, []);
 
   const removeItem = (mal_id: number) => {
     let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCH')!)
@@ -122,6 +123,7 @@ function Search() {
     if (index !== -1) {
       recentSearch.splice(index, 1);
       localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+      fetchRecentSearch();
     };
   };
 
@@ -198,13 +200,23 @@ function Search() {
         </>
         :
         <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-          <div className='flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
-            {recentSearchData.map(({ mal_id, title }: any, key: number) =>
-              <div onClick={() => removeItem(mal_id)}>
-                <RecentSearch mal_id={mal_id} title={title} key={key} />
+          {!recentSearchData || recentSearchData.length === 0 ?
+            <></>
+            :
+            <>
+              <div className='flex items-end justify-between'>
+                <h2 className='text-base md:text-xl font-medium text-white'>Recent Search Results</h2>
+                <div className='text-sm lg:text-base font-semibold transition-colors text-zinc-400 hover:text-zinc-50 cursor-pointer'>CLEAR</div>
               </div>
-            )}
-          </div>
+              <div className='my-3 flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
+                {recentSearchData && recentSearchData.map(({ mal_id, title }: any, key: number) =>
+                  <div onClick={() => removeItem(mal_id)} key={key}>
+                    <RecentSearch mal_id={mal_id} title={title} />
+                  </div>
+                )}
+              </div>
+            </>
+          }
         </div>
       }
     </>
