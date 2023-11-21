@@ -75,6 +75,11 @@ function Search() {
   const [debouncedValue] = useDebounce(inputValue, 1000);
   const [recentSearchData, setRecentSearchData] = React.useState([]);
 
+  const fetchRecentSearch = () => {
+    let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+    setRecentSearchData(RECENT_SEARCH);
+  }
+
   const addRecentSearch = (mal_id: number, title: string) => {
     let recentSearch: { mal_id: number; title: string }[] = [];
     let object = { mal_id, title }
@@ -87,6 +92,7 @@ function Search() {
       recentSearch.push(object);
       localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
     }
+    fetchRecentSearch();
   }
 
   const handleInputChange = (event: any) => {
@@ -107,11 +113,6 @@ function Search() {
       setAnimeData([]);
     }
   }, [debouncedValue]);
-
-  const fetchRecentSearch = () => {
-    let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
-    setRecentSearchData(RECENT_SEARCH);
-  }
 
   React.useEffect(() => {
     fetchRecentSearch();
