@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AnimeData, CardInfoTypes } from '../Types/types';
 import CardInfo, { formatNumber } from './Card/CardInfo';
 import { MdClose } from "@react-icons/all-files/md/MdClose";
+import SkeletonSearch from '../Skeleton/SkeletonSearch';
 
 function sliceText(text: string, number: number): string {
   if (text.length >= number) {
@@ -58,6 +59,20 @@ function Search() {
   const [loading, setLoading] = React.useState(true);
   const [debouncedValue] = useDebounce(inputValue, 1000);
 
+  const addRecentSearch = (mal_id: number, title: string) => {
+    let recentSearch: { mal_id: number; title: string }[] = [];
+    let object = { mal_id, title }
+
+    if (!localStorage.getItem("RECENT_SEARCH")) {
+      recentSearch.push(object);
+      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch))
+    } else {
+      recentSearch = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+      recentSearch.push(object);
+      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+    }
+  }
+
   const handleInputChange = (event: any) => {
     setInputValue(event.target.value);
   }
@@ -68,7 +83,7 @@ function Search() {
       cancelToken = axios.CancelToken.source();
       getRequest(`anime?q=${debouncedValue}&order_by=popularity&sfw=true`, cancelToken.token)
         .then(({ data }) => {
-          setLoading(true);
+          setLoading(false);
           setAnimeData(data.data);
         });
     } else {
@@ -97,32 +112,7 @@ function Search() {
         <>
           {loading ?
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-              {/* <div className='animate-pulse'>
-                <div className='mb-16'>
-                  <div className='h-5 w-[200px] bg-zinc-800'></div>
-                  <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
-                    <div className='w-full aspect-video bg-zinc-800'></div>
-                    <div className='w-full aspect-video bg-zinc-800'></div>
-                    <div className='w-full aspect-video bg-zinc-800'></div>
-                  </div>
-                </div>
-                {["", ""].map((_el, key) =>
-                  <div className='mb-16' key={key}>
-                    <div className='h-5 w-[200px] bg-zinc-800'></div>
-                    <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
-                      {["", "", "", "", "", ""].map((_el, key) =>
-                        <div className='flex items-center' key={key}>
-                          <div className='mr-3 w-[60px] aspect-[2/3] flex-shrink-0 bg-zinc-800'></div>
-                          <div className='w-full'>
-                            <div className='w-[50%] h-3 bg-zinc-800'></div>
-                            <div className='w-[40%] h-3 bg-zinc-800 mt-2'></div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div> */}
+              <SkeletonSearch />
             </div>
             :
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
@@ -138,8 +128,8 @@ function Search() {
                   <div className='mb-16'>
                     <h2 className='text-2xl font-medium text-white'>Top Results</h2>
                     <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
-                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, score, scored_by, synopsis, episodes }, key) =>
-                        <div className='relative group overflow-hidden cursor-pointer' key={key}>
+                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, score, scored_by, synopsis, episodes }, key) =>
+                        <div className='relative group overflow-hidden cursor-pointer' key={key} onClick={() => addRecentSearch(mal_id, title)}>
                           <TopResult images={images} title={title} />
                           <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
                         </div>

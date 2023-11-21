@@ -104,9 +104,9 @@ function NavBar() {
 
         <nav className='w-full flex justify-center md:justify-between'>
           <div className='flex'>
-            <a href='' className='h-full flex items-center'>
+            <Link to='/' className='h-full flex items-center'>
               <img src={shurikenLogo} alt="Shuriken Logo" className='w-[190px] px-[18px]' />
-            </a>
+            </Link>
             <ul className='h-full hidden lg:flex'>
               <NavElement handleClick={handleClick} isClicked={isClicked}>
                 <span className='group-hover:text-white'>Browse</span>
