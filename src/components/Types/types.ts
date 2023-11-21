@@ -12,7 +12,7 @@ export interface CardInfoTypes {
   },
   score: number,
   scored_by: number,
-  synopsis: string,
+  synopsis?: string,
   episodes: number,
   title: string,
 }
