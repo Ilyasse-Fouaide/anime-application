@@ -5,12 +5,19 @@ import axios from 'axios';
 import { AnimeData } from '../Types/types';
 import { formatNumber } from './Card/CardInfo';
 
+function sliceText(text: string, number: number): string {
+  if (text.length >= number) {
+    return text.slice(0, number) + "...";
+  } else {
+    return text
+  }
+}
+
 function InputElement({ inputValue, handleInputChange }: any) {
   return (
     <input type="text" placeholder='Search...' className='py-1 w-full text-xl md:text-2xl lg:text-3xl font-semibold bg-transparent border-b-2 transition-colors border-b-zinc-600 focus:border-b-[var(--red)] outline-none' value={inputValue} onChange={handleInputChange} />
   )
 }
-
 
 function Search() {
   const [inputValue, setInputValue] = React.useState("");
@@ -48,8 +55,18 @@ function Search() {
           {loading ? "Loading" :
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
               <div>
+                <h2 className='text-xl font-medium text-zinc-50'>Top Results</h2>
+                <div className='my-3 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                  {animeData && animeData.map(({ images, title }, key) =>
+                    <div className='w-full aspect-video' key={key}>
+                      <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover' />
+                    </div>
+                  ).slice(0, 3)}
+                </div>
+              </div>
+              <div>
                 <h2 className='text-xl font-medium text-zinc-50'>Series</h2>
-                <div className='mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                   {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
                     <div className='flex items-center cursor-pointer hover:bg-zinc-900' key={key}>
                       <div className='mr-3 w-[60px] h-full flex-shrink-0'>
@@ -57,13 +74,14 @@ function Search() {
                       </div>
                       <div>
                         <h4 className='font-medium text-base text-white'>
-                          {title.length >= 20 ?
+                          {sliceText(title, 20)}
+                          {/* {title.length >= 20 ?
                             <>
                               {title.slice(0, 20)}...
                             </>
                             :
                             title
-                          }
+                          } */}
                         </h4>
                         <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
                         <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
