@@ -56,25 +56,14 @@ function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTyp
 
 function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
 
-  const removeItem = (mal_id: number) => {
-    let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCH')!)
-    const index = recentSearch.findIndex((el: any) => el.mal_id === mal_id);
-    if (index !== -1) {
-      recentSearch.splice(index, 1);
-      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
-    };
-  };
-
   return (
     <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
       <div className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
         {sliceText(title, 20)}
       </div>
-      <form onSubmit={() => removeItem(mal_id)}>
-        <button className='h-full flex items-center cursor-pointer px-1 hover:bg-zinc-600'>
-          <MdClose className="w-[20px] h-[20px]" />
-        </button>
-      </form>
+      <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600'>
+        <MdClose className="w-[20px] h-[20px]" />
+      </div>
     </div>
   )
 }
@@ -84,8 +73,7 @@ function Search() {
   const [animeData, setAnimeData] = React.useState<AnimeData[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [debouncedValue] = useDebounce(inputValue, 1000);
-
-  let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+  const [recentSearchData, setRecentSearchData] = React.useState([]);
 
   const addRecentSearch = (mal_id: number, title: string) => {
     let recentSearch: { mal_id: number; title: string }[] = [];
@@ -119,6 +107,23 @@ function Search() {
       setAnimeData([]);
     }
   }, [debouncedValue]);
+
+  React.useEffect(() => {
+    const fetchRecentSearch = () => {
+      let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+      setRecentSearchData(RECENT_SEARCH);
+    }
+    fetchRecentSearch();
+  }, [recentSearchData]);
+
+  const removeItem = (mal_id: number) => {
+    let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCH')!)
+    const index = recentSearch.findIndex((el: any) => el.mal_id === mal_id);
+    if (index !== -1) {
+      recentSearch.splice(index, 1);
+      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+    };
+  };
 
   return (
     <>
@@ -194,8 +199,10 @@ function Search() {
         :
         <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
           <div className='flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
-            {RECENT_SEARCH.map(({ mal_id, title }: any, key: number) =>
-              <RecentSearch mal_id={mal_id} title={title} key={key} />
+            {recentSearchData.map(({ mal_id, title }: any, key: number) =>
+              <div onClick={() => removeItem(mal_id)}>
+                <RecentSearch mal_id={mal_id} title={title} key={key} />
+              </div>
             )}
           </div>
         </div>
