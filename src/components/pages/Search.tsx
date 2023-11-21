@@ -6,6 +6,7 @@ import { AnimeData, CardInfoTypes } from '../Types/types';
 import CardInfo, { formatNumber } from './Card/CardInfo';
 import { MdClose } from "@react-icons/all-files/md/MdClose";
 import SkeletonSearch from '../Skeleton/SkeletonSearch';
+import cat from "../../assets/cat.svg";
 
 function sliceText(text: string, number: number): string {
   if (text.length >= number) {
@@ -132,8 +133,10 @@ function Search() {
             :
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
               {animeData.length === 0 ?
-
-                <div className='border border-dashed flex justify-center py-5'>
+                <div className='border border-dashed flex flex-col items-center space-y-5 p-5'>
+                  <div className='w-[250px] h-[250px]'>
+                    <img src={cat} alt="CAT" className='w-full h-full pointer-events-none' />
+                  </div>
                   <div className='max-w-md text-center'>
                     <div className='text-sm font-medium'>We couldn't find any results matching your search. Please try again or explore other options.</div>
                   </div>
