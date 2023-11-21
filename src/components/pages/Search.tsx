@@ -167,16 +167,20 @@ function Search() {
                   <div className='mb-16'>
                     <h2 className='text-2xl font-medium text-white'>Series</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
-                        <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
+                        <div onClick={() => addRecentSearch(mal_id, title)}>
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                        </div>
                       )}
                     </div>
                   </div>
                   <div className='mb-16'>
                     <h2 className='text-2xl font-medium text-white'>Moives</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                      {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
-                        <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                      {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
+                        <div onClick={() => addRecentSearch(mal_id, title)}>
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                        </div>
                       )}
                     </div>
                   </div>
