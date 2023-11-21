@@ -54,7 +54,7 @@ function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTyp
   )
 }
 
-function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
+function RecentSearch({ title }: { title: string }) {
 
   return (
     <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
@@ -127,6 +127,11 @@ function Search() {
       fetchRecentSearch();
     };
   };
+
+  const clearRecentSearch = () => {
+    localStorage.removeItem("RECENT_SEARCH");
+    fetchRecentSearch();
+  }
 
   return (
     <>
@@ -207,12 +212,12 @@ function Search() {
             <>
               <div className='flex items-end justify-between'>
                 <h2 className='text-base md:text-xl font-medium text-white'>Recent Search Results</h2>
-                <div className='text-sm lg:text-base font-semibold transition-colors text-zinc-400 hover:text-zinc-50 cursor-pointer'>CLEAR</div>
+                <div className='text-sm lg:text-base font-semibold transition-colors text-zinc-400 hover:text-zinc-50 cursor-pointer' onClick={clearRecentSearch}>CLEAR</div>
               </div>
               <div className='my-3 flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
                 {recentSearchData && recentSearchData.map(({ mal_id, title }: any, key: number) =>
                   <div onClick={() => removeItem(mal_id)} key={key}>
-                    <RecentSearch mal_id={mal_id} title={title} />
+                    <RecentSearch title={title} />
                   </div>
                 )}
               </div>
