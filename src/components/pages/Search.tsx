@@ -4,6 +4,7 @@ import { getRequest } from '../../axios/axiosClient';
 import axios from 'axios';
 import { AnimeData, CardInfoTypes } from '../Types/types';
 import CardInfo, { formatNumber } from './Card/CardInfo';
+import { MdClose } from "@react-icons/all-files/md/MdClose";
 
 function sliceText(text: string, number: number): string {
   if (text.length >= number) {
@@ -81,7 +82,14 @@ function Search() {
       <div className='bg-zinc-900'>
         <div className='max-w-[950px] mx-auto'>
           <div className='px-6 py-6 md:py-8 lg:py-10 lg:px-14'>
-            <InputElement inputValue={inputValue} handleInputChange={handleInputChange} />
+            <div className="relative">
+              <InputElement inputValue={inputValue} handleInputChange={handleInputChange} />
+              {debouncedValue &&
+                <div className='absolute top-1/2 -translate-y-1/2 right-0 p-3 cursor-pointer group' onClick={() => setInputValue("")}>
+                  <MdClose className="w-[30px] h-[30px] text-zinc-300 group-hover:text-white" />
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -89,33 +97,37 @@ function Search() {
         <>
           {loading ? "Loading" :
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-              <div className='mb-16'>
-                <h2 className='text-2xl font-medium text-white'>Top Results</h2>
-                <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
-                  {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, score, scored_by, synopsis, episodes }, key) =>
-                    <div className='relative group overflow-hidden cursor-pointer' key={key}>
-                      <TopResult images={images} title={title} />
-                      <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
+              {animeData.length === 0 ? "No data" :
+                <>
+                  <div className='mb-16'>
+                    <h2 className='text-2xl font-medium text-white'>Top Results</h2>
+                    <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
+                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, score, scored_by, synopsis, episodes }, key) =>
+                        <div className='relative group overflow-hidden cursor-pointer' key={key}>
+                          <TopResult images={images} title={title} />
+                          <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
+                        </div>
+                      ).slice(0, 3)}
                     </div>
-                  ).slice(0, 3)}
-                </div>
-              </div>
-              <div className='mb-16'>
-                <h2 className='text-2xl font-medium text-white'>Series</h2>
-                <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                  {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
-                    <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
-                  )}
-                </div>
-              </div>
-              <div className='mb-16'>
-                <h2 className='text-2xl font-medium text-white'>Moives</h2>
-                <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                  {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
-                    <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
-                  )}
-                </div>
-              </div>
+                  </div>
+                  <div className='mb-16'>
+                    <h2 className='text-2xl font-medium text-white'>Series</h2>
+                    <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                      {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
+                        <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-16'>
+                    <h2 className='text-2xl font-medium text-white'>Moives</h2>
+                    <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                      {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
+                        <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} key={key} />
+                      )}
+                    </div>
+                  </div>
+                </>
+              }
             </div>
           }
         </>
