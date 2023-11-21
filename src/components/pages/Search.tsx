@@ -54,13 +54,23 @@ function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTyp
   )
 }
 
-function RecentSearch({ title }: { title: string }) {
+function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
+
+  const removeItem = (mal_id: number) => {
+    let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCH')!)
+    const index = recentSearch.findIndex((el: any) => el.mal_id === mal_id);
+    if (index !== -1) {
+      recentSearch.splice(index, 1);
+      return localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+    };
+  };
+
   return (
     <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
       <div className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
         {sliceText(title, 20)}
       </div>
-      <div className='flex items-center cursor-pointer px-2 hover:bg-zinc-600'>
+      <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600' onClick={() => removeItem(mal_id)}>
         <MdClose className="w-[20px] h-[20px]" />
       </div>
     </div>
@@ -178,8 +188,8 @@ function Search() {
         :
         <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
           <div className='flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
-            {RECENT_SEARCH.map(({ title }: any, key: number) =>
-              <RecentSearch title={title} key={key} />
+            {RECENT_SEARCH.map(({ mal_id, title }: any, key: number) =>
+              <RecentSearch mal_id={mal_id} title={title} key={key} />
             )}
           </div>
         </div>
