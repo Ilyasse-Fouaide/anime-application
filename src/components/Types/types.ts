@@ -33,4 +33,5 @@ export interface GenresType {
 export interface AnimeData extends Trailer, CardTypes {
   genres: GenresType[],
   duration: string,
+  status: string
 }

@@ -1,16 +1,17 @@
 import { CardInfoTypes } from '../../Types/types'
 import numeral from "numeral";
 
-function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardInfoTypes) {
-  const formatNumber = (num: number): string | number => {
-    if (num >= 1000 && num < 1000000) {
-      return numeral(num).format('0a')
-    } else if (num > 1000000) {
-      return numeral(num).format('0.0a')
-    } else {
-      return num;
-    }
+export const formatNumber = (num: number): string | number => {
+  if (num >= 1000 && num < 1000000) {
+    return numeral(num).format('0a')
+  } else if (num > 1000000) {
+    return numeral(num).format('0.0a')
+  } else {
+    return num;
   }
+}
+
+function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardInfoTypes) {
 
   return (
     <div className='z-10 hidden lg:block absolute inset-0 bg-black transition-transform translate-y-[105%] group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
