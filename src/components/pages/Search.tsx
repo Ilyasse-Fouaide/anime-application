@@ -66,7 +66,7 @@ function Search() {
     if (debouncedValue !== "") {
       let cancelToken;
       cancelToken = axios.CancelToken.source();
-      getRequest(`anime?q=${debouncedValue}&order_by=popularity`, cancelToken.token)
+      getRequest(`anime?q=${debouncedValue}&order_by=popularity&sfw=true`, cancelToken.token)
         .then(({ data }) => {
           setLoading(false);
           setAnimeData(data.data);
@@ -95,9 +95,20 @@ function Search() {
       </div>
       {debouncedValue !== "" ?
         <>
-          {loading ? "Loading" :
+          {loading ?
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-              {animeData.length === 0 ? "No data" :
+              "Loading"
+            </div>
+            :
+            <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
+              {animeData.length === 0 ?
+
+                <div className='border border-dashed flex justify-center py-5'>
+                  <div className='max-w-md text-center'>
+                    <div className='text-sm font-medium'>We couldn't find any results matching your search. Please try again or explore other options.</div>
+                  </div>
+                </div>
+                :
                 <>
                   <div className='mb-16'>
                     <h2 className='text-2xl font-medium text-white'>Top Results</h2>
