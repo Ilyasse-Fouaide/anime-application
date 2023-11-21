@@ -28,11 +28,11 @@ function Search() {
       cancelToken = axios.CancelToken.source();
       getRequest(`anime?q=${debouncedValue}&order_by=popularity`, cancelToken.token)
         .then(({ data }) => {
-          console.log(data);
+          setLoading(false);
           setAnimeData(data.data);
         });
     }
-  }, [debouncedValue])
+  }, [debouncedValue]);
 
   return (
     <>
@@ -43,35 +43,41 @@ function Search() {
           </div>
         </div>
       </div>
-      <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-        <div>
-          <h2 className='text-xl font-medium text-zinc-50'>Series</h2>
-          <div className='mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-            {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
-              <div className='flex items-center cursor-pointer hover:bg-zinc-900' key={key}>
-                <div className='mr-3 w-[60px] h-full flex-shrink-0'>
-                  <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover pointer-events-none' />
-                </div>
-                <div>
-                  <h4 className='font-medium text-base text-white'>
-                    {title.length >= 20 ?
-                      <>
-                        {title.slice(0, 20)}...
-                      </>
-                      :
-                      title
-                    }
-                  </h4>
-                  <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
-                  <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
-                    <div>{score ? score : "NA"} by {scored_by ? `(${formatNumber(scored_by)})` : "N/A"}</div>
-                  </div>
+      {debouncedValue !== "" &&
+        <>
+          {loading ? "Loading" :
+            <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
+              <div>
+                <h2 className='text-xl font-medium text-zinc-50'>Series</h2>
+                <div className='mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                  {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
+                    <div className='flex items-center cursor-pointer hover:bg-zinc-900' key={key}>
+                      <div className='mr-3 w-[60px] h-full flex-shrink-0'>
+                        <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover pointer-events-none' />
+                      </div>
+                      <div>
+                        <h4 className='font-medium text-base text-white'>
+                          {title.length >= 20 ?
+                            <>
+                              {title.slice(0, 20)}...
+                            </>
+                            :
+                            title
+                          }
+                        </h4>
+                        <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
+                        <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
+                          <div>{score ? score : "NA"} by {scored_by ? `(${formatNumber(scored_by)})` : "N/A"}</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-      </div>
+            </div>
+          }
+        </>
+      }
     </>
   )
 }
