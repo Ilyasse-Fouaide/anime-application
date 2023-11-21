@@ -1,6 +1,6 @@
 import React from 'react'
 import shurikenLogo from '../../assets/shuriken-01.svg';
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLine";
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
@@ -79,7 +79,9 @@ const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.E
 
 const InputElement = (): JSX.Element => {
   return (
-    <input type="text" placeholder='Serach Anime...' className='w-[250] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm' />
+    <Link to={'search'}>
+      <input type="text" placeholder='Search Anime...' className='w-[250] h-[38px] bg-transparent border border-zinc-600 outline-none rounded-sm px-9 text-sm cursor-pointer' />
+    </Link>
   )
 }
 

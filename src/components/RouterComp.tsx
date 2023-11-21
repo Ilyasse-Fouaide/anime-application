@@ -2,6 +2,7 @@ import _React from 'react'
 import NavBar from './pages/NavBar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Container from './pages/Container';
+import Search from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Container />
+      },
+      {
+        path: "search",
+        element: <Search />
       },
     ]
   }
