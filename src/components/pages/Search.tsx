@@ -38,6 +38,9 @@ function Search() {
           setLoading(false);
           setAnimeData(data.data);
         });
+    } else {
+      setLoading(true)
+      setAnimeData([]);
     }
   }, [debouncedValue]);
 
@@ -50,38 +53,57 @@ function Search() {
           </div>
         </div>
       </div>
-      {debouncedValue !== "" &&
+      {debouncedValue !== "" ?
         <>
           {loading ? "Loading" :
             <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
-              <div>
-                <h2 className='text-xl font-medium text-zinc-50'>Top Results</h2>
-                <div className='my-3 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                  {animeData && animeData.map(({ images, title }, key) =>
-                    <div className='w-full aspect-video' key={key}>
-                      <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover' />
+              <div className='mb-16'>
+                <h2 className='text-2xl font-medium text-white'>Top Results</h2>
+                <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
+                  {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title }, key) =>
+                    <div className='cursor-pointer hover:bg-zinc-900 pb-3'>
+                      <div className='w-full aspect-video' key={key}>
+                        <img src={images.jpg.large_image_url} alt={title} loading='lazy' className='w-full h-full object-cover' />
+                      </div>
+                      <h4 className='mt-4 font-medium text-base text-zinc-50'>
+                        {sliceText(title, 20)}
+                      </h4>
                     </div>
                   ).slice(0, 3)}
                 </div>
               </div>
-              <div>
-                <h2 className='text-xl font-medium text-zinc-50'>Series</h2>
+              <div className='mb-16'>
+                <h2 className='text-2xl font-medium text-white'>Series</h2>
                 <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                   {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
+                    <div className='flex items-center cursor-pointer hover:bg-zinc-900' key={key}>
+                      <div className='mr-3 w-[60px] h-full flex-shrink-0'>
+                        <img src={images.jpg.large_image_url} alt={title} loading='lazy' className='w-full h-full object-cover pointer-events-none' />
+                      </div>
+                      <div>
+                        <h4 className='font-medium text-base text-zinc-50'>
+                          {sliceText(title, 20)}
+                        </h4>
+                        <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
+                        <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
+                          <div>{score ? score : "NA"} by {scored_by ? `(${formatNumber(scored_by)})` : "N/A"}</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className='mb-16'>
+                <h2 className='text-2xl font-medium text-white'>Moives</h2>
+                <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+                  {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ images, title, episodes, score, scored_by }, key) =>
                     <div className='flex items-center cursor-pointer hover:bg-zinc-900' key={key}>
                       <div className='mr-3 w-[60px] h-full flex-shrink-0'>
                         <img src={images.jpg.large_image_url} alt={title} className='w-full h-full object-cover pointer-events-none' />
                       </div>
                       <div>
-                        <h4 className='font-medium text-base text-white'>
+                        <h4 className='font-medium text-base text-zinc-50'>
                           {sliceText(title, 20)}
-                          {/* {title.length >= 20 ?
-                            <>
-                              {title.slice(0, 20)}...
-                            </>
-                            :
-                            title
-                          } */}
                         </h4>
                         <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
                         <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
@@ -95,6 +117,8 @@ function Search() {
             </div>
           }
         </>
+        :
+        <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>Recent</div>
       }
     </>
   )
