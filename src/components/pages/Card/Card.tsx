@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import { CardTypes } from '../../Types/types'
 import CardInfo from './CardInfo'
 
-function Card({ images, title, type, themes, episodes, score, scored_by, synopsis }: CardTypes) {
+function Card({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
 
   return (
-    <>
+    <Link to={`series/${mal_id}/${title.split(" ").join("-")}`}>
       <div className='w-full aspect-[2/3]'>
         <img
           src={images.jpg.large_image_url}
@@ -35,7 +36,7 @@ function Card({ images, title, type, themes, episodes, score, scored_by, synopsi
         <div className='text-[13px] font-medium text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
       </div>
       <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
-    </>
+    </Link>
   )
 }
 
