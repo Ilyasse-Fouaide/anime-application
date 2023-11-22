@@ -4,16 +4,19 @@ import { getRequest } from '../../axios/axiosClient';
 import Card from './Card/Card';
 import SkeletonCard from '../Skeleton/SkeletonCard';
 
+type Filter = 'airing' | 'upcoming' | 'bypopularity' | 'favorite'
+
 function Popular() {
   const [anime, setAnime] = useState<AnimeData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
-  const [filter, setFilter] = useState<string>('bypopularity');
+  const [filter, setFilter] = useState<Filter>('airing');
+  const [type, setType] = useState<"tv" | "movie">("tv");
 
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await getRequest(`top/anime?page=${page}&filter=${filter}`);
+        const response = await getRequest(`top/anime?page=${page}&filter=${filter}&type=${type}`);
         setAnime((prev) => [...prev, ...response.data.data]);
         setLoading(false);
       } catch (error) {
@@ -23,7 +26,7 @@ function Popular() {
     };
 
     fetchAnime();
-  }, [page, filter]);
+  }, [page, filter, type]);
 
   const handleScroll = () => {
     if (
