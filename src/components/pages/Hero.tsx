@@ -141,19 +141,19 @@ function Hero() {
                 </div>
 
                 <div className='flex justify-center lg:justify-start mt-10'>
-                  <div className='flex items-center uppercase py-[8px] px-[15px] bg-[#DD4854] font-semibold text-zinc-950 cursor-pointer mr-2'>
+                  <div className='flex items-center uppercase py-[8px] px-[15px] bg-[var(--red)] font-semibold text-zinc-950 cursor-pointer mr-2'>
                     <IoIosPlay className="mr-2 text-[23px]" />
                     watch episode
                   </div>
-                  <div className='py-[7px] px-[6px] bg-transparent border-2 border-[#DD4854] text-[26px] text-[#DD4854] cursor-pointer hover:bg-[#DD4854] hover:text-zinc-950 transition-colors'>
+                  <div className='py-[7px] px-[6px] bg-transparent border-2 border-[var(--red)] text-[26px] text-[var(--red)] cursor-pointer hover:bg-[var(--red)] hover:text-zinc-950 transition-colors'>
                     <IoBookmarkOutline />
                   </div>
                 </div>
 
                 <div className='flex items-center justify-center lg:justify-start mt-16'>
                   {["", "", "", "", "", ""].map((_el, key) =>
-                    <div className={`group relative mr-3 h-[10px] transition-all duration-300 bg-zinc-500 hover:bg-[#DD4854]/70 cursor-pointer rounded-full overflow-hidden ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key} onClick={() => goTo(key)}>
-                      <div className={`absolute left-0 bottom-0 top-0 bg-[#DD4854] cursor-pointer ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
+                    <div className={`group relative mr-3 h-[10px] transition-all duration-300 bg-zinc-500 hover:bg-[var(--red)]/70 cursor-pointer rounded-full overflow-hidden ${key === index ? 'w-[60px]' : 'w-[20px]'}`} key={key} onClick={() => goTo(key)}>
+                      <div className={`absolute left-0 bottom-0 top-0 bg-[var(--red)] cursor-pointer ${key === index ? 'w-[100%] transition-all duration-[10s]' : 'w-0'}`}></div>
                     </div>
                   )}
                 </div>
@@ -167,7 +167,7 @@ function Hero() {
         <div className='hidden lg:block z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
           <IoIosArrowForward />
         </div>
-        <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] right-1/2 translate-x-1/2 border-2 border-[#DD4854]/60 rounded-full flex items-center justify-center text-[20px] text-[#DD4854]'>
+        <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] right-1/2 translate-x-1/2 border-2 border-[var(--red)]/60 rounded-full flex items-center justify-center text-[20px] text-[var(--red)]'>
           <FaArrowDown />
         </div>
       </div>

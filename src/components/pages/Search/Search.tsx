@@ -1,15 +1,17 @@
 import React from 'react'
 import { useDebounce } from "use-debounce";
-import { getRequest } from '../../axios/axiosClient';
+import { getRequest } from '../../../axios/axiosClient';
 import axios from 'axios';
-import { AnimeData, CardInfoTypes } from '../Types/types';
-import CardInfo, { formatNumber } from './Card/CardInfo';
+import { AnimeData } from '../../Types/types';
+import CardInfo from '../Card/CardInfo';
 import { MdClose } from "@react-icons/all-files/md/MdClose";
-import SkeletonSearch from '../Skeleton/SkeletonSearch';
-import cat from "../../assets/cat.svg";
+import SkeletonSearch from '../../Skeleton/SkeletonSearch';
+import cat from "../../../assets/cat.svg";
 import { Link } from 'react-router-dom';
+import SeriesMovies from './SeriesMovies';
+import TopResult from './TopResult';
 
-function sliceText(text: string, number: number): string {
+export function sliceText(text: string, number: number): string {
   if (text.length >= number) {
     return text.slice(0, number) + "...";
   } else {
@@ -20,38 +22,6 @@ function sliceText(text: string, number: number): string {
 function InputElement({ inputValue, handleInputChange }: any) {
   return (
     <input type="text" placeholder='Search...' className='py-1 w-full text-xl md:text-2xl lg:text-3xl font-semibold bg-transparent border-b-2 transition-colors border-b-zinc-600 focus:border-b-[var(--red)] outline-none' value={inputValue} onChange={handleInputChange} />
-  )
-}
-
-function TopResult({ images, title }: { images: { jpg: { large_image_url: string } }, title: string }) {
-  return (
-    <div className='cursor-pointer hover:bg-zinc-900 pb-3'>
-      <div className='w-full aspect-video'>
-        <img src={images.jpg.large_image_url} alt={title} loading='lazy' className='w-full h-full object-cover' />
-      </div>
-      <h4 className='mt-4 font-medium text-base text-zinc-50'>
-        {sliceText(title, 20)}
-      </h4>
-    </div>
-  )
-}
-
-function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTypes) {
-  return (
-    <div className='flex items-center cursor-pointer hover:bg-zinc-900'>
-      <div className='mr-3 w-[60px] aspect-[2/3] flex-shrink-0'>
-        <img src={images.jpg.large_image_url} alt={title} loading='lazy' className='w-full h-full object-cover pointer-events-none' />
-      </div>
-      <div>
-        <h4 className='font-medium text-base text-zinc-50'>
-          {sliceText(title, 20)}
-        </h4>
-        <div className='text-xs text-zinc-400'>{episodes ? episodes : "N/A"} Episodes</div>
-        <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
-          <div>{score ? score : "NA"} by {scored_by ? `(${formatNumber(scored_by)})` : "N/A"}</div>
-        </div>
-      </div>
-    </div>
   )
 }
 
@@ -185,7 +155,7 @@ function Search() {
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
                         <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
-                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} />
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} synopsis={''} />
                         </Link>
                       )}
                     </div>
@@ -195,7 +165,7 @@ function Search() {
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
                         <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
-                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} />
+                          <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} synopsis={''} />
                         </Link>
                       )}
                     </div>

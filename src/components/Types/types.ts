@@ -7,12 +7,13 @@ export interface Trailer {
 export interface CardInfoTypes {
   images: {
     jpg: {
-      large_image_url: string
+      large_image_url: string,
+      small_image_url: string
     }
   },
   score: number,
   scored_by: number,
-  synopsis?: string,
+  synopsis: string,
   episodes: number,
   title: string,
 }
