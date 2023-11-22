@@ -13,7 +13,7 @@ function Popular() {
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await getRequest(`top/anime?page=${page}&filter=${filter}`);
+        const response = await getRequest(`top/anime?page=${page}&filter=${filter}&sfw=true`);
         setAnime((prev) => [...prev, ...response.data.data]);
         setLoading(false);
       } catch (error) {
