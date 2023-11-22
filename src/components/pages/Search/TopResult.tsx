@@ -1,6 +1,6 @@
-import { sliceText } from "./Search";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { sliceText } from '../../functions/sliceText';
 
 interface TopResult {
   images: {

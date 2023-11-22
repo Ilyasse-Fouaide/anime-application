@@ -10,14 +10,7 @@ import cat from "../../../assets/cat.svg";
 import { Link } from 'react-router-dom';
 import SeriesMovies from './SeriesMovies';
 import TopResult from './TopResult';
-
-export function sliceText(text: string, number: number): string {
-  if (text.length >= number) {
-    return text.slice(0, number) + "...";
-  } else {
-    return text
-  }
-}
+import { sliceText } from '../../functions/sliceText';
 
 function InputElement({ inputValue, handleInputChange }: any) {
   return (

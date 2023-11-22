@@ -1,6 +1,6 @@
 import { CardInfoTypes } from "../../Types/types";
+import { sliceText } from "../../functions/sliceText";
 import { formatNumber } from "../Card/CardInfo";
-import { sliceText } from "./Search";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
