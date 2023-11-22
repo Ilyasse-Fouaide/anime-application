@@ -11,6 +11,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Card from './Card/Card';
+import SkeletonSwiper from '../Skeleton/SkeletonSwiper';
 
 export interface SlideContainerType {
   api: string,
@@ -48,7 +49,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
   }, []);
 
   if (loading) {
-    return "Loading ...";
+    return <SkeletonSwiper />;
   }
 
   return (
