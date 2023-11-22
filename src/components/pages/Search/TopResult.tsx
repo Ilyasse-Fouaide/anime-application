@@ -20,6 +20,7 @@ function TopResult({ images, title }: TopResult) {
           src={images.jpg.large_image_url}
           placeholderSrc={images.jpg.small_image_url}
           effect="blur"
+          alt={title}
           className="w-full aspect-video object-cover pointer-events-none"
         />
       </div>

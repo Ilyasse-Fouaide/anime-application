@@ -1,17 +1,26 @@
 import { Link } from 'react-router-dom'
 import { CardTypes } from '../../Types/types'
 import CardInfo from './CardInfo'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Card({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
 
   return (
     <Link to={`series/${mal_id}/${title.split(" ").join("-")}`}>
       <div className='w-full aspect-[2/3]'>
-        <img
+        {/* <img
           src={images.jpg.large_image_url}
           alt={title}
           loading='lazy'
           className='object-cover w-full h-full'
+        /> */}
+        <LazyLoadImage
+          src={images.jpg.large_image_url}
+          placeholderSrc={images.jpg.small_image_url}
+          effect="blur"
+          alt={title}
+          className="w-full h-full object-cover pointer-events-none"
         />
       </div>
       <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>
