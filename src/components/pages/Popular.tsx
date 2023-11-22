@@ -55,7 +55,7 @@ function Popular() {
   return (
     <div className='max-w-5xl mx-auto'>
       <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Popular</h2>
-      <div className='w-full grid grid-cols-5 gap-7'>
+      <div className='mb-6 w-full grid grid-cols-5 gap-7'>
         {anime && anime.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key) => (
           <div className='relative group overflow-hidden cursor-pointer' key={key}>
             <Card
