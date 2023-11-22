@@ -4,7 +4,7 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 const Sleleton = () => {
   return (
-    <div className='relative w-full h-[600px] bg-gradient-to-b from-zinc-900 to-zinc-950'>
+    <div className='relative w-full h-[600px] bg-gradient-to-b from-zinc-900 to-zinc-950 animate-pulse'>
       <div className='absolute inset-0 flex flex-col lg:flex-row-reverse'>
         <div className='hidden lg:block w-full h-1/2 lg:h-full'></div>
         <div className='relative w-full lg:w-1/2 h-full flex items-end justify-center lg:items-center lg:mt-0'>
