@@ -23,7 +23,7 @@ function Card({ mal_id, images, title, type, status, episodes, score, scored_by,
         <div className='hidden lg:block w-[2px] h-[10px] bg-zinc-500 mr-2'></div>
         <div className='hidden lg:block'>{status}</div>
       </div>
-      <div className='z-0 absolute top-2 left-2 shadow-2xl shadow-white border-2 border-yellow-200'>
+      <div className='z-0 hidden md:block absolute top-2 left-2 shadow-2xl shadow-white border-2'>
         <div className='text-[13px] font-medium text-zinc-50 py-[1px] px-[8px] bg-[var(--red)]'>EP {episodes ? episodes : "NA"}</div>
       </div>
       <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />

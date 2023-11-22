@@ -13,7 +13,7 @@ function Popular() {
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await getRequest(`top/anime?page=${page}&filter=${filter}&sfw=true`);
+        const response = await getRequest(`top/anime?page=${page}&filter=${filter}`);
         setAnime((prev) => [...prev, ...response.data.data]);
         setLoading(false);
       } catch (error) {
@@ -53,9 +53,9 @@ function Popular() {
   }, [handleScroll]);
 
   return (
-    <div className='max-w-5xl mx-auto'>
+    <div className='max-w-5xl mx-auto p-6'>
       <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Popular</h2>
-      <div className='mb-6 w-full grid grid-cols-5 gap-7'>
+      <div className='mb-6 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7'>
         {anime && anime.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key) => (
           <div className='relative group overflow-hidden cursor-pointer' key={key}>
             <Card
