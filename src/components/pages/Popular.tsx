@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 import Card from './Card/Card';
+import SkeletonCard from '../Skeleton/SkeletonCard';
 
 function Popular() {
   const [anime, setAnime] = useState<AnimeData[]>([]);
@@ -54,8 +55,9 @@ function Popular() {
 
   return (
     <div className='max-w-5xl mx-auto'>
-      <div className='w-full grid grid-cols-5 gap-6'>
-        {anime.map(({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }, key) => (
+      <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Popular</h2>
+      <div className='w-full grid grid-cols-5 gap-7'>
+        {anime && anime.map(({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }, key) => (
           <div className='relative group overflow-hidden cursor-pointer' key={key}>
             <Card
               mal_id={mal_id}
@@ -70,8 +72,8 @@ function Popular() {
             />
           </div>
         ))}
-        {loading && <p>Loading ...</p>}
       </div>
+      {loading && <SkeletonCard />}
     </div>
   );
 }

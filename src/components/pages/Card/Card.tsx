@@ -14,7 +14,7 @@ function Card({ mal_id, images, title, type, themes, episodes, score, scored_by,
           placeholderSrc={images.jpg.small_image_url}
           effect="blur"
           alt={title}
-          className="w-full h-full object-cover pointer-events-none"
+          className="w-full aspect-[2/3] object-cover pointer-events-none"
         />
       </div>
       <h3 className='text-xs text-zinc-50 font-medium mt-3'>{title}</h3>

@@ -168,6 +168,7 @@ function NavBar() {
       <div className={`-z-[999] transition-opacity ${isClicked ? 'opacity-40' : ''}`}>
         <Outlet />
       </div>
+      <div className='w-full h-[500px] bg-gradient-to-t from-zinc-600 to-zinc-950'></div>
     </div>
   )
 }
