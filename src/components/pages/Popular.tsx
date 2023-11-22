@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import _React, { useState, useEffect } from 'react';
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 import Card from './Card/Card';
@@ -35,7 +35,6 @@ function Popular() {
     }
   };
 
-  // Debounce function to limit the frequency of handleScroll calls
   const debounce = (func: () => void, delay: number) => {
     let timeoutId: any;
     return () => {
@@ -57,14 +56,14 @@ function Popular() {
     <div className='max-w-5xl mx-auto'>
       <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Popular</h2>
       <div className='w-full grid grid-cols-5 gap-7'>
-        {anime && anime.map(({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }, key) => (
+        {anime && anime.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key) => (
           <div className='relative group overflow-hidden cursor-pointer' key={key}>
             <Card
               mal_id={mal_id}
               images={images}
               title={title}
               type={type}
-              themes={themes}
+              status={status}
               episodes={episodes}
               score={score}
               scored_by={scored_by}

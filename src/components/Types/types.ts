@@ -20,9 +20,7 @@ export interface CardInfoTypes {
 
 export interface CardTypes extends CardInfoTypes {
   type: string,
-  themes: {
-    name: string
-  }[],
+  status: string
 }
 
 export interface GenresType {

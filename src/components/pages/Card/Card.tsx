@@ -4,7 +4,7 @@ import CardInfo from './CardInfo'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-function Card({ mal_id, images, title, type, themes, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
+function Card({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
 
   return (
     <Link to={`series/${mal_id}/${title.split(" ").join("-")}`}>
@@ -21,8 +21,9 @@ function Card({ mal_id, images, title, type, themes, episodes, score, scored_by,
       <div className='text-xs text-zinc-400 mt-3 flex items-center'>
         <p className='mr-2'>{type}</p>
         <div className='hidden lg:block w-[2px] h-[10px] bg-zinc-500 mr-2'></div>
-        <div className='hidden lg:flex items-center'>
-          {themes.length !== 0 ? (
+        <div className='hidden lg:block'>
+          {status}
+          {/* {themes.length !== 0 ? (
             <>
               {themes.map((theme, key: number) => (
                 <p className='mr-1' key={key}>
@@ -32,7 +33,7 @@ function Card({ mal_id, images, title, type, themes, episodes, score, scored_by,
             </>
           ) : (
             <p>NA</p>
-          )}
+          )} */}
         </div>
       </div>
       <div className='z-0 absolute top-2 left-2 shadow-2xl shadow-white border-2 border-yellow-200'>
