@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --red: #DD4854
+  /* --red: #DD4854 */
+  --red: #E06100
 }
 
 * {
