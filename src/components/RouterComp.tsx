@@ -3,6 +3,7 @@ import NavBar from './pages/NavBar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Container from './pages/Container';
 import Search from './pages/Search/Search';
+import Popular from './pages/Popular';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <Search />
+      },
+      {
+        path: "popular",
+        element: <Popular />
       },
     ]
   }
