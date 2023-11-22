@@ -5,7 +5,7 @@ import { IoIosPlay } from "@react-icons/all-files/io/IoIosPlay";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { FiClock } from "@react-icons/all-files/fi/FiClock";
 import { FaArrowDown } from "@react-icons/all-files/fa/FaArrowDown";
-import Skeleton from "./Sleleton";
+import Skeleton from "../Skeleton/Sleleton";
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 
@@ -74,7 +74,7 @@ function Hero() {
               style={{ '--image-url': `url('${trailer?.images.maximum_image_url}')` }}
               className={`relative w-full lg:w-1/2 h-full flex items-end justify-center lg:items-center lg:mt-0 z-10 bg-[image:var(--image-url)] lg:bg-none bg-cover bg-center bg-no-repeat`}
             >
-              <div className='-z-10 absolute inset-0 bg-gradient-to-t from-zinc-950 '></div>
+              <div className='-z-10 absolute inset-0 bg-gradient-to-t from-zinc-950'></div>
 
               <div className='w-full pl-[25px] pr-[25px] lg:pl-[65px] lg:pr-0'>
                 <h1 className='text-[35px] sm:text-[50px] text-zinc-50 w-full lg:w-[200%] tracking-tighter text-center lg:text-left font-semibold leading-[1]'>
@@ -167,10 +167,11 @@ function Hero() {
         <div className='hidden lg:block z-10 absolute top-1/2 right-0 -translate-y-1/2 text-[30px] py-10 pr-4 cursor-pointer hover:opacity-50' onClick={handleNext}>
           <IoIosArrowForward />
         </div>
-        <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] right-1/2 translate-x-1/2 border-2 border-[var(--red)]/60 rounded-full flex items-center justify-center text-[20px] text-[var(--red)]'>
+        {/* <div className='lg:hidden w-10 h-10 bg-zinc-800 absolute bottom-[90px] right-1/2 translate-x-1/2 border-2 border-[var(--red)]/60 rounded-full flex items-center justify-center text-[20px] text-[var(--red)]'>
           <FaArrowDown />
-        </div>
+        </div> */}
       </div>
+      <Skeleton />
     </>
   )
 }

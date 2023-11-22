@@ -105,7 +105,7 @@ function Search() {
   }
 
   return (
-    <>
+    <div className='mb-[135px]'>
       <div className='bg-zinc-900'>
         <div className='max-w-[950px] mx-auto'>
           <div className='px-6 py-6 md:py-8 lg:py-10 lg:px-14'>
@@ -196,7 +196,7 @@ function Search() {
           }
         </div>
       }
-    </>
+    </div>
   )
 }
 
