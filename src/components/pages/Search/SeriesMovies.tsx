@@ -13,7 +13,7 @@ function SeriesMovies({ images, title, episodes, score, scored_by }: CardInfoTyp
           placeholderSrc={images.jpg.small_image_url}
           effect="blur"
           alt={title}
-          className="w-full h-full object-cover pointer-events-none"
+          className="w-full aspect-[2/3] object-cover pointer-events-none"
         />
       </div>
       <div>

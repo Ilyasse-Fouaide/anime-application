@@ -20,7 +20,7 @@ function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardI
         <div className='text-[13px] text-zinc-300 font-semibold mt-3'>
           <div>{score ? score : "N/A"} by {scored_by ? `(${formatNumber(scored_by)})` : "N/A"}</div>
         </div>
-        <div className='text-[13px] text-zinc-400 font-medium'>{episodes} Espisodes</div>
+        <div className='text-[13px] text-zinc-400 font-medium'>{episodes ? `${episodes} Episodes` : "N/A"}</div>
         <p className='text-[13px] leading-[17px] text-zinc-50 font-medium mt-3'>
           {synopsis ?
             <>
