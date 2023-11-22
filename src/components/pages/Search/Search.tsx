@@ -47,21 +47,21 @@ function Search() {
   const [recentSearchData, setRecentSearchData] = React.useState([]);
 
   const fetchRecentSearch = () => {
-    let RECENT_SEARCH = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
-    setRecentSearchData(RECENT_SEARCH);
+    let RECENT_SEARCHES = JSON.parse(localStorage.getItem("RECENT_SEARCHES")!);
+    setRecentSearchData(RECENT_SEARCHES);
   }
 
   const addRecentSearch = (mal_id: number, title: string) => {
     let recentSearch: { mal_id: number; title: string }[] = [];
     let object = { mal_id, title }
 
-    if (!localStorage.getItem("RECENT_SEARCH")) {
+    if (!localStorage.getItem("RECENT_SEARCHES")) {
       recentSearch.push(object);
-      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch))
+      localStorage.setItem("RECENT_SEARCHES", JSON.stringify(recentSearch))
     } else {
-      recentSearch = JSON.parse(localStorage.getItem("RECENT_SEARCH")!);
+      recentSearch = JSON.parse(localStorage.getItem("RECENT_SEARCHES")!);
       recentSearch.push(object);
-      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+      localStorage.setItem("RECENT_SEARCHES", JSON.stringify(recentSearch));
     }
     fetchRecentSearch();
   }
@@ -90,17 +90,17 @@ function Search() {
   }, []);
 
   const removeItem = (mal_id: number) => {
-    let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCH')!)
+    let recentSearch: any = JSON.parse(localStorage.getItem('RECENT_SEARCHES')!)
     const index = recentSearch.findIndex((el: any) => el.mal_id === mal_id);
     if (index !== -1) {
       recentSearch.splice(index, 1);
-      localStorage.setItem("RECENT_SEARCH", JSON.stringify(recentSearch));
+      localStorage.setItem("RECENT_SEARCHES", JSON.stringify(recentSearch));
       fetchRecentSearch();
     };
   };
 
   const clearRecentSearch = () => {
-    localStorage.removeItem("RECENT_SEARCH");
+    localStorage.removeItem("RECENT_SEARCHES");
     fetchRecentSearch();
   }
 

@@ -9,12 +9,6 @@ function Card({ mal_id, images, title, type, themes, episodes, score, scored_by,
   return (
     <Link to={`series/${mal_id}/${title.split(" ").join("-")}`}>
       <div className='w-full aspect-[2/3]'>
-        {/* <img
-          src={images.jpg.large_image_url}
-          alt={title}
-          loading='lazy'
-          className='object-cover w-full h-full'
-        /> */}
         <LazyLoadImage
           src={images.jpg.large_image_url}
           placeholderSrc={images.jpg.small_image_url}
