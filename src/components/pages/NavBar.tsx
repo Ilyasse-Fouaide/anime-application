@@ -18,6 +18,7 @@ interface Genre {
 
 interface Search {
   search: string,
+  to: string
 }
 
 const genres: Genre[] = [
@@ -39,11 +40,11 @@ const genres: Genre[] = [
 ];
 
 const search: Search[] = [
-  { search: 'Popular' },
-  { search: 'New' },
-  { search: 'Alphabetic' },
-  { search: 'Simulcast Season' },
-  { search: 'Characters' },
+  { search: 'Popular', to: "popular" },
+  { search: 'New', to: "new" },
+  { search: 'Alphabetic', to: "alphabetic" },
+  { search: 'Simulcast Season', to: "simulcast-season" },
+  { search: 'Characters', to: "characters" },
 ];
 
 const dropDownVariants = {
@@ -124,8 +125,10 @@ function NavBar() {
                     >
                       <div className='w-[220px] flex-shrink-0 border-r-2 border-r-zinc-800'>
                         <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Looking for?</div>
-                        {search.map(({ search }, key) =>
-                          <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{search}</motion.div>
+                        {search.map(({ search, to }, key) =>
+                          <Link to={`${to}`}>
+                            <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{search}</motion.div>
+                          </Link>
                           // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.05 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key} onClick={() => console.log(key)}>{search}</motion.div>
                         )}
                       </div>
