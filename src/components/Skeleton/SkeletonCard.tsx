@@ -1,6 +1,6 @@
 function SkeletonCard() {
   return (
-    <div className='w-full grid grid-cols-5 gap-7 animate-pulse'>
+    <div className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7 animate-pulse'>
       {[...Array(25).keys()].map((_el, key) =>
         <div key={key}>
           <div className='w-full aspect-[2/3]'>
