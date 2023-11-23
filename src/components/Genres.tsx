@@ -20,6 +20,7 @@ import Attack_on_Titan from "../assets/images/Attack_on_Titan.jpg"
 import Code_Geass from "../assets/images/Code_Geass.jpg"
 import Monster from "../assets/images/Monster.jpg"
 import Doraemon from "../assets/images/Doraemon.jpg"
+import SkeletonGenre from './Skeleton/SkeletonGenre';
 
 const genreRelated: { id: number, image: any, color: string }[] = [
   { id: 4, image: gintama, color: "#BA00D2" },
@@ -90,7 +91,7 @@ function Genres() {
   }, []);
 
   if (loading) {
-    return "Loading ..."
+    return <SkeletonGenre />
   }
 
   return (
