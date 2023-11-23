@@ -1,34 +1,60 @@
-import _React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 import Card from './Card/Card';
 import SkeletonCard from '../Skeleton/SkeletonCard';
 import { VscListFilter } from "@react-icons/all-files/vsc/VscListFilter";
 import { VscSettings } from "@react-icons/all-files/vsc/VscSettings";
+import { Link } from 'react-router-dom';
 
 type Filter = 'airing' | 'upcoming' | 'bypopularity' | 'favorite'
+
+function FilterPopularity({ filter, setFilter }: any) {
+  const [clicked, setIsClicked] = React.useState(false);
+
+  const handleClick = (el: string) => {
+    setFilter(el)
+  }
+
+  return (
+    <div className={`z-[999] relative mr-2 py-2 px-3 transition-colors hover:bg-slate-800 cursor-pointer text-sm text-zinc-400  uppercase font-semibold inline-flex items-center ${clicked && "bg-slate-800"}`} onClick={() => setIsClicked(!clicked)}>
+      <VscListFilter className="mr-2 w-[24px] h-[24px]" />
+      {filter}
+      {clicked &&
+        <div className='absolute top-full right-0 w-[150%] bg-slate-800'>
+          <div className='my-2'>
+            {["airing", "upcoming", "popular", "favorite"].map((el, key) =>
+              <Link to={`${el}`}>
+                <div className='py-3 px-5 text-xs hover:bg-slate-900' key={key} onClick={() => handleClick(el)}>{el}</div>
+              </Link>
+            )}
+          </div>
+        </div>
+      }
+    </div>
+  )
+}
 
 function Popular() {
   const [anime, setAnime] = useState<AnimeData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
-  const [filter, setFilter] = useState<Filter>('airing');
+  const [filter, setFilter] = useState<Filter>('bypopularity');
   const [type, setType] = useState<"tv" | "movie">("tv");
 
+  const fetchAnime = async () => {
+    try {
+      const response = await getRequest(`top/anime?page=${page}&filter=bypopularity&type=${type}`);
+      setAnime((prev) => [...prev, ...response.data.data]);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching anime:', error);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchAnime = async () => {
-      try {
-        const response = await getRequest(`top/anime?page=${page}&filter=${filter}&type=${type}`);
-        setAnime((prev) => [...prev, ...response.data.data]);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching anime:', error);
-        setLoading(false);
-      }
-    };
-
     fetchAnime();
-  }, [page, filter, type]);
+  }, [page, type]);
 
   const handleScroll = () => {
     if (
@@ -63,11 +89,8 @@ function Popular() {
         <h1 className='text-3xl font-semibold text-white'>Anime List</h1>
         <div className='flex items-center'>
 
-          <div className='mr-2 py-2 px-3 transition-colors hover:bg-zinc-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
-            <VscListFilter className="mr-2 w-[24px] h-[24px]" />
-            airing
-          </div>
-          <div className='py-2 px-3 transition-colors hover:bg-zinc-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
+          <FilterPopularity setFilter={setFilter} filter={filter} fetchAnime={fetchAnime} />
+          <div className='py-2 px-3 transition-colors hover:bg-slate-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
             <VscSettings className="mr-2 w-[24px] h-[24px]" />
             Filter
           </div>
