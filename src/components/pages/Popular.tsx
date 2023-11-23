@@ -3,6 +3,8 @@ import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 import Card from './Card/Card';
 import SkeletonCard from '../Skeleton/SkeletonCard';
+import { VscListFilter } from "@react-icons/all-files/vsc/VscListFilter";
+import { VscSettings } from "@react-icons/all-files/vsc/VscSettings";
 
 type Filter = 'airing' | 'upcoming' | 'bypopularity' | 'favorite'
 
@@ -57,6 +59,21 @@ function Popular() {
 
   return (
     <div className='max-w-5xl mx-auto p-6'>
+      <div className='flex justify-between items-center mt-10'>
+        <h1 className='text-3xl font-semibold text-white'>Anime List</h1>
+        <div className='flex items-center'>
+
+          <div className='mr-2 py-2 px-3 transition-colors hover:bg-zinc-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
+            <VscListFilter className="mr-2 w-[24px] h-[24px]" />
+            airing
+          </div>
+          <div className='py-2 px-3 transition-colors hover:bg-zinc-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
+            <VscSettings className="mr-2 w-[24px] h-[24px]" />
+            Filter
+          </div>
+
+        </div>
+      </div>
       <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Popular</h2>
       <div className='mb-6 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7'>
         {anime && anime.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key) => (
