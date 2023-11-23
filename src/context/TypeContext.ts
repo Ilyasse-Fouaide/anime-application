@@ -1,4 +1,9 @@
 import { createContext } from "react";
 
-const TypeContext = createContext(null);
+interface TypeContextProps {
+  type: string | null;
+  setType: (e: string) => void;
+}
+
+const TypeContext = createContext<TypeContextProps>(null);
 export default TypeContext;

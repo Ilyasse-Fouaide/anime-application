@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { VscListFilter } from "@react-icons/all-files/vsc/VscListFilter";
 import { VscSettings } from "@react-icons/all-files/vsc/VscSettings";
 import { NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
+import TypeContext from '../../../context/TypeContext';
 
 function FilterPopularity() {
   const [clicked, setIsClicked] = React.useState(false);
@@ -37,7 +38,7 @@ function FilterPopularity() {
 
 function FilterType() {
   const [clicked, setIsClicked] = React.useState(false);
-  const [type, setType] = React.useState("tv");
+  const { type, setType } = useContext(TypeContext);
 
   return (
     <div
@@ -57,10 +58,11 @@ function FilterType() {
                 key={key}
                 onClick={(e) => {
                   e.stopPropagation();
+                  setType(el)
                 }}
               >
                 <div className='flex items-center space-x-1'>
-                  <input type="radio" name="filter" id='filter' value={el} checked={type === el} />
+                  <input type="radio" name="filter" id='filter' value={el} checked={el === type} />
                   <label htmlFor="filter">{el}</label>
                 </div>
               </div>
