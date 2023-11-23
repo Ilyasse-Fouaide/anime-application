@@ -61,8 +61,12 @@ function FilterType() {
                   setType(el)
                 }}
               >
-                <div className='flex items-center space-x-1'>
-                  <input type="radio" name="filter" id='filter' value={el} checked={el === type} />
+                <div className='flex items-center space-x-2'>
+                  <div className={`w-[20px] h-[20px] ring-2 ${type === el ? "ring-[var(--red)]" : "ring-slate-500"} bg-slate-900 rounded-full relative`}>
+                    {type === el &&
+                      <div className='absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 w-[70%] h-[70%] bg-[var(--red)] rounded-full'></div>
+                    }
+                  </div>
                   <label htmlFor="filter">{el}</label>
                 </div>
               </div>
