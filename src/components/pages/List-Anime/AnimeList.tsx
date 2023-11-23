@@ -1,7 +1,7 @@
 import React from 'react';
 import { VscListFilter } from "@react-icons/all-files/vsc/VscListFilter";
 import { VscSettings } from "@react-icons/all-files/vsc/VscSettings";
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 function FilterPopularity() {
   const [clicked, setIsClicked] = React.useState(false);
@@ -22,9 +22,9 @@ function FilterPopularity() {
         <div className='absolute top-full right-0 w-[150%] bg-slate-800'>
           <div className='my-2'>
             {options.map(({ text, to }, key) =>
-              <Link to={`/${to}`}>
+              <NavLink to={`/${to}`}>
                 <div className='py-3 px-5 text-xs hover:bg-slate-900' key={key}>{text}</div>
-              </Link>
+              </NavLink>
             )}
           </div>
         </div>

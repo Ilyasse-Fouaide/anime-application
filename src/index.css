@@ -11,6 +11,10 @@
   /* outline: 1px solid red */
 }
 
+a.active {
+  @apply text-red-500
+}
+
 .swiper-button-next {
   @apply right-0 bg-gradient-to-l from-zinc-950/60
 }
