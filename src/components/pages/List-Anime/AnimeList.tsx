@@ -16,10 +16,12 @@ function FilterPopularity() {
 
   return (
     <div className={`z-[999] relative mr-2 py-2 px-3 transition-colors hover:bg-slate-800 cursor-pointer text-sm text-zinc-400  uppercase font-semibold inline-flex items-center ${clicked && "bg-slate-800"}`} onClick={() => setIsClicked(!clicked)}>
-      <VscListFilter className="mr-2 w-[24px] h-[24px]" />
-      {location.pathname.split("/")[2]}
+      <VscListFilter className="mr-0 md:mr-2 w-[24px] h-[24px]" />
+      <span className='hidden md:block'>
+        {location.pathname.split("/")[2]}
+      </span>
       {clicked &&
-        <div className='absolute top-full right-0 w-[150%] bg-slate-800'>
+        <div className='absolute top-full right-0 w-auto md:w-[150%] bg-slate-800'>
           <div className='my-2'>
             {options.map(({ text, to }, key) =>
               <NavLink to={`/${to}`}>
@@ -38,13 +40,15 @@ function AnimeList() {
   return (
     <div className='max-w-5xl mx-auto p-6'>
       <div className='flex justify-between items-center mt-10'>
-        <h1 className='text-3xl font-semibold text-white'>Anime List</h1>
+        <h1 className='text-xl sm:text-3xl font-semibold text-white'>Anime List</h1>
         <div className='flex items-center'>
 
           <FilterPopularity />
           <div className='py-2 px-3 transition-colors hover:bg-slate-800 cursor-pointer text-sm text-zinc-400 hover:text-white uppercase font-semibold inline-flex items-center'>
             <VscSettings className="mr-2 w-[24px] h-[24px]" />
-            Filter
+            <span className='hidden md:block'>
+              Filter
+            </span>
           </div>
 
         </div>
