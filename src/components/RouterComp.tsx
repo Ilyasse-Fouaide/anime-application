@@ -3,7 +3,7 @@ import NavBar from './pages/NavBar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Container from './pages/Container';
 import Search from './pages/Search/Search';
-import Popular from './pages/Popular';
+import AnimeList from './pages/AnimeList';
 
 const router = createBrowserRouter([
   {
@@ -20,19 +20,19 @@ const router = createBrowserRouter([
       },
       {
         path: "popular",
-        element: <Popular />
+        element: <AnimeList />
       },
       {
         path: "airing",
-        element: <Popular />
+        element: <AnimeList />
       },
       {
         path: "upcoming",
-        element: <Popular />
+        element: <AnimeList />
       },
       {
         path: "favorite",
-        element: <Popular />
+        element: <AnimeList />
       },
     ]
   }
