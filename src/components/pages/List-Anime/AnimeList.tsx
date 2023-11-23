@@ -41,12 +41,9 @@ function FilterType() {
   return (
     <div
       className={`z-[999] relative flex items-center py-2 px-3 transition-colors hover:bg-slate-800 ${clicked ? "bg-slate-800" : ""} cursor-pointer group`}
-      onClick={() => setIsClicked(!clicked)}
-    >
+      onClick={() => setIsClicked(!clicked)}>
       <div
-        className={`text-sm uppercase font-semibold inline-flex items-center transition-colors group-hover:text-white ${clicked ? "text-white" : "text-zinc-400 "
-          }`}
-      >
+        className={`text-sm uppercase font-semibold inline-flex items-center transition-colors group-hover:text-white ${clicked ? "text-white" : "text-zinc-400 "}`}>
         <VscSettings className="mr-2 w-[24px] h-[24px]" />
         <span className='hidden md:block'>Filter</span>
       </div>
@@ -61,7 +58,10 @@ function FilterType() {
                   e.stopPropagation();
                 }}
               >
-                {el}
+                <div className='flex items-center space-x-1'>
+                  <input type="radio" name="filter" id='filter' value={el} />
+                  <label htmlFor="filter">{el}</label>
+                </div>
               </div>
             ))}
           </div>
