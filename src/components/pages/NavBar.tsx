@@ -40,7 +40,7 @@ const genres: Genre[] = [
 ];
 
 const search: Search[] = [
-  { search: 'Popular', to: "popular" },
+  { search: 'Popular', to: "videos/popular" },
   { search: 'New', to: "new" },
   { search: 'Alphabetic', to: "alphabetic" },
   { search: 'Simulcast Season', to: "simulcast-season" },
