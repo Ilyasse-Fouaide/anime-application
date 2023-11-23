@@ -22,6 +22,18 @@ const router = createBrowserRouter([
         path: "popular",
         element: <Popular />
       },
+      {
+        path: "airing",
+        element: <Popular />
+      },
+      {
+        path: "upcoming",
+        element: <Popular />
+      },
+      {
+        path: "favorite",
+        element: <Popular />
+      },
     ]
   }
 ])

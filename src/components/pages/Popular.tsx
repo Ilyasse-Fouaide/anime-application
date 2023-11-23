@@ -7,7 +7,7 @@ import { VscListFilter } from "@react-icons/all-files/vsc/VscListFilter";
 import { VscSettings } from "@react-icons/all-files/vsc/VscSettings";
 import { Link } from 'react-router-dom';
 
-type Filter = 'airing' | 'upcoming' | 'bypopularity' | 'favorite'
+type Filter = 'airing' | 'upcoming' | 'popular' | 'favorite'
 
 function FilterPopularity({ filter, setFilter }: any) {
   const [clicked, setIsClicked] = React.useState(false);
@@ -24,7 +24,7 @@ function FilterPopularity({ filter, setFilter }: any) {
         <div className='absolute top-full right-0 w-[150%] bg-slate-800'>
           <div className='my-2'>
             {["airing", "upcoming", "popular", "favorite"].map((el, key) =>
-              <Link to={`${el}`}>
+              <Link to={`/${el}`}>
                 <div className='py-3 px-5 text-xs hover:bg-slate-900' key={key} onClick={() => handleClick(el)}>{el}</div>
               </Link>
             )}
@@ -39,7 +39,7 @@ function Popular() {
   const [anime, setAnime] = useState<AnimeData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
-  const [filter, setFilter] = useState<Filter>('bypopularity');
+  const [filter, setFilter] = useState<Filter>('popular');
   const [type, setType] = useState<"tv" | "movie">("tv");
 
   const fetchAnime = async () => {
