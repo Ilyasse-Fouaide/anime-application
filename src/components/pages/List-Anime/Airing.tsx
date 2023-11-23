@@ -1,30 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { AnimeData } from '../../Types/types';
 import { getRequest } from '../../../axios/axiosClient';
 import Card from '../Card/Card';
 import SkeletonCard from '../../Skeleton/SkeletonCard';
+import TypeContext from '../../../context/TypeContext';
 
 function Airing() {
   const [anime, setAnime] = useState<AnimeData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
+  const { type } = useContext(TypeContext);
 
-  const fetchAnime = () => {
-    getRequest(`top/anime?page=${page}&filter=airing&sfw`)
+
+  useEffect(() => {
+    getRequest(`top/anime?page=${page}&filter=airing&sfw${type !== "all" ? `&type=${type}` : ""}`)
       .then((response) => {
-        setAnime((prev) => [...prev, ...response.data.data]);
+        setAnime((prev) => page === 1 ? response.data.data : [...prev, ...response.data.data]);
         setLoading(false);
       })
       .catch((_error) => {
         setLoading(false);
       })
-  };
-
-  useEffect(() => {
-    fetchAnime();
-  }, [page]);
+  }, [page, type]);
 
   const handleScroll = () => {
+    if (document.documentElement.scrollTop <= 20) {
+      setPage(1);
+    }
+
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.scrollHeight
@@ -72,6 +75,7 @@ function Airing() {
         ))}
       </div>
       {loading && <SkeletonCard />}
+      {anime.length === 0 && "No data"}
     </>
   )
 }

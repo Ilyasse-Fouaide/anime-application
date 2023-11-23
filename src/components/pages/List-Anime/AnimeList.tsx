@@ -50,9 +50,9 @@ function FilterType() {
         <span className='hidden md:block'>Filter</span>
       </div>
       {clicked && (
-        <div className='absolute top-full right-0 w-[150%] bg-slate-800'>
+        <div className='absolute top-full right-0 w-[150%] bg-slate-800 shadow-2xl shadow-zinc-900'>
           <div className='my-2'>
-            {["all", "tv", "movie", "ova", "ona"].map((el, key) => (
+            {["all", "tv", "movie", "ona", "ova"].map((el, key) => (
               <div
                 className='py-3 px-5 text-xs hover:bg-slate-900 uppercase'
                 key={key}
@@ -61,13 +61,13 @@ function FilterType() {
                   setType(el)
                 }}
               >
-                <div className='flex items-center space-x-2'>
+                <div className='flex items-center space-x-3'>
                   <div className={`w-[20px] h-[20px] ring-2 ${type === el ? "ring-[var(--red)]" : "ring-slate-500"} bg-slate-900 rounded-full relative`}>
                     {type === el &&
                       <div className='absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 w-[70%] h-[70%] bg-[var(--red)] rounded-full'></div>
                     }
                   </div>
-                  <label htmlFor="filter">{el}</label>
+                  <label htmlFor="filter" className={`font-semibold ${type === el ? "text-white" : "text-slate-400"}`}>{el}</label>
                 </div>
               </div>
             ))}
