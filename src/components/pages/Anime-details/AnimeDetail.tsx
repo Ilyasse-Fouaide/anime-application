@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 
 function AnimeDetail() {
-  const [AnimeDetail, setAnimeDtail] = React.useState<AnimeData[]>([]);
+  const [AnimeDetail, setAnimeDtail] = React.useState<AnimeData | null>(null);
   const [loading, setLoading] = React.useState(true);
   const { id } = useParams();
 
@@ -29,7 +29,14 @@ function AnimeDetail() {
   }
 
   return (
-    <div className='w-full h-[600px] bg-gray-100' ></div>
+    <div className='relative w-full h-[600px] bg-no-repeat bg-cover bg-center' style={{ backgroundImage: `url('${AnimeDetail?.images.jpg.large_image_url}')` }}>
+      <div>
+        {/* content */}
+      </div>
+      {/* Effects */}
+      <div className='absolute inset-0 bg-zinc-950/80 backdrop-blur-md backdrop-grayscale'></div>
+      {/* <div className='absolute inset-'></div> */}
+    </div>
   )
 }
 
