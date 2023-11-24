@@ -78,26 +78,32 @@ function AnimeDetail() {
 
         {/* Effects */}
         <div className='absolute inset-0 bg-zinc-950/80 backdrop-blur-md'></div>
-        <div className='absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 w-[500px] aspect-square rounded-full bg-zinc-950 blur-3xl'></div>
       </div>
 
       <div className='max-w-5xl mx-auto p-6'>
-        <h1 className='max-w-xl text-[40px] text-zinc-50 font-[500] leading-[45px]' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
+        <h2 className='max-w-xl text-[40px] text-zinc-50 font-[500] leading-[45px]' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h2>
         {animeDetail?.title.length! >= 50 &&
           <Tooltip id="my-tooltip" place='bottom' />
         }
 
+        <div className='mt-1 flex items-center space-x-2 font-medium'>
+          <span className='text-zinc-400'>Japanese:</span>
+          <h4 className='text-zinc-50'>{animeDetail?.title_japanese}</h4>
+        </div>
+
         {/* Buttons */}
         <div className='flex justify-center lg:justify-start mt-6'>
-          <div className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)]'>
+          <div className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)] hover:text-orange-400 hover:border-orange-400'>
             <IoIosPlay className="mr-2 text-[23px]" />
-            watch episode
+            watch now
           </div>
           <div className='flex items-center uppercase py-[8px] px-[15px] bg-transparent text-zinc-400 font-semibold hover:text-zinc-100 hover:bg-zinc-800 cursor-pointer transition-colors'>
             <IoBookmarkOutline className="mr-2 text-[26px]" />
             Add To Watch list
           </div>
         </div>
+
+        <div></div>
 
         <Decription animeDetail={animeDetail} />
 

@@ -33,5 +33,6 @@ export interface AnimeData extends Trailer, CardTypes {
   mal_id: number,
   genres: GenresType[],
   duration: string,
-  status: string
+  status: string,
+  title_japanese: string
 }
