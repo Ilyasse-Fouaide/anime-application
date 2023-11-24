@@ -152,7 +152,7 @@ function AnimeDetail() {
 
         <div className='mt-10 flex items-center space-x-1 text-zinc-50'>
           <div>Related:</div>
-          {animeDetail.relations.map(({ relation, entry }, key) =>
+          {animeDetail?.relations.map(({ relation, entry }, key) =>
             <div key={key}>
               {relation === "Prequel" &&
                 <>

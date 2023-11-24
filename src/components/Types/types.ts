@@ -42,4 +42,11 @@ export interface AnimeData extends Trailer, CardTypes {
   studios: {
     name: string
   }[],
+  relations: {
+    relation: string,
+    entry: {
+      mal_id: number,
+      name: string
+    }[]
+  }[]
 }
