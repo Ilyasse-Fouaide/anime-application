@@ -8,6 +8,7 @@ import Popular from './pages/List-Anime/Popular';
 import Airing from './pages/List-Anime/Airing';
 import Upcoming from './pages/List-Anime/Upcoming';
 import Favorite from './pages/List-Anime/Favorite';
+import AnimeDetail from './pages/Anime-details/AnimeDetail';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             element: <Favorite />
           },
         ]
+      },
+      {
+        path: "series/:id/:title",
+        element: <AnimeDetail />
       },
     ]
   }
