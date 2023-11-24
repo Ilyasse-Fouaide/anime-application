@@ -7,6 +7,7 @@ import { FiClock } from "@react-icons/all-files/fi/FiClock";
 import Skeleton from "../Skeleton/Sleleton";
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const limit: number = 6
@@ -61,7 +62,7 @@ function Hero() {
   return (
     <>
       <div className='relative w-full h-[600px]'>
-        {animeData && animeData.map(({ trailer, title, type, duration, genres, synopsis }, key) =>
+        {animeData && animeData.map(({ mal_id, trailer, title, type, duration, genres, synopsis }, key) =>
           <div className={`absolute inset-0 flex flex-col lg:flex-row-reverse duration-500 ${key === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} key={key}>
             <div className='hidden lg:block w-full h-1/2 lg:h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${trailer?.images.maximum_image_url}')` }}>
               <div className='relative w-full h-full'>
@@ -140,10 +141,10 @@ function Hero() {
                 </div>
 
                 <div className='flex justify-center lg:justify-start mt-10'>
-                  <div className='flex items-center uppercase py-[8px] px-[15px] bg-[var(--red)] font-semibold text-zinc-950 cursor-pointer mr-2'>
+                  <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} className='flex items-center uppercase py-[8px] px-[15px] bg-[var(--red)] font-semibold text-zinc-950 cursor-pointer mr-2'>
                     <IoIosPlay className="mr-2 text-[23px]" />
                     watch episode
-                  </div>
+                  </Link>
                   <div className='py-[7px] px-[6px] bg-transparent border-2 border-[var(--red)] text-[26px] text-[var(--red)] cursor-pointer hover:bg-[var(--red)] hover:text-zinc-950 transition-colors'>
                     <IoBookmarkOutline />
                   </div>

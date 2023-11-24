@@ -1,6 +1,6 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
@@ -83,7 +83,7 @@ function AnimeDetail() {
       </div>
 
       <div className='max-w-5xl mx-auto p-6'>
-        <h2 className='max-w-xl text-[1.5rem] md:text-[30px] text-zinc-50 font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h2>
+        <h2 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h2>
         {animeDetail?.title.length! >= 50 &&
           <Tooltip id="my-tooltip" place='bottom' />
         }
@@ -130,22 +130,39 @@ function AnimeDetail() {
           )}
         </div>
 
-        <div className='mt-5 py-3 border-b border-b-zinc-600 flex items-start md:items-center justify-between text-zinc-50 font-medium'>
+        <div className='mt-5 py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
           <div>Producers</div>
           <div className='text-xs max-w-[50%] text-right'>
+            {animeDetail?.producers.length === 0 && 'N/A'}
             {animeDetail?.producers.map(({ name }, key) =>
               <span key={key}>{`${name}, `}</span>
             )}
           </div>
         </div>
 
-        <div className='mt-0 md:mt-5 py-3 border-b border-b-zinc-600 flex items-start md:items-center justify-between text-zinc-50 font-medium'>
-          <div>Studios</div>
+        <div className='py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
+          <div>Studio</div>
           <div className='text-xs max-w-[50%] text-right'>
+            {animeDetail?.studios.length === 0 && 'N/A'}
             {animeDetail?.studios.map(({ name }, key) =>
-              <span key={key}>{`${name}, `}</span>
+              <span key={key}>{`${name}`}</span>
             )}
           </div>
+        </div>
+
+        <div className='mt-10 flex items-center space-x-1 text-zinc-50'>
+          <div>Related:</div>
+          {animeDetail.relations.map(({ relation, entry }, key) =>
+            <div key={key}>
+              {relation === "Prequel" &&
+                <>
+                  {entry.map(({ mal_id, name }, key) =>
+                    <Link to={`/series/${mal_id}/${name.split(" ").join("-")}`} className='text-sm rounded-full bg-slate-800 py-1 px-3 cursor-pointer' key={key}>{sliceText(name, 25)}</Link>
+                  )}
+                </>
+              }
+            </div>
+          )}
         </div>
 
       </div>
