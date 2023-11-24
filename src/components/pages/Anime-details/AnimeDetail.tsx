@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
+import { Tooltip } from 'react-tooltip'
+
+import 'react-tooltip/dist/react-tooltip.css'
 
 function AnimeDetail() {
   const [animeDetail, setAnimeDtail] = React.useState<AnimeData | null>(null);
@@ -14,7 +17,6 @@ function AnimeDetail() {
     const fetchAnimeDetai = () => {
       getRequest(`anime/${id}/full`)
         .then((response) => {
-          console.log(response.data.data)
           setAnimeDtail(response.data.data);
           setLoading(false);
         })
@@ -49,7 +51,10 @@ function AnimeDetail() {
       </div>
 
       <div className='max-w-5xl mx-auto p-6'>
-        <h1 className='max-w-xl text-[40px] text-zinc-50 font-[500] leading-[45px]'>{sliceText(animeDetail?.title!, 50)}</h1>
+        <h1 className='max-w-xl text-[40px] text-zinc-50 font-[500] leading-[45px]' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
+        {animeDetail?.title.length! >= 50 &&
+          <Tooltip id="my-tooltip" place='bottom' />
+        }
       </div>
     </>
   )
