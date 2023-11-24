@@ -12,6 +12,54 @@ import { IoStar } from '@react-icons/all-files/io5/IoStar';
 import 'react-tooltip/dist/react-tooltip.css'
 import { formatNumber } from '../Card/CardInfo';
 
+function Episode() {
+  const [animeVideo, setAnimeVideo] = React.useState([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const { id, title: slug } = useParams();
+
+  React.useEffect(() => {
+    const getEpisodes = () => {
+      getRequest(`anime/${id}/videos`)
+        .then(({ data }) => {
+          setAnimeVideo(data.data);
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false)
+        })
+    }
+
+    getEpisodes();
+  }, [id]);
+
+  if (loading) {
+    return "loading ...";
+  }
+
+  return (
+    <div className='mt-10'>
+      <div className='grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-[580px]:gap-5 lg:gap-6'>
+        {animeVideo && animeVideo.episodes.map(({ images, title, episode }, key) =>
+          <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
+            {images.jpg.image_url ?
+              <img src={images.jpg.image_url} className='flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video' alt={title} />
+              :
+              <div className='flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video bg-zinc-800 flex items-center justify-center'>
+                <IoIosPlay className="text-zinc-500 w-[45px] h-[45px]" />
+              </div>
+            }
+            <div className='mt-0 min-[580px]:mt-3 font-medium text-white'>
+              <div className='text-xs text-zinc-400'>{slug}</div>
+              <span className='text-[13px] min-[580px]:text-[14px] text-white'>{episode} - {sliceText(title, 22)}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
 
@@ -59,7 +107,7 @@ function AnimeDetail() {
         })
     }
     fetchAnimeDetai();
-  }, [])
+  }, [id])
 
   if (loading) {
     return "";
@@ -150,20 +198,7 @@ function AnimeDetail() {
           </div>
         </div>
 
-        <div className='mt-10 flex items-center space-x-1 text-zinc-50'>
-          <div>Related:</div>
-          {animeDetail?.relations.map(({ relation, entry }, key) =>
-            <div key={key}>
-              {relation === "Prequel" &&
-                <>
-                  {entry.map(({ mal_id, name }, key) =>
-                    <Link to={`/series/${mal_id}/${name.split(" ").join("-")}`} className='text-sm rounded-full bg-slate-800 py-1 px-3 cursor-pointer' key={key}>{sliceText(name, 25)}</Link>
-                  )}
-                </>
-              }
-            </div>
-          )}
-        </div>
+        <Episode />
 
       </div>
     </>
