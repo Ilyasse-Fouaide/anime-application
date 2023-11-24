@@ -30,7 +30,7 @@ function Decription({ animeDetail }: any) {
             {detail && <div className='absolute bottom-0 w-full h-[50px] bg-gradient-to-t from-zinc-950'></div>}
           </div>
           <div className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
-            {detail ? "MORE DETAIL" : "LESS DETAIL"}
+            {detail ? "MORE" : "LESS"}
           </div>
         </>
         :
@@ -88,12 +88,12 @@ function AnimeDetail() {
           <Tooltip id="my-tooltip" place='bottom' />
         }
 
-        <div className='mt-2 mb-16 flex items-start md:items-center space-x-2 text-xs sm:text-sm font-medium'>
+        <div className='mt-2 mb-5 md:mb-16 flex items-start md:items-center space-x-2 text-xs sm:text-sm font-medium'>
           <span className='text-zinc-400'>Japanese:</span>
           <h4 className='text-zinc-50'>{animeDetail?.title_japanese}</h4>
         </div>
 
-        <div className='flex items-center space-x-3 text-[15px] font-medium text-zinc-50'>
+        <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
           <div className='flex items-center space-x-2'>
             <span>{animeDetail?.score ? animeDetail?.score : "N/A"}</span>
             <IoStar className="cursor-pointer" />
@@ -126,8 +126,26 @@ function AnimeDetail() {
 
         <div className='mt-5 flex flex-wrap items-center'>
           {animeDetail?.genres.map((genre, key) =>
-            <div className='text-xs uppercase py-1 px-2 bg-slate-700 mr-2 my-1' key={key}>{genre.name}</div>
+            <div className='text-xs uppercase py-1 px-2 transition-colors bg-slate-700 hover:bg-slate-600 mr-2 my-1 cursor-pointer' key={key}>{genre.name}</div>
           )}
+        </div>
+
+        <div className='mt-5 py-3 border-b border-b-zinc-600 flex items-start md:items-center justify-between text-zinc-50 font-medium'>
+          <div>Producers</div>
+          <div className='text-xs max-w-[50%] text-right'>
+            {animeDetail?.producers.map(({ name }, key) =>
+              <span key={key}>{`${name}, `}</span>
+            )}
+          </div>
+        </div>
+
+        <div className='mt-0 md:mt-5 py-3 border-b border-b-zinc-600 flex items-start md:items-center justify-between text-zinc-50 font-medium'>
+          <div>Studios</div>
+          <div className='text-xs max-w-[50%] text-right'>
+            {animeDetail?.studios.map(({ name }, key) =>
+              <span key={key}>{`${name}, `}</span>
+            )}
+          </div>
         </div>
 
       </div>
