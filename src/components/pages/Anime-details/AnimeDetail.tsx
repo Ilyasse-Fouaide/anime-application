@@ -65,7 +65,12 @@ function Episode() {
           {animeVideo && animeVideo.episodes.map(({ images, title, episode }, key) =>
             <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
               {images.jpg.image_url ?
-                <img src={images.jpg.image_url} className='flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video' alt={title} />
+                <div className='relative flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video'>
+                  <img src={images.jpg.image_url} className='w-full h-full' alt={title} />
+                  <div className='w-[50px] h-[50px] md:w-[60px] md:h-[60px] absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-zinc-950/50 flex items-center justify-center rounded-full'>
+                    <IoIosPlay className="text-white w-[35px] h-[35px] md:w-[45px] md:h-[45px] -mr-[5px]" />
+                  </div>
+                </div>
                 :
                 <div className='flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video bg-zinc-800 flex items-center justify-center'>
                   <IoIosPlay className="text-zinc-500 w-[45px] h-[45px]" />
