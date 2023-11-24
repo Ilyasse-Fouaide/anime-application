@@ -1,7 +1,7 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
 import { Link, useParams } from 'react-router-dom';
-import { AnimeData } from '../../Types/types';
+import { AnimeData, animeVideo } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
 import { Tooltip } from 'react-tooltip'
@@ -14,7 +14,7 @@ import cat from "../../../assets/cat.svg";
 import { formatNumber } from '../Card/CardInfo';
 
 function Episode() {
-  const [animeVideo, setAnimeVideo] = React.useState([]);
+  const [animeVideo, setAnimeVideo] = React.useState<any>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [detail, setDetail] = React.useState(true);
   const { id, title: slug } = useParams();
@@ -62,7 +62,7 @@ function Episode() {
     <>
       <div className='relative mt-16 overflow-y-hidden' style={{ height: detail && twelveEP ? "650px" : "auto" }}>
         <div className='grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-[580px]:gap-5 lg:gap-6'>
-          {animeVideo && animeVideo.episodes.map(({ images, title, episode }, key) =>
+          {animeVideo && animeVideo.episodes.map(({ images, title, episode }: { images: { jpg: { image_url: string } }, title: string, episode: string }, key: number) =>
             <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
               {images.jpg.image_url ?
                 <div className='relative flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video'>

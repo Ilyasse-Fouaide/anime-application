@@ -50,3 +50,15 @@ export interface AnimeData extends Trailer, CardTypes {
     }[]
   }[]
 }
+
+export interface animeVideo {
+  episodes: {
+    images: {
+      jpg: {
+        image_url: string,
+      }
+    },
+    episode: string
+    title: string
+  }[]
+}
