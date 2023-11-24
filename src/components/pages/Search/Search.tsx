@@ -18,14 +18,14 @@ function InputElement({ inputValue, handleInputChange }: any) {
   )
 }
 
-function RecentSearch({ mal_id, title }: { mal_id: number, title: string }) {
+function RecentSearch({ mal_id, title, removeItem }: { mal_id: number, title: string, removeItem: (mal_id: number) => void }) {
 
   return (
     <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
-      <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
+      <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
         {sliceText(title, 20)}
       </Link>
-      <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600'>
+      <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600' onClick={() => removeItem(mal_id)}>
         <MdClose className="w-[20px] h-[20px]" />
       </div>
     </div>
@@ -136,7 +136,7 @@ function Search() {
                     <h2 className='text-2xl font-medium text-white'>Top Results</h2>
                     <div className='my-3 grid grid-cols-2 md:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, score, scored_by, synopsis, episodes }, key) =>
-                        <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} className='relative group overflow-hidden cursor-pointer' key={key} onClick={() => addRecentSearch(mal_id, title)}>
+                        <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} className='relative group overflow-hidden cursor-pointer' key={key} onClick={() => addRecentSearch(mal_id, title)}>
                           <TopResult images={images} title={title} />
                           <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
                         </Link>
@@ -147,7 +147,7 @@ function Search() {
                     <h2 className='text-2xl font-medium text-white'>Series</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
-                        <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
+                        <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
                           <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} synopsis={''} />
                         </Link>
                       )}
@@ -157,7 +157,7 @@ function Search() {
                     <h2 className='text-2xl font-medium text-white'>Moives</h2>
                     <div className='my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                       {animeData && animeData.filter((el) => el.type === "Movie" && el.status !== "Not yet aired").map(({ mal_id, images, title, episodes, score, scored_by }, key) =>
-                        <Link to={`series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
+                        <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} onClick={() => addRecentSearch(mal_id, title)} key={key} >
                           <SeriesMovies images={images} title={title} episodes={episodes} score={score} scored_by={scored_by} synopsis={''} />
                         </Link>
                       )}
@@ -180,8 +180,8 @@ function Search() {
               </div>
               <div className='my-3 flex flex-wrap flex-col min-[500px]:flex-row gap-2'>
                 {recentSearchData && recentSearchData.map(({ mal_id, title }: any, key: number) =>
-                  <div onClick={() => removeItem(mal_id)} key={key}>
-                    <RecentSearch mal_id={mal_id} title={title} />
+                  <div key={key}>
+                    <RecentSearch mal_id={mal_id} title={title} removeItem={removeItem} />
                   </div>
                 )}
               </div>
