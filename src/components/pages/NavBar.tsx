@@ -169,7 +169,7 @@ function NavBar() {
         <Outlet />
       </div>
       {/* Footer */}
-      <div className='w-full h-[50vh] bg-gradient-to-t from-zinc-600 to-zinc-950'></div>
+      {/* <div className='w-full h-[50vh] bg-gradient-to-t from-zinc-600 to-zinc-950'></div> */}
     </div>
   )
 }

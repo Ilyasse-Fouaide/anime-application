@@ -7,7 +7,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 function Card({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
 
   return (
-    <Link to={`series/${mal_id}/${title.split(" ").join("-")}`}>
+    <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`}>
       <div className='w-full aspect-[2/3]'>
         <LazyLoadImage
           src={images.jpg.large_image_url}
