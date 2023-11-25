@@ -10,7 +10,7 @@ export default function LazyLoadComponent({ children }: { children: React.ReactN
         setTimeout(() => {
           setInview(true);
           observe.disconnect();
-        }, 300)
+        }, 500)
       }
     }, { threshold: 1 });
     if (node) {
@@ -19,7 +19,7 @@ export default function LazyLoadComponent({ children }: { children: React.ReactN
   }, []);
 
   return (
-    <div ref={lastElement} style={{ marginBottom: inView ? "0px" : "500px" }}>
+    <div ref={lastElement} style={{ marginBottom: inView ? "0px" : "1000px" }}>
       {inView && children}
     </div>
   );
