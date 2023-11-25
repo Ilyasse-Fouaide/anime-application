@@ -1,10 +1,11 @@
-import axios from 'axios'
 import React from 'react'
+import { getRequest } from '../../../axios/axiosClient';
+import { AnimeData } from '../../Types/types';
 
 export default function useAnimeFetch(filter: string, page: number) {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
-  const [anime, setAnime] = React.useState<any[]>([]);
+  const [anime, setAnime] = React.useState<AnimeData[]>([]);
   const [hasMore, setHasMore] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -13,7 +14,7 @@ export default function useAnimeFetch(filter: string, page: number) {
 
   React.useEffect(() => {
     setLoading(true)
-    axios.get(`https://api.jikan.moe/v4/top/anime?filter=${filter}&page=${page}`)
+    getRequest(`top/anime?filter=${filter}&page=${page}`)
       .then(({ data }) => {
         setAnime((prev) => [...prev, ...data.data]);
         setHasMore(data.pagination.has_next_page);
