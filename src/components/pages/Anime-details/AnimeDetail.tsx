@@ -9,10 +9,10 @@ import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { IoBookmarkOutline } from '@react-icons/all-files/io5/IoBookmarkOutline';
 import { IoStar } from '@react-icons/all-files/io5/IoStar';
 import 'react-tooltip/dist/react-tooltip.css'
-
 import { formatNumber } from '../Card/CardInfo';
 import Episode from './Episode';
 import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
+import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 
 
 function Decription({ animeDetail }: any) {
@@ -49,7 +49,6 @@ function AnimeDetail() {
   const [loading, setLoading] = React.useState(true);
   const { id } = useParams();
   const [error, setError] = React.useState(false);
-  const [inView, setInview] = React.useState(false);
 
   React.useEffect(() => {
     const fetchAnimeDetai = () => {
@@ -66,21 +65,6 @@ function AnimeDetail() {
     }
     fetchAnimeDetai();
   }, [id])
-
-  const lastElement = React.useCallback((node: any) => {
-    const observer = new IntersectionObserver((enties, observe) => {
-      const isIntersecting = enties[0].isIntersecting;
-      if (isIntersecting) {
-        setInview(true);
-      }
-      if (isIntersecting) {
-        observe.disconnect();
-      }
-    }, { threshold: 1 });
-    if (node) {
-      observer.observe(node);
-    }
-  }, []);
 
   if (loading) {
     return <SkeltonAnimeDetail />;
@@ -175,11 +159,9 @@ function AnimeDetail() {
           </div>
         </div>
 
-        <div ref={lastElement}>
-          {inView &&
-            <Episode />
-          }
-        </div>
+        <LazyLoadComponent>
+          <Episode />
+        </LazyLoadComponent>
 
       </div>
     </>
