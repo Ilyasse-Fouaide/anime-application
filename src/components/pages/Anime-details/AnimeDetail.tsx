@@ -12,6 +12,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 
 import { formatNumber } from '../Card/CardInfo';
 import Episode from './Episode';
+import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
 
 
 function Decription({ animeDetail }: any) {
@@ -81,12 +82,8 @@ function AnimeDetail() {
     }
   }, []);
 
-  React.useEffect(() => {
-    console.log(inView)
-  }, [inView])
-
   if (loading) {
-    return "loading ...";
+    return <SkeltonAnimeDetail />;
   }
 
   if (error) {
