@@ -1,7 +1,7 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { Link, useParams } from 'react-router-dom';
-import { AnimeData, animeVideo } from '../../Types/types';
+import { useParams } from 'react-router-dom';
+import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
 import { Tooltip } from 'react-tooltip'
@@ -9,92 +9,10 @@ import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { IoBookmarkOutline } from '@react-icons/all-files/io5/IoBookmarkOutline';
 import { IoStar } from '@react-icons/all-files/io5/IoStar';
 import 'react-tooltip/dist/react-tooltip.css'
-import cat from "../../../assets/cat.svg";
 
 import { formatNumber } from '../Card/CardInfo';
+import Episode from './Episode';
 
-function Episode() {
-  const [animeVideo, setAnimeVideo] = React.useState<any>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [detail, setDetail] = React.useState(true);
-  const { id, title: slug } = useParams();
-
-  React.useEffect(() => {
-    const getEpisodes = () => {
-      getRequest(`anime/${id}/videos`)
-        .then(({ data }) => {
-          setAnimeVideo(data.data);
-          setLoading(false)
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false)
-        })
-    }
-
-    getEpisodes();
-  }, [id]);
-
-  if (loading) {
-    return "loading ...";
-  }
-
-  const handleClick = () => {
-    setDetail(!detail)
-  }
-
-  if (animeVideo.episodes.length === 0) {
-    return (
-      <div className='mt-16 border border-dashed flex flex-col items-center space-y-5 p-5'>
-        <div className='w-[250px] h-[250px]'>
-          <img src={cat} alt="CAT" className='w-full h-full pointer-events-none' />
-        </div>
-        <div className='max-w-md text-center'>
-          <div className='text-sm font-medium'>We couldn't find any available. Check back later or explore other content</div>
-        </div>
-      </div>
-    )
-  }
-
-  const twelveEP = animeVideo.episodes.length > 12;
-
-  return (
-    <>
-      <div className='relative mt-16 overflow-y-hidden' style={{ height: detail && twelveEP ? "650px" : "auto" }}>
-        <div className='grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-[580px]:gap-5 lg:gap-6'>
-          {animeVideo && animeVideo.episodes.map(({ images, title, episode }: { images: { jpg: { image_url: string } }, title: string, episode: string }, key: number) =>
-            <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
-              {images.jpg.image_url ?
-                <div className='relative flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video'>
-                  <img src={images.jpg.image_url} className='w-full h-full' alt={title} />
-                  <div className='w-[50px] h-[50px] md:w-[60px] md:h-[60px] absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-zinc-950/50 flex items-center justify-center rounded-full'>
-                    <IoIosPlay className="text-white w-[35px] h-[35px] md:w-[45px] md:h-[45px] -mr-[5px]" />
-                  </div>
-                </div>
-                :
-                <div className='flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video bg-zinc-800 flex items-center justify-center'>
-                  <IoIosPlay className="text-zinc-500 w-[45px] h-[45px]" />
-                </div>
-              }
-              <div className='mt-0 min-[580px]:mt-3 font-medium text-white'>
-                <div className='text-xs text-zinc-400'>{slug}</div>
-                <span className='text-[13px] min-[580px]:text-[14px] text-white'>{episode} - {sliceText(title, 22)}</span>
-              </div>
-            </div>
-          )}
-        </div>
-        {detail && twelveEP && <div className='absolute bottom-0 w-full h-[500px] bg-gradient-to-t from-zinc-950'></div>}
-      </div>
-      <div className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
-        {twelveEP &&
-          <>
-            {detail ? "MORE EPISODES" : "LESS EPISODES"}
-          </>
-        }
-      </div>
-    </>
-  )
-}
 
 function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
@@ -129,6 +47,8 @@ function AnimeDetail() {
   const [animeDetail, setAnimeDtail] = React.useState<AnimeData | null>(null);
   const [loading, setLoading] = React.useState(true);
   const { id } = useParams();
+  const [error, setError] = React.useState(false);
+  const [inView, setInview] = React.useState(false);
 
   React.useEffect(() => {
     const fetchAnimeDetai = () => {
@@ -140,13 +60,37 @@ function AnimeDetail() {
         .catch((error) => {
           console.error(error);
           setLoading(false);
+          setError(true)
         })
     }
     fetchAnimeDetai();
   }, [id])
 
+  const lastElement = React.useCallback((node: any) => {
+    const observer = new IntersectionObserver((enties, observe) => {
+      const isIntersecting = enties[0].isIntersecting;
+      if (isIntersecting) {
+        setInview(true);
+      }
+      if (isIntersecting) {
+        observe.disconnect();
+      }
+    }, { threshold: 1 });
+    if (node) {
+      observer.observe(node);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    console.log(inView)
+  }, [inView])
+
   if (loading) {
-    return "";
+    return "loading ...";
+  }
+
+  if (error) {
+    return "Error ..."
   }
 
   return (
@@ -234,7 +178,11 @@ function AnimeDetail() {
           </div>
         </div>
 
-        <Episode />
+        <div ref={lastElement}>
+          {inView &&
+            <Episode />
+          }
+        </div>
 
       </div>
     </>
