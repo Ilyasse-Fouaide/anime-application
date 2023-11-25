@@ -51,6 +51,10 @@ function AnimeDetail() {
   const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  React.useEffect(() => {
     const fetchAnimeDetai = () => {
       getRequest(`anime/${id}/full`)
         .then((response) => {
