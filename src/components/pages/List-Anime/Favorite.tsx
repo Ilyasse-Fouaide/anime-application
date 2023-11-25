@@ -1,64 +1,38 @@
-import { useState, useEffect, useContext } from 'react';
-import { AnimeData } from '../../Types/types';
-import { getRequest } from '../../../axios/axiosClient';
+import { useState, useCallback, useRef } from 'react';
 import Card from '../Card/Card';
 import SkeletonCard from '../../Skeleton/SkeletonCard';
-import TypeContext from '../../../context/TypeContext';
+import useAnimeFetch from './useFetchAnime';
+import NoMorData from './NoMorData';
 
 function Favorite() {
-  const [anime, setAnime] = useState<AnimeData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(1);
-  const { type } = useContext(TypeContext);
+  const [filter, _setFilter] = useState("bypopularity");
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getRequest(`top/anime?page=${page}&filter=favorite&sfw${type !== "all" ? `&type=${type}` : ""}`)
-      .then((response) => {
-        setAnime((prev) => page === 1 ? response.data.data : [...prev, ...response.data.data]);
-        setLoading(false);
-      })
-      .catch((_error) => {
-        setLoading(false);
-      })
-  }, [page, type]);
+  const { loading, error, anime, hasMore } = useAnimeFetch(filter, page);
 
-  const handleScroll = () => {
-    if (document.documentElement.scrollTop <= 20) {
-      setPage(1);
+  const observer = useRef<any>();
+
+  const lastElement = useCallback((node: any) => {
+    observer.current = new IntersectionObserver((entries, observe) => {
+      const isIntersecting = entries[0].isIntersecting
+      if (isIntersecting && hasMore) {
+        setPage(prev => prev + 1);
+      }
+      if (isIntersecting) {
+        observe.disconnect();
+      }
+    }, { threshold: 1 });
+    if (node) {
+      observer.current.observe(node);
     }
-
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight
-    ) {
-      setLoading(true);
-      setPage((prev) => prev + 1);
-    }
-  };
-
-  const debounce = (func: () => void, delay: number) => {
-    let timeoutId: any;
-    return () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(func, delay);
-    };
-  };
-
-  useEffect(() => {
-    const debouncedScroll = debounce(handleScroll, 500);
-    window.addEventListener('scroll', debouncedScroll);
-
-    return () => {
-      window.removeEventListener('scroll', debouncedScroll);
-    };
-  }, [handleScroll]);
+  }, [hasMore])
 
   return (
     <>
       <h2 className='mb-3 mt-5 text-lg text-white font-semibold'>Favorite</h2>
       <div className='mb-6 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7'>
         {anime && anime.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key) => (
-          <div className='relative group overflow-hidden cursor-pointer' key={key}>
+          <div className='relative group overflow-hidden cursor-pointer' key={key} ref={anime.length - 1 === key ? lastElement : null}>
             <Card
               mal_id={mal_id}
               images={images}
@@ -74,6 +48,7 @@ function Favorite() {
         ))}
       </div>
       {loading && <SkeletonCard />}
+      {!hasMore && !loading && !error && <NoMorData />}
     </>
   )
 }

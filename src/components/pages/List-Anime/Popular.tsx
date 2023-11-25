@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import Card from '../Card/Card';
 import SkeletonCard from '../../Skeleton/SkeletonCard';
 import useAnimeFetch from './useFetchAnime';
+import NoMorData from './NoMorData';
 
 function Popular() {
   const [filter, _setFilter] = useState("bypopularity");
@@ -20,7 +21,7 @@ function Popular() {
       if (isIntersecting) {
         observe.disconnect();
       }
-    });
+    }, { threshold: 1 });
     if (node) {
       observer.current.observe(node);
     }
@@ -47,6 +48,7 @@ function Popular() {
         ))}
       </div>
       {loading && <SkeletonCard />}
+      {!hasMore && !loading && !error && <NoMorData />}
     </>
   )
 }
