@@ -167,6 +167,11 @@ function AnimeDetail() {
           <Episode />
         </LazyLoadComponent>
 
+        <LazyLoadComponent>
+          {/* <div className='w-full h-36 bg-slate-700'></div> */}
+          <Episode />
+        </LazyLoadComponent>
+
       </div>
     </>
   )

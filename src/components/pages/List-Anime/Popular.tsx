@@ -25,7 +25,7 @@ function Popular() {
     if (node) {
       observer.current.observe(node);
     }
-  }, [hasMore])
+  }, [hasMore]);
 
   return (
     <>

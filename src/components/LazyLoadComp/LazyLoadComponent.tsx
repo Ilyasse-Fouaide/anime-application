@@ -7,10 +7,10 @@ export default function LazyLoadComponent({ children }: { children: React.ReactN
     const observer = new IntersectionObserver((enties, observe) => {
       const isIntersecting = enties[0].isIntersecting;
       if (isIntersecting) {
-        setInview(true);
-      }
-      if (isIntersecting) {
-        observe.disconnect();
+        setTimeout(() => {
+          setInview(true);
+          observe.disconnect();
+        }, 300)
       }
     }, { threshold: 1 });
     if (node) {
@@ -19,7 +19,7 @@ export default function LazyLoadComponent({ children }: { children: React.ReactN
   }, []);
 
   return (
-    <div ref={lastElement}>
+    <div ref={lastElement} style={{ marginBottom: inView ? "0px" : "500px" }}>
       {inView && children}
     </div>
   );
