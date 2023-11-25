@@ -4,6 +4,7 @@ import { getRequest } from "../../../axios/axiosClient";
 import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { sliceText } from "../../functions/sliceText";
 import cat from "../../../assets/cat.svg";
+import SeketonVideos from "../../Skeleton/SeketonVideos";
 
 export default function Episode() {
   const [animeVideo, setAnimeVideo] = React.useState<any>([]);
@@ -30,7 +31,7 @@ export default function Episode() {
   }, [id]);
 
   if (loading) {
-    return "loading ...";
+    return <SeketonVideos />;
   }
 
   const handleClick = () => {
@@ -86,7 +87,6 @@ export default function Episode() {
           </>
         }
       </div>
-      {error && "Error"}
     </>
   )
 }
