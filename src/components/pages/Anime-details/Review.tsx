@@ -8,6 +8,7 @@ import { IoStarOutline } from '@react-icons/all-files/io5/IoStarOutline';
 import ShowMoreText from "react-show-more-text";
 import { formatNumber } from '../Card/CardInfo';
 import { ReviewTypes } from '../../Types/types';
+import SkeletonReview from '../../Skeleton/SkeletonReview';
 
 function Review() {
   const [reviews, setReviews] = React.useState<ReviewTypes[]>([]);
@@ -29,7 +30,7 @@ function Review() {
   }, []);
 
   if (loading) {
-    return "Loadding..."
+    return <SkeletonReview />
   }
 
   if (error) {
