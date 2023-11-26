@@ -1,5 +1,6 @@
 import _React from 'react';
 import SlideContainer, { SlideContainerType } from '../SlideContainer'
+import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 
 function Slide() {
 
@@ -19,9 +20,9 @@ function Slide() {
   return (
     <>
       {slideData.map(({ api, header, paragraph }, key) =>
-        <div key={key}>
+        <LazyLoadComponent key={key}>
           <SlideContainer api={api} header={header} paragraph={paragraph} key={key} />
-        </div>
+        </LazyLoadComponent>
       )}
     </>
   )
