@@ -43,6 +43,14 @@ function Review() {
     return "Error"
   }
 
+  if (reviews.length === 0) {
+    return (
+      <div className='text-center text-sm text-white font-medium py-5 border border-dashed w-full'>
+        No reviews found for this content.
+      </div>
+    )
+  }
+
   return (
     <div>
       {reviews && reviews.map(({ user, date, tags, review, reactions }, key) =>
