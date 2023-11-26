@@ -42,6 +42,10 @@ a.active {
   @apply hidden
 }
 
+.show-more-less-clickable {
+  @apply cursor-pointer text-zinc-300
+}
+
 @media (min-width: 1024px) {
   .hidden-bg {
     background-image: none

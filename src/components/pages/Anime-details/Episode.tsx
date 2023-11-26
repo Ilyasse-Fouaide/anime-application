@@ -45,7 +45,7 @@ export default function Episode() {
           <img src={cat} alt="CAT" className='w-full h-full pointer-events-none' />
         </div>
         <div className='max-w-md text-center'>
-          <div className='text-sm font-medium'>We couldn't find any available. Check back later or explore other content</div>
+          <div className='text-sm font-medium'>We couldn't find any episode available. Check back later or explore other content</div>
         </div>
       </div>
     )
@@ -73,7 +73,9 @@ export default function Episode() {
               }
               <div className='mt-0 min-[580px]:mt-3 font-medium text-white'>
                 <div className='text-xs text-zinc-400'>{slug}</div>
-                <span className='text-[13px] min-[580px]:text-[14px] text-white'>{episode} - {sliceText(title, 22)}</span>
+                <span className='text-[13px] min-[580px]:text-[14px] text-white'>
+                  EP {episode.split("Episode")[1]} - {window.innerWidth <= 527 ? sliceText(title, 13) : sliceText(title, 22)}
+                </span>
               </div>
             </div>
           )}
