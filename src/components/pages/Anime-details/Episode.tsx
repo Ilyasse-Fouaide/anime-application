@@ -14,6 +14,12 @@ export default function Episode() {
   const { id, title: slug } = useParams();
 
   React.useEffect(() => {
+    setAnimeVideo([]);
+    setLoading(true);
+    setError(false);
+  }, [id]);
+
+  React.useEffect(() => {
     const getEpisodes = () => {
       getRequest(`anime/${id}/videos`)
         .then(({ data }) => {
@@ -28,7 +34,7 @@ export default function Episode() {
     }
 
     getEpisodes();
-  }, [id]);
+  }, []);
 
   if (loading) {
     return <SeketonVideos />;

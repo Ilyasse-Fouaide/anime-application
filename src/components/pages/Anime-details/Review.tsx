@@ -17,6 +17,12 @@ function Review() {
   const { id } = useParams();
 
   React.useEffect(() => {
+    setReviews([]);
+    setLoading(true);
+    setError(false);
+  }, [id]);
+
+  React.useEffect(() => {
     getRequest(`anime/${id}/reviews`)
       .then(({ data }) => {
         setReviews(data.data);
