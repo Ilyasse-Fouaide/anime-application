@@ -13,6 +13,7 @@ import { formatNumber } from '../Card/CardInfo';
 import Episode from './Episode';
 import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
 import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
+import Relation from './Relation';
 
 
 function Decription({ animeDetail }: any) {
@@ -172,49 +173,21 @@ function AnimeDetail() {
         <div className='mt-5 border-t border-t-zinc-700 py-5'>
           <div className='flex items-center justify-between'>
             <div>
-              {animeDetail?.relations.map(({ relation, entry }, key) => {
-                if (relation === "Prequel") {
-                  return (
-                    <div key={key}>
-                      {entry.map(({ mal_id, name }, key) =>
-                        <Link
-                          to={`/series/${mal_id}/${name.split(" ").join("-")}`}
-                          key={key}
-                          className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
-                        >
-                          Previous season
-                        </Link>
-                      )}
-                    </div>
-                  )
-                }
-              })}
+              {animeDetail?.relations.map(({ relation, entry }, key) =>
+                <Relation relation={relation} entry={entry} text={"Previous season"} rel={"Prequel"} key={key} />
+              )}
             </div>
             <div>
-              {animeDetail?.relations.map(({ relation, entry }, key) => {
-                if (relation === "Sequel") {
-                  return (
-                    <div key={key}>
-                      {entry.map(({ mal_id, name }, key) =>
-                        <Link
-                          to={`/series/${mal_id}/${name.split(" ").join("-")}`}
-                          key={key}
-                          className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
-                        >
-                          Next season
-                        </Link>
-                      )}
-                    </div>
-                  )
-                }
-              })}
+              {animeDetail?.relations.map(({ relation, entry }, key) =>
+                <Relation relation={relation} entry={entry} text={"Next season"} rel={"Sequel"} key={key} />
+              )}
             </div>
           </div>
         </div>
 
-        <LazyLoadComponent>
-          {/* Other comp */}
-        </LazyLoadComponent>
+        {/* <LazyLoadComponent> */}
+        {/* Other comp */}
+        {/* </LazyLoadComponent> */}
 
       </div>
     </>
