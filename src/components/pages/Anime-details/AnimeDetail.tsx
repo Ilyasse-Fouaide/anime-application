@@ -1,6 +1,6 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
@@ -52,7 +52,9 @@ function AnimeDetail() {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+    setAnimeDtail(null);
+    setLoading(true);
+  }, [id])
 
   React.useEffect(() => {
     const fetchAnimeDetai = () => {
@@ -166,6 +168,49 @@ function AnimeDetail() {
         <LazyLoadComponent>
           <Episode />
         </LazyLoadComponent>
+
+        <div className='mt-5 border-t border-t-zinc-700 py-5'>
+          <div className='flex items-center justify-between'>
+            <div>
+              {animeDetail?.relations.map(({ relation, entry }, key) => {
+                if (relation === "Prequel") {
+                  return (
+                    <div key={key}>
+                      {entry.map(({ mal_id, name }, key) =>
+                        <Link
+                          to={`/series/${mal_id}/${name.split(" ").join("-")}`}
+                          key={key}
+                          className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
+                        >
+                          Previous season
+                        </Link>
+                      )}
+                    </div>
+                  )
+                }
+              })}
+            </div>
+            <div>
+              {animeDetail?.relations.map(({ relation, entry }, key) => {
+                if (relation === "Sequel") {
+                  return (
+                    <div key={key}>
+                      {entry.map(({ mal_id, name }, key) =>
+                        <Link
+                          to={`/series/${mal_id}/${name.split(" ").join("-")}`}
+                          key={key}
+                          className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
+                        >
+                          Next season
+                        </Link>
+                      )}
+                    </div>
+                  )
+                }
+              })}
+            </div>
+          </div>
+        </div>
 
         <LazyLoadComponent>
           {/* Other comp */}
