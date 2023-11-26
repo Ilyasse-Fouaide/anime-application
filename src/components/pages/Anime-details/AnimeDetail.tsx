@@ -1,6 +1,6 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
@@ -14,6 +14,7 @@ import Episode from './Episode';
 import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
 import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 import Relation from './Relation';
+import Review from './Review';
 
 
 function Decription({ animeDetail }: any) {
@@ -185,9 +186,9 @@ function AnimeDetail() {
           </div>
         </div>
 
-        {/* <LazyLoadComponent> */}
-        {/* Other comp */}
-        {/* </LazyLoadComponent> */}
+        <LazyLoadComponent>
+          <Review />
+        </LazyLoadComponent>
 
       </div>
     </>
