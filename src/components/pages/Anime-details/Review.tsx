@@ -7,18 +7,17 @@ import { IoStarHalf } from '@react-icons/all-files/io5/IoStarHalf';
 import { IoStarOutline } from '@react-icons/all-files/io5/IoStarOutline';
 import ShowMoreText from "react-show-more-text";
 import { formatNumber } from '../Card/CardInfo';
+import { ReviewTypes } from '../../Types/types';
 
 function Review() {
-  const [reviews, setReviews] = React.useState([]);
+  const [reviews, setReviews] = React.useState<ReviewTypes[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<boolean>(false);
-  const [detail, setDetail] = React.useState(true);
   const { id } = useParams();
 
   React.useEffect(() => {
     getRequest(`anime/${id}/reviews`)
       .then(({ data }) => {
-        // console.log({ data })
         setReviews(data.data);
         setLoading(false)
       })
@@ -28,10 +27,6 @@ function Review() {
         setError(true);
       });
   }, []);
-
-  const handleClick = () => {
-    setDetail(!detail)
-  }
 
   if (loading) {
     return "Loadding..."
@@ -43,7 +38,7 @@ function Review() {
 
   return (
     <div>
-      {reviews && reviews.map(({ mal_id, user, date, tags, review, reactions }, key) =>
+      {reviews && reviews.map(({ user, date, tags, review, reactions }, key) =>
         <div className='my-10 flex gap-3 sm:gap-5 lg:gap-6' key={key}>
           <div>
             <div className='w-[24px] sm:w-[46px] lg:w-[62px] aspect-square ring-2 md:ring ring-[var(--red)] ring-offset-black ring-offset-2 md:ring-offset-4 rounded-full'>

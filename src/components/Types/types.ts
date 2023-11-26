@@ -62,3 +62,22 @@ export interface animeVideo {
     title: string
   }[]
 }
+
+export interface ReviewTypes {
+  mal_id: number,
+  reactions: {
+    overall: number,
+  },
+  review: string
+  date: Date,
+  score: number,
+  tags: string[],
+  user: {
+    username: string,
+    images: {
+      webp: {
+        image_url: string,
+      }
+    },
+  }
+}
