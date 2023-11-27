@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import SkeletonRecomm from '../../Skeleton/SkeletonRecomm';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { sliceText } from '../../functions/sliceText';
 
 function Recommendations() {
   const [anime, setAnime] = React.useState<any[]>([]);
@@ -59,12 +61,16 @@ function Recommendations() {
           {anime && anime.map(({ entry, votes }, key) => {
             return (
               <div className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block' key={key}>
-                <img src={entry.images.webp.large_image_url} alt={entry.title} className='w-full h-full object-cover object-center pointer-events-none' />
-                <div className='w-full'>
-                  <h3 className=' text-xs text-zinc-50 font-medium mt-3'>{entry.title}</h3>
-                  <div className='text-xs text-zinc-400 mt-3 flex items-center'>
-                    <p className='mr-2'>{votes} Votes</p>
-                  </div>
+                <LazyLoadImage
+                  src={entry.images.webp.large_image_url}
+                  placeholderSrc={entry.images.webp.small_image_url}
+                  effect="blur"
+                  alt={entry.title}
+                  className="w-full aspect-[2/3] object-cover pointer-events-none"
+                />
+                <div className='text-xs text-zinc-50 font-medium mt-3'>{sliceText(entry.title, 15)}</div>
+                <div className='text-xs text-zinc-400 mt-3 flex items-center'>
+                  <p className='mr-2'>{votes} Votes</p>
                 </div>
               </div>
             )
