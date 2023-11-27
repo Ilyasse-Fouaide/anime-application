@@ -85,7 +85,7 @@ function AnimeDetail() {
 
   return (
     <>
-      <div className='relative w-full h-[500px] bg-no-repeat bg-cover bg-center overflow-hidden' style={{ backgroundImage: `url('${animeDetail?.images.jpg.small_image_url}')` }}>
+      <div className='relative w-full h-[400px] min-[425px]:h-[500px] bg-no-repeat bg-cover bg-center overflow-hidden' style={{ backgroundImage: `url('${animeDetail?.images.jpg.small_image_url}')` }}>
         <div className='relative z-10 w-full h-full flex justify-center'>
           <LazyLoadImage
             src={animeDetail?.images.jpg.large_image_url}
