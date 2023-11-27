@@ -40,11 +40,15 @@ export default function Episode() {
     return <SeketonVideos />;
   }
 
+  if (error) {
+    return "Error"
+  }
+
   const handleClick = () => {
     setDetail(!detail)
   }
 
-  if (animeVideo.episodes.length === 0 && !error) {
+  if (animeVideo.episodes.length === 0 && !error && !loading) {
     return (
       <div className='mt-16 border border-dashed flex flex-col items-center space-y-5 p-5'>
         <div className='w-[250px] h-[250px]'>

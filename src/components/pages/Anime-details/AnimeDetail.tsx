@@ -15,6 +15,7 @@ import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
 import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 import Relation from './Relation';
 import Review from './Review';
+import Recommendations from './Recommendations';
 
 
 function Decription({ animeDetail }: any) {
@@ -188,6 +189,10 @@ function AnimeDetail() {
 
         <LazyLoadComponent>
           <Review />
+        </LazyLoadComponent>
+
+        <LazyLoadComponent>
+          <Recommendations />
         </LazyLoadComponent>
 
       </div>
