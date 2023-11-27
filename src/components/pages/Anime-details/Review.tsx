@@ -19,7 +19,7 @@ function List({ user, date, tags, review, reactions }: ReviewTypes) {
         </div>
       </div>
       <div className='w-full'>
-        <div className='font-medium flex items-center gap-2'>
+        <div className='font-medium flex items-center flex-wrap gap-1 sm:gap-2'>
           <span className='text-white text-[13px] md:text-[15px]'>{user.username}</span>
           <span className='text-zinc-400 text-xs md:text-sm'>{`${moment(date).format("DD MMMM YYYY")}`}</span>
         </div>
@@ -115,10 +115,9 @@ function Review() {
       {reviews && reviews.map(({ user, date, tags, review, reactions }, key) =>
         <List user={user} date={date} tags={tags} review={review} reactions={reactions} key={key} />
       ).slice(0, more)}
-      <div className='space-x-3'>
-        <button className='inline-block py-[8px] px-[15px] bg-zinc-950 border-2 border-[var(--red)] text-[var(--red)] hover:text-orange-400 hover:border-orange-400 font-semibold cursor-pointer disabled:border-zinc-500 disabled:text-zinc-500 disabled:cursor-not-allowed' onClick={handleMoreClick} disabled={more === reviews.length}>Load More</button>
-        <button className='inline-block py-[8px] px-[15px] bg-zinc-950 border-2 border-[var(--red)] text-[var(--red)] hover:text-orange-400 hover:border-orange-400 font-semibold cursor-pointer disabled:border-zinc-500 disabled:text-zinc-500 disabled:cursor-not-allowed' onClick={handleLessClick} disabled={more <= 4}>Load Less</button>
-        {more} {reviews.length}
+      <div className='flex items-center flex-wrap gap-3'>
+        <button className='inline-block py-[8px] px-[15px] bg-zinc-950 border-2 border-[var(--red)] text-sm md:text-base text-[var(--red)] hover:text-orange-400 hover:border-orange-400 font-semibold cursor-pointer disabled:border-zinc-500 disabled:text-zinc-500 disabled:cursor-not-allowed' onClick={handleMoreClick} disabled={more === reviews.length}>Load More</button>
+        <button className='inline-block py-[8px] px-[15px] bg-zinc-950 border-2 border-[var(--red)] text-sm md:text-base text-[var(--red)] hover:text-orange-400 hover:border-orange-400 font-semibold cursor-pointer disabled:border-zinc-500 disabled:text-zinc-500 disabled:cursor-not-allowed' onClick={handleLessClick} disabled={more <= 4}>Load Less</button>
       </div>
     </div>
   )
