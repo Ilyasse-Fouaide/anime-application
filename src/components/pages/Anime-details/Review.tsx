@@ -53,6 +53,9 @@ function Review() {
 
   return (
     <div>
+      <div className='mt-10'>
+        <div className='text-lg font-semibold font-white underline'>{reviews.length} Reviews</div>
+      </div>
       {reviews && reviews.map(({ user, date, tags, review, reactions }, key) =>
         <div className='my-10 flex gap-3 sm:gap-5 lg:gap-6' key={key}>
           <div>
