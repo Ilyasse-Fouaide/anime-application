@@ -3,6 +3,7 @@ import { getRequest } from '../../../axios/axiosClient';
 import { useParams } from 'react-router-dom';
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
+import SkeletonRecomm from '../../Skeleton/SkeletonRecomm';
 
 function Recommendations() {
   const [anime, setAnime] = React.useState<any[]>([]);
@@ -29,7 +30,7 @@ function Recommendations() {
   }, [id]);
 
   if (loading) {
-    return "loading ..."
+    return <SkeletonRecomm />
   }
 
   if (error) {
@@ -57,10 +58,10 @@ function Recommendations() {
         <div id='slider' className='space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
           {anime && anime.map(({ entry, votes }, key) => {
             return (
-              <div className='relative w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block' key={key}>
-                <img src={entry.images.webp.large_image_url} alt={entry.title} className='w-full h-full object-cover object-center' />
-                <div>
-                  <h3 className='text-xs text-zinc-50 font-medium mt-3'>{entry.title}</h3>
+              <div className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block' key={key}>
+                <img src={entry.images.webp.large_image_url} alt={entry.title} className='w-full h-full object-cover object-center pointer-events-none' />
+                <div className='w-full'>
+                  <h3 className=' text-xs text-zinc-50 font-medium mt-3'>{entry.title}</h3>
                   <div className='text-xs text-zinc-400 mt-3 flex items-center'>
                     <p className='mr-2'>{votes} Votes</p>
                   </div>
@@ -69,10 +70,10 @@ function Recommendations() {
             )
           })}
         </div>
-        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/2 -translate-y-1/2 right-0 translate-x-1/2  bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
+        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/3 right-0 translate-x-1/2  bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
           <IoIosArrowForward className="w-[26px] h-[26px] -mr-[1px]" />
         </div>
-        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
+        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/3 left-0 -translate-x-1/2 bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
           <IoIosArrowBack className="w-[26px] h-[26px] -ml-[1px]" />
         </div>
       </div>
