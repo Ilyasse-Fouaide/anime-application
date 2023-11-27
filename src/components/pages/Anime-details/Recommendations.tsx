@@ -1,6 +1,6 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import SkeletonRecomm from '../../Skeleton/SkeletonRecomm';
@@ -9,7 +9,7 @@ import { sliceText } from '../../functions/sliceText';
 
 function List({ entry, votes }: any) {
   return (
-    <div className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block'>
+    <Link to={`/series/${entry.mal_id}/${entry.title.split(" ").join("-")}`} className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block'>
       <div className='w-full aspect-[2/3]'>
         <LazyLoadImage
           src={entry.images.webp.large_image_url}
@@ -23,7 +23,7 @@ function List({ entry, votes }: any) {
       <div className='text-xs text-zinc-400 mt-3 flex items-center'>
         <p className='mr-2'>{votes} Votes</p>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -78,7 +78,7 @@ function Recommendations() {
       <h3 className='mb-6 text-white text-lg font-semibold'>Recommendations</h3>
       <div className='relative'>
         <div id='slider' className='space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
-          {anime && anime.map(({ entry, votes }, key) => {
+          {anime && anime.map(({ mal_id, entry, votes }, key) => {
             return <List entry={entry} votes={votes} key={key} />
           })}
         </div>

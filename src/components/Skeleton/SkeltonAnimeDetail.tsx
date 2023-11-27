@@ -1,7 +1,7 @@
 function SkeltonAnimeDetail() {
   return (
     <div className="animate-pulse">
-      <div className="w-full h-[500px] bg-gradient-to-b from-zinc-800 flex justify-center">
+      <div className="w-full h-[400px] min-[425px]:h-[500px] bg-gradient-to-b from-zinc-800 flex justify-center">
         <div className="w-[333px] h-full bg-zinc-800"></div>
       </div>
       <div className="max-w-5xl mx-auto p-6">
