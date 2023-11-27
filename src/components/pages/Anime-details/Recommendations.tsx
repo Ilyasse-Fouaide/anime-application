@@ -1,6 +1,8 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
 import { useParams } from 'react-router-dom';
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 function Recommendations() {
   const [anime, setAnime] = React.useState<any[]>([]);
@@ -20,7 +22,7 @@ function Recommendations() {
         setAnime(data.data);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch((_error) => {
         setError(true);
         setLoading(false);
       })
@@ -48,7 +50,7 @@ function Recommendations() {
     <div className='pt-10'>
       <h3 className='mb-6 text-white text-lg font-semibold'>Recommendations</h3>
       <div className='relative'>
-        <div id='slider' className='space-x-2 sm:space-x-6 lg:space-x-8 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
+        <div id='slider' className='space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
           {anime && anime.map(({ entry }, key) => {
             return (
               <div className='relative w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block' key={key}>
@@ -65,8 +67,12 @@ function Recommendations() {
             )
           })}
         </div>
-        <div onClick={slideLeft}>Left</div>
-        <div onClick={slideRight}>Right</div>
+        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/2 -translate-y-1/2 right-0 translate-x-1/2  bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
+          <IoIosArrowForward className="w-[26px] h-[26px] -mr-[1px]" />
+        </div>
+        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
+          <IoIosArrowBack className="w-[26px] h-[26px] -ml-[1px]" />
+        </div>
       </div>
     </div>
   )
