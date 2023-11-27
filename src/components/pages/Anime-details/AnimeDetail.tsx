@@ -30,7 +30,7 @@ function Decription({ animeDetail }: any) {
         <>
           <div className='relative mt-6 overflow-hidden' style={{ height: detail ? "5rem" : "auto" }}>
             <p className='text-zinc-50 text-sm font-medium'>
-              {animeDetail?.synopsis}
+              {animeDetail?.synopsis.split('\n').map((el: string, key: number) => <div className='my-5' key={key}>{el}</div>)}
             </p>
             {detail && <div className='absolute bottom-0 w-full h-[50px] bg-gradient-to-t from-zinc-950'></div>}
           </div>
@@ -39,7 +39,7 @@ function Decription({ animeDetail }: any) {
           </div>
         </>
         :
-        <p className='mt-6 text-zinc-50 text-sm font-medium'>{animeDetail?.synopsis}</p>
+        <p className='mt-6 text-zinc-50 text-sm font-medium'>{animeDetail?.synopsis.split('\n').map((el: string, key: number) => <div className='my-5' key={key}>{el}</div>)}</p>
       }
 
     </>
