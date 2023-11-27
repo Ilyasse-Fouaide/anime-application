@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mui/x-charts": "^6.18.2",
     "@react-icons/all-files": "^4.1.0",
     "@types/numeral": "^2.0.5",
     "axios": "^1.6.1",

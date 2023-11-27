@@ -64,13 +64,11 @@ export interface animeVideo {
 }
 
 export interface ReviewTypes {
-  mal_id: number,
   reactions: {
     overall: number,
   },
   review: string
   date: Date,
-  score: number,
   tags: string[],
   user: {
     username: string,
@@ -80,4 +78,6 @@ export interface ReviewTypes {
       }
     },
   }
+  score?: number,
+  mal_id?: number,
 }

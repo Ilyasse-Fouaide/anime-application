@@ -29,9 +29,9 @@ function Decription({ animeDetail }: any) {
       {animeDetail?.synopsis.length >= 500 ?
         <>
           <div className='relative mt-6 overflow-hidden' style={{ height: detail ? "5rem" : "auto" }}>
-            <p className='text-zinc-50 text-sm font-medium'>
-              {animeDetail?.synopsis.split('\n').map((el: string, key: number) => <div className='my-5' key={key}>{el}</div>)}
-            </p>
+            <div className='text-zinc-50 text-sm font-medium'>
+              {animeDetail?.synopsis.split('\n').map((el: string, key: number) => <p className='my-5' key={key}>{el}</p>)}
+            </div>
             {detail && <div className='absolute bottom-0 w-full h-[50px] bg-gradient-to-t from-zinc-950'></div>}
           </div>
           <div className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
@@ -39,7 +39,7 @@ function Decription({ animeDetail }: any) {
           </div>
         </>
         :
-        <p className='mt-6 text-zinc-50 text-sm font-medium'>{animeDetail?.synopsis.split('\n').map((el: string, key: number) => <div className='my-5' key={key}>{el}</div>)}</p>
+        <div className='mt-6 text-zinc-50 text-sm font-medium'>{animeDetail?.synopsis.split('\n').map((el: string, key: number) => <p className='my-5' key={key}>{el}</p>)}</div>
       }
 
     </>
