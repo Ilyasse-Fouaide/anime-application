@@ -108,7 +108,7 @@ function Review() {
 
 
   return (
-    <div>
+    <div className='max-w-[860px]'>
       <div className='mt-10'>
         <div className='text-lg font-semibold font-white underline'>{reviews.length} Reviews</div>
       </div>

@@ -1,6 +1,9 @@
 function SkeletonReview() {
   return (
-    <div className="animate-pulse">
+    <div className="max-w-[860px] animate-pulse">
+      <div className="mt-10">
+        <div className="w-[120px] h-[28px] bg-zinc-800"></div>
+      </div>
       {[...Array(4).keys()].map((_el, key) =>
         <div className="my-10 flex gap-3 sm:gap-5 lg:gap-6" key={key}>
           <div>
