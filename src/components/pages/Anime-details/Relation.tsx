@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { slug } from '../../functions/slug'
 
 interface Relation {
   relation: string,
@@ -14,7 +15,7 @@ function Relation({ relation, entry, text, rel }: Relation & { text: string, rel
       <div>
         {entry.map(({ mal_id, name }, key) =>
           <Link
-            to={`/series/${mal_id}/${name.split(" ").join("-")}`}
+            to={`/series/${mal_id}/${slug(name)}`}
             key={key}
             className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
           >

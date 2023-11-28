@@ -3,11 +3,12 @@ import { CardTypes } from '../../Types/types'
 import CardInfo from './CardInfo'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { slug } from '../../functions/slug';
 
 function Card({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }: CardTypes & { mal_id: number }) {
 
   return (
-    <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`}>
+    <Link to={`/series/${mal_id}/${slug(title)}`}>
       <div className='w-full aspect-[2/3]'>
         <LazyLoadImage
           src={images.jpg.large_image_url}

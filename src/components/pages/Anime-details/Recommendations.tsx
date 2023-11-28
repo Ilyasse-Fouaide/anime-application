@@ -6,10 +6,11 @@ import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import SkeletonRecomm from '../../Skeleton/SkeletonRecomm';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
+import { slug } from '../../functions/slug';
 
 function List({ entry, votes }: any) {
   return (
-    <Link to={`/series/${entry.mal_id}/${entry.title.split(" ").join("-")}`} className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block'>
+    <Link to={`/series/${entry.mal_id}/${slug(entry.title)}`} className='relative w-[135px] min-[375px]:w-[160px] sm:w-[125px] md:w-[157px] lg:w-[132px] xl:w-[150px] aspect-[2/3] inline-block'>
       <div className='w-full aspect-[2/3]'>
         <LazyLoadImage
           src={entry.images.webp.large_image_url}

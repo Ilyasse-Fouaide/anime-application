@@ -8,6 +8,7 @@ import Skeleton from "../Skeleton/Sleleton";
 import { AnimeData } from '../Types/types';
 import { getRequest } from '../../axios/axiosClient';
 import { Link } from 'react-router-dom';
+import { slug } from '../functions/slug';
 
 function Hero() {
   const limit: number = 6
@@ -141,7 +142,7 @@ function Hero() {
                 </div>
 
                 <div className='flex justify-center lg:justify-start mt-10'>
-                  <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} className='flex items-center uppercase py-[8px] px-[15px] bg-[var(--red)] font-semibold text-zinc-950 cursor-pointer mr-2'>
+                  <Link to={`/series/${mal_id}/${slug(title)}`} className='flex items-center uppercase py-[8px] px-[15px] bg-[var(--red)] font-semibold text-zinc-950 cursor-pointer mr-2'>
                     <IoIosPlay className="mr-2 text-[23px]" />
                     watch episode
                   </Link>
