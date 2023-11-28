@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { slug } from '../../functions/slug'
+import { IoIosArrowForward } from "@react-icons/all-files/io/IoIosArrowForward";
+import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 
 interface Relation {
   relation: string,
@@ -19,7 +21,17 @@ function Relation({ relation, entry, text, rel }: Relation & { text: string, rel
             key={key}
             className={`uppercase text-[14px] font-medium ${name ? "text-zinc-400" : "text-zinc-600"} hover:text-white`}
           >
-            {text}
+            <span className='hidden sm:block'>
+              {text}
+            </span>
+            <span className='block sm:hidden text-[26px]'>
+              {rel === "Prequel" &&
+                <IoIosArrowBack />
+              }
+              {rel === "Sequel" &&
+                <IoIosArrowForward />
+              }
+            </span>
           </Link>
         )}
       </div>
