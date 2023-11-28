@@ -133,7 +133,6 @@ function NavBar() {
                           <NavLink to={`${to}`} key={key}>
                             <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800'>{search}</motion.div>
                           </NavLink>
-                          // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.05 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key} onClick={() => console.log(key)}>{search}</motion.div>
                         )}
                       </div>
                       <div className='w-full'>
@@ -143,7 +142,6 @@ function NavBar() {
                             <Link to={`/genre/${id}/${slug(genre)}`} key={key}>
                               <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800'>{genre}</motion.div>
                             </Link>
-                            // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.03 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
                           )}
                         </div>
                       </div>

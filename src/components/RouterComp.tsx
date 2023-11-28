@@ -9,6 +9,7 @@ import Airing from './pages/List-Anime/Airing';
 import Upcoming from './pages/List-Anime/Upcoming';
 import Favorite from './pages/List-Anime/Favorite';
 import AnimeDetail from './pages/Anime-details/AnimeDetail';
+import GenresAnime from './pages/Genres/GenresAnime';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "series/:id/:title",
         element: <AnimeDetail />
+      },
+      {
+        path: "genre/:id/:name",
+        element: <GenresAnime />
       },
     ]
   }
