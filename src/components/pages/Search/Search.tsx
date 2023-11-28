@@ -23,7 +23,7 @@ function RecentSearch({ mal_id, title, removeItem }: { mal_id: number, title: st
 
   return (
     <div className='text-xs text-white uppercase bg-zinc-700 flex justify-between cursor-pointer'>
-      <Link to={`/series/${mal_id}/${title.split(" ").join("-")}`} className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
+      <Link to={`/series/${mal_id}/${slug(title)}`} className='py-2 px-2 hover:bg-zinc-600 h-full flex-shrink-0'>
         {sliceText(title, 20)}
       </Link>
       <div className='flex items-center cursor-pointer px-1 hover:bg-zinc-600' onClick={() => removeItem(mal_id)}>

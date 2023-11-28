@@ -1,5 +1,5 @@
 import React from 'react'
-import shurikenLogo from '../../assets/shuriken-01.svg';
+import shurikenLogo from '../../assets/shuriken-icon.svg';
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLine";
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
@@ -106,7 +106,9 @@ function NavBar() {
         <nav className='w-full flex justify-center md:justify-between'>
           <div className='flex'>
             <Link to='/' className='h-full flex items-center'>
-              <img src={shurikenLogo} alt="Shuriken Logo" className='w-[190px] px-[18px]' />
+              <div className='w-[32px] h-[32px]'>
+                <img src={shurikenLogo} alt="Shuriken Logo" className='w-full h-full' />
+              </div>
             </Link>
             <ul className='h-full hidden lg:flex'>
               <NavElement handleClick={handleClick} isClicked={isClicked}>

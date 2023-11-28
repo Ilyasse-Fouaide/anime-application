@@ -82,7 +82,7 @@ export default function Episode() {
                 </div>
               }
               <div className='mt-0 min-[580px]:mt-3 font-medium text-white'>
-                <div className='text-xs text-zinc-400'>{slug}</div>
+                <div className='text-xs text-zinc-400'>{sliceText(slug!, 26)}</div>
                 <span className='text-[13px] min-[580px]:text-[14px] text-white'>
                   EP {episode.split("Episode")[1]} - {window.innerWidth <= 527 ? sliceText(title, 13) : sliceText(title, 22)}
                 </span>
