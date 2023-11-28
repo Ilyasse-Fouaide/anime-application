@@ -27,6 +27,28 @@ function List({ entry, votes }: any) {
   )
 }
 
+function Arrows() {
+  const slideLeft = () => {
+    let left = document.getElementById("slider");
+    left!.scrollLeft = left!.scrollLeft - 500
+  }
+
+  const slideRight = () => {
+    let right = document.getElementById("slider");
+    right!.scrollLeft = right!.scrollLeft + 500
+  }
+  return (
+    <>
+      <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
+        <IoIosArrowForward className="w-[26px] h-[26px] -mr-[2px]" />
+      </div>
+      <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
+        <IoIosArrowBack className="w-[26px] h-[26px] -ml-[2px]" />
+      </div>
+    </>
+  )
+}
+
 function Recommendations() {
   const [anime, setAnime] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -63,16 +85,6 @@ function Recommendations() {
     return ""
   }
 
-  const slideLeft = () => {
-    let left = document.getElementById("slider");
-    left!.scrollLeft = left!.scrollLeft - 500
-  }
-
-  const slideRight = () => {
-    let right = document.getElementById("slider");
-    right!.scrollLeft = right!.scrollLeft + 500
-  }
-
   return (
     <div className='pt-10'>
       <h3 className='mb-6 text-white text-lg font-semibold'>Recommendations</h3>
@@ -82,12 +94,7 @@ function Recommendations() {
             return <List entry={entry} votes={votes} key={key} />
           })}
         </div>
-        <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
-          <IoIosArrowForward className="w-[26px] h-[26px] -mr-[2px]" />
-        </div>
-        <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
-          <IoIosArrowBack className="w-[26px] h-[26px] -ml-[2px]" />
-        </div>
+        <Arrows />
       </div>
     </div>
   )
