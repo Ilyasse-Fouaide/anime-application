@@ -21,6 +21,8 @@ import Code_Geass from "../assets/images/Code_Geass.jpg"
 import Monster from "../assets/images/Monster.jpg"
 import Doraemon from "../assets/images/Doraemon.jpg"
 import SkeletonGenre from './Skeleton/SkeletonGenre';
+import { Link } from 'react-router-dom';
+import { slug } from './functions/slug';
 
 const genreRelated: { id: number, image: any, color: string }[] = [
   { id: 4, image: gintama, color: "#BA00D2" },
@@ -45,24 +47,26 @@ const genreRelated: { id: number, image: any, color: string }[] = [
 const GenreCard = ({ name, count, mal_id }: GenresType) => {
 
   return (
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='relative w-full aspect-[3/2] rounded-lg overflow-hidden cursor-pointer' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
+    <Link to={`/genre/${mal_id}/${slug(name)}`}>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: .8 }} className='relative w-full aspect-[3/2] rounded-lg overflow-hidden cursor-pointer' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
 
-      <p className='relative p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
-        {name.length >= 12 ?
-          <>
-            {name.split("").splice(0, 12).join("")}...
-          </>
-          :
-          name
-        }
-        {" "}
-        <span className='text-base'>{`(${count})`}</span>
-      </p>
-      <div className='z-10 min-[280px]:w-[100px] min-[320px]:w-[150px] min-[425px]:w-[190px] lg:w-[150px] aspect-square rounded-md overflow-hidden absolute -bottom-7 -right-7 rotate-[30deg] shadow-md shadow-zinc-950/60'>
-        <div className='w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${genreRelated.find((el) => el.id === mal_id)?.image}')` }}></div>
-      </div>
+        <p className='relative p-4 uppercase font-bold text-xl text-zinc-50 rounded-lg break-words w-fit' style={{ backgroundColor: `${genreRelated.find((el) => el.id === mal_id)?.color}` }}>
+          {name.length >= 12 ?
+            <>
+              {name.split("").splice(0, 12).join("")}...
+            </>
+            :
+            name
+          }
+          {" "}
+          <span className='text-base'>{`(${count})`}</span>
+        </p>
+        <div className='z-10 min-[280px]:w-[100px] min-[320px]:w-[150px] min-[425px]:w-[190px] lg:w-[150px] aspect-square rounded-md overflow-hidden absolute -bottom-7 -right-7 rotate-[30deg] shadow-md shadow-zinc-950/60'>
+          <div className='w-full h-full bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${genreRelated.find((el) => el.id === mal_id)?.image}')` }}></div>
+        </div>
 
-    </motion.div>
+      </motion.div>
+    </Link>
   )
 }
 

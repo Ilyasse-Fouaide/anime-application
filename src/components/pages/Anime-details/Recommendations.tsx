@@ -29,18 +29,23 @@ function List({ entry, votes }: any) {
 }
 
 function Arrows() {
+  let left;
+  let right;
+
   const slideLeft = () => {
-    let left = document.getElementById("slider");
+    left = document.getElementById("slider");
     left!.scrollLeft = left!.scrollLeft - 500
   }
 
   const slideRight = () => {
-    let right = document.getElementById("slider");
+    right = document.getElementById("slider");
     right!.scrollLeft = right!.scrollLeft + 500
   }
+
+
   return (
     <>
-      <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
+      <div className={`hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30`} onClick={slideRight}>
         <IoIosArrowForward className="w-[26px] h-[26px] -mr-[2px]" />
       </div>
       <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
