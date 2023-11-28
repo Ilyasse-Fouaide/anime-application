@@ -106,7 +106,7 @@ function NavBar() {
         <nav className='w-full flex justify-center md:justify-between'>
           <div className='flex'>
             <Link to='/' className='h-full flex items-center'>
-              <div className='w-[32px] h-[32px]'>
+              <div className='w-[32px] h-[32px] mr-[18px]'>
                 <img src={shurikenLogo} alt="Shuriken Logo" className='w-full h-full' />
               </div>
             </Link>
@@ -171,7 +171,7 @@ function NavBar() {
         <Outlet />
       </div>
       {/* Footer */}
-      {/* <div className='w-full h-[50vh] bg-gradient-to-t from-zinc-600 to-zinc-950'></div> */}
+      <div className='w-full h-[50vh] bg-gradient-to-t from-zinc-800 to-zinc-950'></div>
     </div>
   )
 }

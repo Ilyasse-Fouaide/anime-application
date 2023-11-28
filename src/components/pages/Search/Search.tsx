@@ -172,7 +172,9 @@ function Search() {
         :
         <div className='max-w-[950px] mx-auto py-10 px-6 lg:px-0'>
           {!recentSearchData || recentSearchData.length === 0 ?
-            <></>
+            <div className='py-[27px] border border-dashed border-white'>
+              <div className='text-center text-base md:text-xl font-medium text-white'>Search for Anime you like to watch</div>
+            </div>
             :
             <>
               <div className='flex items-end justify-between'>

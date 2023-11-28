@@ -12,7 +12,7 @@ export default function LazyLoadComponent({ children }: { children: React.ReactN
           observe.disconnect();
         }, 500)
       }
-    }, { threshold: 1 });
+    }, { threshold: 1, rootMargin: "0px 0px -200px 0px" });
     if (node) {
       observer.observe(node);
     }
