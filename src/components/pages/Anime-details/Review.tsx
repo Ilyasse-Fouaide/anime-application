@@ -41,7 +41,7 @@ function List({ user, date, tags, review, reactions }: ReviewTypes) {
             anchorClass="show-more-less-clickable"
             expanded={false}
             truncatedEndingComponent={"... "}
-            className="text-white font-medium text-xs text-[14px]"
+            className="text-white font-medium text-xs md:text-base"
           >
             {review.split('\n').map((paragraph, index) => (
               <p key={index} className='my-4'>{paragraph}</p>

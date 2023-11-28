@@ -78,15 +78,15 @@ function Recommendations() {
       <h3 className='mb-6 text-white text-lg font-semibold'>Recommendations</h3>
       <div className='relative'>
         <div id='slider' className='space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
-          {anime && anime.map(({ mal_id, entry, votes }, key) => {
+          {anime && anime.map(({ entry, votes }, key) => {
             return <List entry={entry} votes={votes} key={key} />
           })}
         </div>
-        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/3 right-0 translate-x-1/2  bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
-          <IoIosArrowForward className="w-[26px] h-[26px] -mr-[1px]" />
+        <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideRight}>
+          <IoIosArrowForward className="w-[26px] h-[26px] -mr-[2px]" />
         </div>
-        <div className='hidden md:block absolute w-[36px] h-[36px] top-1/3 left-0 -translate-x-1/2 bg-[var(--red)] p-1 rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
-          <IoIosArrowBack className="w-[26px] h-[26px] -ml-[1px]" />
+        <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
+          <IoIosArrowBack className="w-[26px] h-[26px] -ml-[2px]" />
         </div>
       </div>
     </div>

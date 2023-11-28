@@ -43,7 +43,7 @@ a.active {
 }
 
 .show-more-less-clickable {
-  @apply cursor-pointer text-zinc-300
+  @apply cursor-pointer text-zinc-300 text-xs
 }
 
 @media (min-width: 1024px) {
