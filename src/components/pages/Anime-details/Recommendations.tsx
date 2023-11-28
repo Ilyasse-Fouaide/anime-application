@@ -94,6 +94,8 @@ function Recommendations() {
             return <List entry={entry} votes={votes} key={key} />
           })}
         </div>
+        <div className='absolute top-0 left-0 w-[60px] h-full bg-gradient-to-r from-black/70'></div>
+        <div className='absolute top-0 right-0 w-[60px] h-full bg-gradient-to-l from-black/70'></div>
         <Arrows />
       </div>
     </div>
