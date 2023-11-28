@@ -5,6 +5,7 @@ import { RiArrowDropDownLine } from "@react-icons/all-files/ri/RiArrowDropDownLi
 import { IoSearch } from "@react-icons/all-files/io5/IoSearch";
 import { IoBookmarkOutline } from "@react-icons/all-files/io5/IoBookmarkOutline";
 import { AnimatePresence, motion } from 'framer-motion';
+import { slug } from '../functions/slug';
 
 interface NavElementType {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ interface NavElementType {
 };
 
 interface Genre {
+  id: number,
   genre: string,
 }
 
@@ -22,21 +24,21 @@ interface Search {
 }
 
 const genres: Genre[] = [
-  { genre: 'actions' },
-  { genre: 'Music' },
-  { genre: 'Shonen' },
-  { genre: 'Adventure' },
-  { genre: 'Romance' },
-  { genre: 'Slice of life' },
-  { genre: 'Comedy' },
-  { genre: 'Sci-Fi' },
-  { genre: 'Sports' },
-  { genre: 'Drama' },
-  { genre: 'Seinen' },
-  { genre: 'Supernatural' },
-  { genre: 'Fantasy' },
-  { genre: 'Shojo' },
-  { genre: 'Thriller' },
+  { id: 4, genre: 'Comedy' },
+  { id: 15, genre: 'Kids' },
+  { id: 10, genre: 'Fantasy' },
+  { id: 1, genre: 'Action' },
+  { id: 2, genre: 'Music' },
+  { id: 19, genre: 'Adventure' },
+  { id: 24, genre: 'Sci-Fy' },
+  { id: 8, genre: 'Drama' },
+  { id: 22, genre: 'Romance' },
+  { id: 23, genre: 'School' },
+  { id: 27, genre: 'Shounen' },
+  { id: 36, genre: 'Slice of Life' },
+  { id: 13, genre: 'Historical' },
+  { id: 37, genre: 'Supernatural' },
+  { id: 18, genre: 'Mecca' },
 ];
 
 const search: Search[] = [
@@ -137,8 +139,10 @@ function NavBar() {
                       <div className='w-full'>
                         <div className='py-[12px] px-[16px] text-[13px] text-zinc-400 cursor-pointer uppercase'>Genre</div>
                         <div className='grid grid-cols-2 xl:grid-cols-3'>
-                          {genres.map(({ genre }, key) =>
-                            <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
+                          {genres.map(({ id, genre }, key) =>
+                            <Link to={`/genre/${id}/${slug(genre)}`} key={key}>
+                              <motion.div variants={dropDownVariants} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800'>{genre}</motion.div>
+                            </Link>
                             // <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.03 * key }} className='py-[12px] px-[16px] cursor-pointer hover:bg-zinc-800' key={key}>{genre}</motion.div>
                           )}
                         </div>

@@ -1,6 +1,6 @@
 function SkeletonRecomm() {
   return (
-    <div className="pt-10">
+    <div className="pt-10 animate-pulse">
       <h3 className="w-[180px] h-[28px] mb-6 bg-zinc-800"></h3>
       <div className="relative">
         <div className="space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar">
