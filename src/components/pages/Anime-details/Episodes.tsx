@@ -53,6 +53,10 @@ const Episodes = () => {
     episode?.scrollIntoView({ behavior: "instant" });
   }
 
+  function delayClick(key: number) {
+    setTimeout(() => { handlePageClick(key) }, 1000)
+  }
+
   if (loading) {
     return "Loading ..."
   }
@@ -113,7 +117,7 @@ const Episodes = () => {
           {[...Array(lastPage).keys()].map((_el, key) =>
             <div
               className={`py-1 px-3 ${page === key + 1 ? "bg-[var(--red)] text-black" : "bg-zinc-800 text-white"} hover:bg-[var(--red)] hover:text-zinc-950 font-medium text-sm cursor-pointer`}
-              onClick={() => handlePageClick(key + 1)}
+              onClick={() => delayClick(key + 1)}
               key={key}
             >
               {key + 1}
