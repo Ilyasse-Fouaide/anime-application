@@ -14,8 +14,16 @@ import { sliceText } from '../../functions/sliceText';
 import { slug } from '../../functions/slug';
 
 function InputElement({ inputValue, handleInputChange }: any) {
+  const ref = React.useRef<HTMLInputElement | null>(null);
+
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  }, [])
+
   return (
-    <input type="text" placeholder='Search...' className='py-1 w-full text-xl md:text-2xl lg:text-3xl font-semibold bg-transparent border-b-2 transition-colors border-b-zinc-600 focus:border-b-[var(--red)] outline-none' value={inputValue} onChange={handleInputChange} />
+    <input type="text" placeholder='Search...' className='py-1 w-full text-xl md:text-2xl lg:text-3xl font-semibold bg-transparent border-b-2 transition-colors border-b-zinc-600 focus:border-b-[var(--red)] outline-none' value={inputValue} onChange={handleInputChange} ref={ref} />
   )
 }
 
