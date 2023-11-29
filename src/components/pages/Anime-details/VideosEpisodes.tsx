@@ -6,7 +6,7 @@ import { sliceText } from "../../functions/sliceText";
 import cat from "../../../assets/cat.svg";
 import SeketonVideos from "../../Skeleton/SeketonVideos";
 
-export default function Episode() {
+export default function VideosEpisodes() {
   const [animeVideo, setAnimeVideo] = React.useState<any>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [detail, setDetail] = React.useState(true);
@@ -55,7 +55,7 @@ export default function Episode() {
           <img src={cat} alt="CAT" className='w-full h-full pointer-events-none' />
         </div>
         <div className='max-w-md text-center'>
-          <div className='text-sm font-medium'>We couldn't find any episode available. Check back later or explore other content</div>
+          <div className='text-sm font-medium'>We couldn't find any videos episodes available. Check back later or explore other content</div>
         </div>
       </div>
     )
@@ -66,6 +66,9 @@ export default function Episode() {
   return (
     <>
       <div className={`relative mt-16 overflow-y-hidden duration-1000`} style={{ height: detail && twelveEP ? "650px" : "auto" }}>
+        <div className='mb-6'>
+          <h3 className='text-white text-lg font-semibold'>Videos Episodes</h3>
+        </div>
         <div className='grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-[580px]:gap-5 lg:gap-6'>
           {animeVideo && animeVideo.episodes.map(({ images, title, episode }: { images: { jpg: { image_url: string } }, title: string, episode: string }, key: number) =>
             <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>

@@ -93,7 +93,9 @@ function Recommendations() {
 
   return (
     <div className='pt-10'>
-      <h3 className='mb-6 text-white text-lg font-semibold'>Recommendations</h3>
+      <div className='mb-6'>
+        <h3 className='text-white text-lg font-semibold'>Recommendations</h3>
+      </div>
       <div className='relative'>
         <div id='slider' className='space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-4 w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar'>
           {anime && anime.map(({ entry, votes }, key) => {

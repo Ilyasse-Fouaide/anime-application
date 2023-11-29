@@ -10,7 +10,7 @@ import { IoBookmarkOutline } from '@react-icons/all-files/io5/IoBookmarkOutline'
 import { IoStar } from '@react-icons/all-files/io5/IoStar';
 import 'react-tooltip/dist/react-tooltip.css'
 import { formatNumber } from '../Card/CardInfo';
-import Episode from './Episode';
+import VideosEpisodes from './VideosEpisodes';
 import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
 import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 import Relation from './Relation';
@@ -169,7 +169,7 @@ function AnimeDetail() {
         </div>
 
         <LazyLoadComponent>
-          <Episode />
+          <VideosEpisodes />
         </LazyLoadComponent>
 
         <div className='mt-5 border-t border-t-zinc-700 py-5'>
