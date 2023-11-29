@@ -6,16 +6,17 @@ import { sliceText } from '../../functions/sliceText';
 import moment from 'moment';
 import { IoIosArrowBack } from "@react-icons/all-files/io/IoIosArrowBack";
 import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
+import { Episode } from '../../Types/types';
 
 const Episodes = () => {
-  const [episodes, setEpisodes] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-  const [hasNext, setHasNext] = React.useState(false);
-  const [lastPage, setLastPage] = React.useState(1);
-  const [more, setMore] = React.useState(true);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(false);
-  const { id } = useParams();
+  const [episodes, setEpisodes] = React.useState<Episode[]>([]);
+  const [page, setPage] = React.useState<number>(1);
+  const [hasNext, setHasNext] = React.useState<boolean>(false);
+  const [lastPage, setLastPage] = React.useState<number>(1);
+  const [more, setMore] = React.useState<boolean>(true);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<boolean>(false);
+  const { id } = useParams<{ id: string | undefined }>();
 
   React.useEffect(() => {
     setEpisodes([]);
@@ -69,7 +70,7 @@ const Episodes = () => {
     <>
       <div id='episode' className={`mt-16 relative`}>
 
-        <div className='overflow-y-hidden' style={{ height: more ? "705px" : "auto" }}>
+        <div className='overflow-y-hidden' style={{ height: more && episodes.length > 15 ? "705px" : "auto" }}>
           <div className='mb-6'>
             <h3 className='text-white text-lg font-semibold'>Episodes</h3>
             <p className='text-sm md:text-base text-zinc-400 mt-[8px]'>{episodes.length} Episodes</p>

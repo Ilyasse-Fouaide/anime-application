@@ -81,3 +81,10 @@ export interface ReviewTypes {
   score?: number,
   mal_id?: number,
 }
+
+export interface Episode {
+  mal_id: number,
+  title: string,
+  aired: Date,
+  score: number
+}
