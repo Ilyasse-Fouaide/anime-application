@@ -54,6 +54,15 @@ const router = createBrowserRouter([
         path: "genre/:id/:name",
         element: <GenresAnime />
       },
+      {
+        path: "/error",
+        element: <div className='h-[calc(100vh-486px-60px)] flex items-center justify-center'>
+          <div>
+            <h1 className='text-center text-6xl font-semibold text-[var(--red)]'>Ooops...</h1>
+            <div className='max-w-lg text-center font-medium mt-4 text-white'>Network Error: Unable to connect. Please check your internet connection and try again.</div>
+          </div>
+        </div>
+      },
     ]
   }
 ])

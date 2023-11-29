@@ -37,9 +37,6 @@ function Hero() {
           setLoading(false);
         })
         .catch((error) => {
-          if (error.message === "Network Error") {
-            console.log("Network Error")
-          }
           console.log(error.message)
           setLoading(false);
         });

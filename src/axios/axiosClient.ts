@@ -1,9 +1,9 @@
 import axios from "axios";
 import axiosRateLimit from "axios-rate-limit";
+import { baseURL } from "./baseUrl";
 
 const axiosClient = axios.create({
-  // baseURL: import.meta.env.VITE_BASE_URL,
-  baseURL: 'https://api.jikan.moe/v4',
+  baseURL: baseURL,
 });
 
 const rateLimitedAxios = axiosRateLimit(axiosClient, {
@@ -25,6 +25,10 @@ rateLimitedAxios.interceptors.response.use(
     return response
   },
   (error) => {
+    if (error.message === "Network Error") {
+      window.location.href = "/error"
+    }
+
     if (error.response && error.response.status === 429) {
       console.log("Too many request")
     }
