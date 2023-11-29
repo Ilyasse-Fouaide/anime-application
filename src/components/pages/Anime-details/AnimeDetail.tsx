@@ -8,7 +8,6 @@ import { Tooltip } from 'react-tooltip'
 import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { IoBookmarkOutline } from '@react-icons/all-files/io5/IoBookmarkOutline';
 import { IoStar } from '@react-icons/all-files/io5/IoStar';
-import 'react-tooltip/dist/react-tooltip.css'
 import { formatNumber } from '../Card/CardInfo';
 import VideosEpisodes from './VideosEpisodes';
 import SkeltonAnimeDetail from '../../Skeleton/SkeltonAnimeDetail';
@@ -16,7 +15,9 @@ import LazyLoadComponent from '../../LazyLoadComp/LazyLoadComponent';
 import Relation from './Relation';
 import Review from './Review';
 import Recommendations from './Recommendations';
+import Episodes from './Episodes';
 
+import 'react-tooltip/dist/react-tooltip.css'
 
 function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
@@ -167,6 +168,10 @@ function AnimeDetail() {
             )}
           </div>
         </div>
+
+        <LazyLoadComponent>
+          <Episodes />
+        </LazyLoadComponent>
 
         <LazyLoadComponent>
           <VideosEpisodes />
