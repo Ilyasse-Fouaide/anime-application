@@ -110,7 +110,7 @@ function SlideContainer({ api, header, paragraph }: SlideContainerType) {
           {animeData &&
             animeData.map(({ mal_id, images, title, type, status, episodes, score, scored_by, synopsis }, key: number) => (
               <SwiperSlide className='relative group overflow-hidden cursor-pointer' key={key}>
-                <Card mal_id={mal_id} images={images} title={title} type={type} status={status} episodes={episodes} score={score} scored_by={scored_by} synopsis={synopsis} />
+                <Card mal_id={mal_id} images={images} title={title} type={type} status={status} episodes={episodes} score={score} scored_by={scored_by} synopsis={synopsis} slice={200} />
               </SwiperSlide>
             ))}
 

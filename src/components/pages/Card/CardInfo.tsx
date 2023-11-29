@@ -12,7 +12,7 @@ export const formatNumber = (num: number): string | number => {
   }
 }
 
-function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardInfoTypes) {
+function CardInfo({ images, score, scored_by, synopsis, episodes, title, slice }: CardInfoTypes & { slice: number }) {
 
   return (
     <div className='z-10 hidden lg:block absolute inset-0 bg-black transition-transform translate-y-[105%] group-hover:translate-y-0 bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url('${images.jpg.large_image_url}')` }}>
@@ -25,7 +25,7 @@ function CardInfo({ images, score, scored_by, synopsis, episodes, title }: CardI
         <p className='text-[13px] leading-[17px] text-zinc-50 font-medium mt-3'>
           {synopsis ?
             <>
-              {synopsis.split("").splice(0, 200).join("") + "..."}
+              {sliceText(synopsis, slice)}
             </>
             :
             <>No Description Availabled</>

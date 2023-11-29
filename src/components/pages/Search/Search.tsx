@@ -139,7 +139,7 @@ function Search() {
                       {animeData && animeData.filter((el) => el.type === "TV" && el.status !== "Not yet aired").map(({ mal_id, images, title, score, scored_by, synopsis, episodes }, key) =>
                         <Link to={`/series/${mal_id}/${slug(title)}`} className='relative group overflow-hidden cursor-pointer' key={key} onClick={() => addRecentSearch(mal_id, title)}>
                           <TopResult images={images} title={title} />
-                          <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} />
+                          <CardInfo images={images} score={score} scored_by={scored_by} synopsis={synopsis} episodes={episodes} title={title} slice={75} />
                         </Link>
                       ).slice(0, 3)}
                     </div>

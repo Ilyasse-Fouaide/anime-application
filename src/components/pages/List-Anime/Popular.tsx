@@ -43,6 +43,7 @@ function Popular() {
               score={score}
               scored_by={scored_by}
               synopsis={synopsis}
+              slice={100}
             />
           </div>
         ))}
