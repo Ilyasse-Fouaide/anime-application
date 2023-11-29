@@ -11,7 +11,7 @@ import { Episode } from '../../Types/types';
 const Episodes = () => {
   const [episodes, setEpisodes] = React.useState<Episode[]>([]);
   const [page, setPage] = React.useState<number>(1);
-  const [hasNext, setHasNext] = React.useState<boolean>(false);
+  const [_hasNext, setHasNext] = React.useState<boolean>(false);
   const [lastPage, setLastPage] = React.useState<number>(1);
   const [more, setMore] = React.useState<boolean>(true);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -73,15 +73,16 @@ const Episodes = () => {
         <div className='overflow-y-hidden' style={{ height: more && episodes.length > 15 ? "705px" : "auto" }}>
           <div className='mb-6'>
             <h3 className='text-white text-lg font-semibold'>Episodes</h3>
-            <p className='text-sm md:text-base text-zinc-400 mt-[8px]'>{episodes.length} Episodes</p>
           </div>
 
           {episodes && episodes.sort((a, b) => b.mal_id - a.mal_id).map(({ mal_id, title, aired, score }, key) => {
             return (
               <div className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 even:bg-zinc-950 odd:bg-zinc-900 cursor-pointer hover:bg-zinc-800' key={key}>
-                <div className='pr-5 text-xs sm:text-sm md:text-base font-semibold w-[35px] flex items-center justify-center'>{mal_id}</div>
+                <div className='pr-5 text-xs sm:text-sm font-semibold w-[55px] flex items-center justify-center'>{mal_id}</div>
                 <div className='px-5 w-full flex-grow flex items-center'>
-                  <IoIosPlay className="mr-1 text-orange-50" />
+                  <div className='mr-2 flex items-center justify-center w-[16px] h-[16px] bg-[var(--red)] rounded-full'>
+                    <IoIosPlay className="text-[14px] text-white" />
+                  </div>
                   <h3 className='text-xs sm:text-sm md:text-base font-semibold text-[var(--red)] hover:underline'>{sliceText(title, 20)}</h3>
                 </div>
                 <div className='w-[150px] hidden flex-shrink-0 sm:block px-5 text-zinc-400 text-sm md:flex items-center justify-center'>
@@ -104,6 +105,7 @@ const Episodes = () => {
 
         {episodes.length > 15 &&
           <>
+            <div className={`${more ? "block" : "hidden"} absolute bottom-0 w-full h-[80px] bg-gradient-to-t from-zinc-950`}></div>
             <div className={`absolute bottom-0 left-0 right-0 h-1 bg-zinc-700`}></div>
             <div className='absolute cursor-pointer bottom-0 translate-y-1/2 right-1/2 translate-x-1/2 w-[52px] h-[52px] flex items-center justify-center text-[28px] font-medium text-zinc-100 bg-zinc-700 hover:bg-zinc-600 rounded-full' onClick={handleMore}>
               <IoIosArrowBack className={`${more ? "-rotate-90 -mb-1" : "rotate-90 -mt-1"} `} />
@@ -114,7 +116,7 @@ const Episodes = () => {
       </div>
 
       {lastPage > 1 &&
-        <div className='mt-10 flex items-center justify-end space-x-1'>
+        <div className='mt-10 flex flex-wrap items-center justify-center md:justify-end gap-1'>
           {[...Array(lastPage).keys()].map((_el, key) =>
             <div
               className={`py-1 px-3 ${page === key + 1 ? "bg-[var(--red)] text-black" : "bg-zinc-800 text-white"} hover:bg-[var(--red)] hover:text-zinc-950 font-medium text-sm cursor-pointer`}
