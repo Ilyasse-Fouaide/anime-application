@@ -20,7 +20,7 @@ function Ep({ mal_id, title, aired, score, }: Episode) {
         <h3 className='text-xs sm:text-sm md:text-base font-semibold text-[var(--red)] hover:underline'>{sliceText(title, 20)}</h3>
       </div>
       <div className='w-[150px] hidden flex-shrink-0 sm:block px-5 text-zinc-400 text-[13px] md:flex items-center justify-center'>
-        <span>{moment(aired).format("MMM DD, YYYY")}</span>
+        <span>{aired ? moment(aired).format("MMM DD, YYYY") : "N/A"}</span>
       </div>
       <div className='w-[90px] hidden flex-shrink-0 px-5 sm:flex items-center justify-center space-x-2'>
         {score ?
