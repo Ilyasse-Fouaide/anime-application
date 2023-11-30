@@ -45,7 +45,11 @@ export default function VideosEpisodes() {
   }
 
   const handleClick = () => {
+    const video = document.getElementById("video");
     setDetail(!detail)
+    if (!detail) {
+      video?.scrollIntoView({ behavior: "instant" });
+    }
   }
 
   if (animeVideo.episodes.length === 0 && !error && !loading) {
@@ -65,7 +69,7 @@ export default function VideosEpisodes() {
 
   return (
     <>
-      <div className={`relative mt-16 overflow-y-hidden duration-1000`} style={{ height: detail && twelveEP ? "650px" : "auto" }}>
+      <div id="video" className={`relative mt-16 overflow-y-hidden duration-1000`} style={{ height: detail && twelveEP ? "650px" : "auto" }}>
         <div className='mb-6'>
           <h3 className='text-white text-lg font-semibold'>Videos Episodes</h3>
         </div>
