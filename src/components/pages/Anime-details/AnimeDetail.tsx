@@ -1,6 +1,6 @@
 import React from 'react'
 import { getRequest } from '../../../axios/axiosClient';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AnimeData } from '../../Types/types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { sliceText } from '../../functions/sliceText';
@@ -18,6 +18,7 @@ import Recommendations from './Recommendations';
 import Episodes from './Episodes';
 
 import 'react-tooltip/dist/react-tooltip.css'
+import { slug } from '../../functions/slug';
 
 function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
@@ -102,14 +103,14 @@ function AnimeDetail() {
       </div>
 
       <div className='max-w-5xl mx-auto p-6'>
-        <h2 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h2>
+        <h1 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
         {animeDetail?.title.length! >= 50 &&
           <Tooltip id="my-tooltip" place='bottom' />
         }
 
         <div className='mt-2 mb-5 md:mb-16 flex items-start md:items-center space-x-2 text-xs sm:text-sm font-medium'>
           <span className='text-zinc-400'>Japanese:</span>
-          <h4 className='text-zinc-50'>{animeDetail?.title_japanese}</h4>
+          <h2 className='text-zinc-50'>{animeDetail?.title_japanese}</h2>
         </div>
 
         <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
@@ -127,25 +128,27 @@ function AnimeDetail() {
 
         {/* Buttons */}
         <div className='flex justify-start mt-4'>
-          <div className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)] hover:text-orange-400 hover:border-orange-400'>
+          <button className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)] hover:text-orange-400 hover:border-orange-400'>
             <IoIosPlay className="mr-0 min-[320px]:mr-2 text-[23px]" />
             <span className='hidden min-[320px]:block'>
               watch now
             </span>
-          </div>
-          <div className='flex items-center uppercase py-[8px] px-[15px] bg-transparent text-zinc-400 font-semibold hover:text-zinc-100 hover:bg-zinc-800 cursor-pointer transition-colors'>
+          </button>
+          <button className='flex items-center uppercase py-[8px] px-[15px] bg-transparent text-zinc-400 font-semibold hover:text-zinc-100 hover:bg-zinc-800 cursor-pointer transition-colors'>
             <IoBookmarkOutline className="mr-0 md:mr-2 text-[26px]" />
             <span className='hidden md:block'>
               Add To Watch list
             </span>
-          </div>
+          </button>
         </div>
 
         <Decription animeDetail={animeDetail} />
 
         <div className='mt-5 flex flex-wrap items-center'>
-          {animeDetail?.genres.map((genre, key) =>
-            <div className='text-xs uppercase py-1 px-2 transition-colors bg-slate-700 hover:bg-slate-600 mr-2 my-1 cursor-pointer' key={key}>{genre.name}</div>
+          {animeDetail?.genres.map(({ mal_id, name }, key) =>
+            <Link to={`/genre/${mal_id}/${slug(name)}`} className='py-1 px-2 mr-2 my-1 cursor-pointer transition-colors bg-slate-700 hover:bg-slate-600' key={key}>
+              <div className='text-xs uppercase'>{name}</div>
+            </Link>
           )}
         </div>
 

@@ -45,12 +45,12 @@ function Arrows() {
 
   return (
     <>
-      <div className={`hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30`} onClick={slideRight}>
+      <button className={`hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 right-0 translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30`} onClick={slideRight}>
         <IoIosArrowForward className="w-[26px] h-[26px] -mr-[2px]" />
-      </div>
-      <div className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
+      </button>
+      <button className='hidden md:flex items-center justify-center absolute w-[46px] h-[46px] top-1/3 left-0 -translate-x-1/2 bg-zinc-600 text-white rounded-full cursor-pointer shadow-xl shadow-black/30' onClick={slideLeft}>
         <IoIosArrowBack className="w-[26px] h-[26px] -ml-[2px]" />
-      </div>
+      </button>
     </>
   )
 }

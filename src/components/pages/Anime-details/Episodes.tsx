@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IoStar } from '@react-icons/all-files/io5/IoStar';
 import { getRequest } from '../../../axios/axiosClient';
 import { sliceText } from '../../functions/sliceText';
@@ -11,7 +11,7 @@ import SkeletonEpisodes from '../../Skeleton/SkeletonEpisodes';
 
 function Ep({ mal_id, title, aired, score, }: Episode) {
   return (
-    <div className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 even:bg-zinc-950 odd:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
+    <Link to={`/episode/${mal_id}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 even:bg-zinc-950 odd:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
       <div className='pr-5 text-xs sm:text-sm font-semibold w-[55px] flex items-center justify-center'>{mal_id}</div>
       <div className='px-5 w-full flex-grow flex items-center'>
         <div className='mr-2 flex items-center justify-center w-[16px] h-[16px] bg-[var(--red)] rounded-full'>
@@ -32,7 +32,7 @@ function Ep({ mal_id, title, aired, score, }: Episode) {
           <span>N/A</span>
         }
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -112,9 +112,9 @@ const Episodes = () => {
           <>
             <div className={`${more ? "block" : "hidden"} absolute bottom-0 w-full h-[80px] bg-gradient-to-t from-zinc-950`}></div>
             <div className={`absolute bottom-0 left-0 right-0 h-1 bg-zinc-700`}></div>
-            <div className='absolute cursor-pointer bottom-0 translate-y-1/2 right-1/2 translate-x-1/2 w-[52px] h-[52px] flex items-center justify-center text-[28px] font-medium text-zinc-100 bg-zinc-700 hover:bg-zinc-600 rounded-full' onClick={handleMore}>
+            <button className='absolute cursor-pointer bottom-0 translate-y-1/2 right-1/2 translate-x-1/2 w-[52px] h-[52px] flex items-center justify-center text-[28px] font-medium text-zinc-100 bg-zinc-700 hover:bg-zinc-600 rounded-full' onClick={handleMore}>
               <IoIosArrowBack className={`${more ? "-rotate-90 -mb-1" : "rotate-90 -mt-1"} `} />
-            </div>
+            </button>
           </>
         }
 
@@ -123,13 +123,13 @@ const Episodes = () => {
       {lastPage > 1 &&
         <div className='mt-10 flex flex-wrap items-center justify-center md:justify-end gap-1'>
           {[...Array(lastPage).keys()].map((_el, key) =>
-            <div
+            <button
               className={`py-1 px-3 ${page === key + 1 ? "bg-[var(--red)] text-black" : "bg-zinc-800 text-white"} hover:bg-[var(--red)] hover:text-zinc-950 font-medium text-sm cursor-pointer`}
               onClick={() => delayClick(key + 1)}
               key={key}
             >
               {key + 1}
-            </div>
+            </button>
           )}
         </div>
       }

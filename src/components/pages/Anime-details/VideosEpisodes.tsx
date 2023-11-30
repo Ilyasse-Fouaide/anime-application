@@ -1,5 +1,5 @@
 import React from "react"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getRequest } from "../../../axios/axiosClient";
 import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { sliceText } from "../../functions/sliceText";
@@ -68,14 +68,14 @@ export default function VideosEpisodes() {
   const twelveEP = animeVideo.episodes.length > 12;
 
   return (
-    <>
-      <div id="video" className={`relative mt-16 overflow-y-hidden duration-1000`} style={{ height: detail && twelveEP ? "650px" : "auto" }}>
+    <div className="relative">
+      <div id="video" className={`mt-16 overflow-y-hidden duration-1000`} style={{ height: detail && twelveEP ? "650px" : "auto" }}>
         <div className='mb-6'>
           <h3 className='text-white text-lg font-semibold'>Videos Episodes</h3>
         </div>
         <div className='grid grid-cols-1 min-[580px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-[580px]:gap-5 lg:gap-6'>
-          {animeVideo && animeVideo.episodes.map(({ images, title, episode }: { images: { jpg: { image_url: string } }, title: string, episode: string }, key: number) =>
-            <div className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
+          {animeVideo && animeVideo.episodes.map(({ mal_id, images, title, episode }: { mal_id: number, images: { jpg: { image_url: string } }, title: string, episode: string }, key: number) =>
+            <Link to={`/episode/${mal_id}/video`} className='w-full flex flex-row min-[580px]:flex-col cursor-pointer' key={key}>
               {images.jpg.image_url ?
                 <div className='relative flex-shrink-0 w-[50%] min-[580px]:w-full mr-3 aspect-video'>
                   <img src={images.jpg.image_url} className='w-full h-full' alt={title} />
@@ -94,11 +94,11 @@ export default function VideosEpisodes() {
                   EP {episode.split("Episode")[1]} - {window.innerWidth <= 527 ? sliceText(title, 13) : sliceText(title, 22)}
                 </span>
               </div>
-            </div>
+            </Link>
           )}
         </div>
-        {detail && twelveEP && <div className='absolute bottom-0 w-full h-[500px] bg-gradient-to-t from-zinc-950'></div>}
       </div>
+      {detail && twelveEP && <div className='absolute bottom-0 right-0 left-0 h-[300px] bg-gradient-to-t from-zinc-950'></div>}
       <div className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
         {twelveEP &&
           <>
@@ -106,6 +106,6 @@ export default function VideosEpisodes() {
           </>
         }
       </div>
-    </>
+    </div>
   )
 }

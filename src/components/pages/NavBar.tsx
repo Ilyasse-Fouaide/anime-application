@@ -74,9 +74,9 @@ const dropDownVariants = {
 
 const NavElement = ({ children, handleClick, isClicked }: NavElementType): JSX.Element => {
   return (
-    <li className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked ? 'bg-zinc-950' : ''}`} onClick={handleClick}>
+    <div className={`group relative px-[18px] flex items-center cursor-pointer hover:bg-zinc-950 ${isClicked ? 'bg-zinc-950' : ''}`} onClick={handleClick}>
       {children}
-    </li>
+    </div>
   );
 };
 
@@ -102,7 +102,7 @@ function NavBar() {
   }
 
   return (
-    <div>
+    <header>
       <div className='z-[999] sticky top-0 w-full h-[60px] bg-zinc-800 px-[65px] flex'>
 
         <nav className='w-full flex justify-center md:justify-between'>
@@ -112,7 +112,7 @@ function NavBar() {
                 <img src={shurikenLogo} alt="Shuriken Logo" className='w-full h-full' />
               </div>
             </Link>
-            <ul className='h-full hidden lg:flex'>
+            <div className='h-full hidden lg:flex'>
               <NavElement handleClick={handleClick} isClicked={isClicked}>
                 <span className='group-hover:text-white'>Browse</span>
                 <div className='pl-1 text-white'>
@@ -155,7 +155,7 @@ function NavBar() {
               <NavElement>
                 <span className='group-hover:text-white'>News</span>
               </NavElement>
-            </ul>
+            </div>
           </div>
           <div className='hidden md:flex h-full'>
             <div className='relative px-[18px] flex items-center'>
@@ -174,7 +174,7 @@ function NavBar() {
       </div>
       {/* Footer */}
       <div className='w-full h-[50vh] bg-gradient-to-t from-zinc-800 to-zinc-950'></div>
-    </div>
+    </header>
   )
 }
 
