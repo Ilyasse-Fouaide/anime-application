@@ -26,7 +26,7 @@ rateLimitedAxios.interceptors.response.use(
   },
   (error) => {
     if (error.message === "Network Error") {
-      window.location.href = "/error"
+      console.log("error network")
     }
 
     if (error.response && error.response.status === 429) {
