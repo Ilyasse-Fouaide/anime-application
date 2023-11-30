@@ -48,6 +48,11 @@ function Search() {
   const [debouncedValue] = useDebounce(inputValue, 1000);
   const [recentSearchData, setRecentSearchData] = React.useState([]);
 
+  React.useEffect(() => {
+    setAnimeData([]);
+    setLoading(true)
+  }, [debouncedValue])
+
   const fetchRecentSearch = () => {
     let RECENT_SEARCHES = JSON.parse(localStorage.getItem("RECENT_SEARCHES")!);
     setRecentSearchData(RECENT_SEARCHES);
