@@ -4,10 +4,6 @@ import { baseURL } from "./baseUrl";
 
 const axiosClient = axios.create({
   baseURL: baseURL,
-  headers: {
-    'Accept-Encoding': 'gzip',
-    'Content-Encoding': 'gzip'
-  },
 });
 
 const rateLimitedAxios = axiosRateLimit(axiosClient, {
