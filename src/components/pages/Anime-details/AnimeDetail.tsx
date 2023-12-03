@@ -16,10 +16,11 @@ import Relation from './Relation';
 import Review from './Review';
 import Recommendations from './Recommendations';
 import Episodes from './Episodes';
-
-import 'react-tooltip/dist/react-tooltip.css'
 import { slug } from '../../functions/slug';
 import moment from 'moment';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import 'react-tooltip/dist/react-tooltip.css'
 
 function PlayIcon({ className }: { className: string }) {
   return (
@@ -30,24 +31,64 @@ function PlayIcon({ className }: { className: string }) {
 }
 
 function Trailer({ animeDetail, title }: { animeDetail: any, title: string | undefined }) {
+  const [isOpen, setOpen] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    const body = document.querySelector("body");
+
+    if (isOpen) {
+      body?.classList.add("overflow-hidden")
+    } else {
+      body?.classList.remove("overflow-hidden")
+    }
+
+  }, [isOpen])
+
+  const handleClick = () => {
+    setOpen(false);
+  }
+
   return (
-    <div className='hidden min-[850px]:block w-[300px]'>
-      <div className='w-[300px] aspect-video bg-zinc-800'>
-        {/* Image Trailer */}
-        <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
-          <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
-          <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
-            <PlayIcon className='w-10 h-10 text-white -mr-1' />
+    <>
+      <AnimatePresence>
+        {isOpen &&
+          <>
+            <div className='z-40 fixed inset-0 w-full h-[100vh] bg-black/70'></div>
+            <motion.div
+              className='hidden min-[850px]:block z-50 fixed top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-zinc-800 w-[800px] aspect-video'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div className='relative w-full h-full'>
+                <iframe className='w-full h-full' src={animeDetail.trailer.embed_url} frameBorder="0" allowFullScreen></iframe>
+                <div className='w-[36px] h-[36px] absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-[var(--red)] rounded-full flex items-center justify-center cursor-pointer' onClick={handleClick}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[26px] h-[26px] text-black">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        }
+      </AnimatePresence >
+      <div className='hidden min-[850px]:block w-[300px]'>
+        <div className='w-[300px] aspect-video bg-zinc-800' onClick={() => setOpen(true)}>
+          {/* Image Trailer */}
+          <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
+            <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
+            <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+              <PlayIcon className='w-10 h-10 text-white -mr-1' />
+            </div>
           </div>
         </div>
-      </div>
-      {/* Extra Info */}
-      {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
+        {/* Extra Info */}
+        {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
               <li className='text-zinc-200 font-medium text-sm my-1'>Ranked <span className='text-white font-semibold'>#{animeDetail?.rank}</span></li>
               <li className='text-zinc-200 font-medium text-sm my-1'>Popularity <span className='text-white font-semibold'>#{animeDetail?.popularity}</span></li>
               <li className='text-zinc-200 font-medium text-sm my-1'>Members <span className='text-white font-semibold'>#{formatNumber(animeDetail?.members)}</span></li>
             </ul> */}
-      {/* <ul className='px-2 py-1 w-full'>
+        {/* <ul className='px-2 py-1 w-full'>
               <li className='text-zinc-400 font-medium text-xs my-1'>Type: <span className='text-zinc-100 font-semibold'>{animeDetail?.type}</span></li>
               <li className='text-zinc-400 font-medium text-xs my-1'>Episodes: <span className='text-zinc-100 font-semibold'>{animeDetail?.episodes}</span></li>
               <li className='text-zinc-400 font-medium text-xs my-1'>Status: <span className='text-zinc-100 font-semibold'>{animeDetail?.status}</span></li>
@@ -71,7 +112,8 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
                 <span className='text-zinc-100 font-semibold'>{animeDetail?.rating}</span>
               </li>
             </ul> */}
-    </div>
+      </div>
+    </>
   )
 }
 
