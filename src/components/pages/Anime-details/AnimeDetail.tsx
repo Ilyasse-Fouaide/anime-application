@@ -26,7 +26,52 @@ function PlayIcon({ className }: { className: string }) {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
       <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
     </svg>
+  )
+}
 
+function Trailer({ animeDetail, title }: { animeDetail: any, title: string | undefined }) {
+  return (
+    <div className='hidden min-[850px]:block w-[300px]'>
+      <div className='w-[300px] aspect-video bg-zinc-800'>
+        {/* Image Trailer */}
+        <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
+          <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
+          <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+            <PlayIcon className='w-10 h-10 text-white -mr-1' />
+          </div>
+        </div>
+      </div>
+      {/* Extra Info */}
+      {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
+              <li className='text-zinc-200 font-medium text-sm my-1'>Ranked <span className='text-white font-semibold'>#{animeDetail?.rank}</span></li>
+              <li className='text-zinc-200 font-medium text-sm my-1'>Popularity <span className='text-white font-semibold'>#{animeDetail?.popularity}</span></li>
+              <li className='text-zinc-200 font-medium text-sm my-1'>Members <span className='text-white font-semibold'>#{formatNumber(animeDetail?.members)}</span></li>
+            </ul> */}
+      {/* <ul className='px-2 py-1 w-full'>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Type: <span className='text-zinc-100 font-semibold'>{animeDetail?.type}</span></li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Episodes: <span className='text-zinc-100 font-semibold'>{animeDetail?.episodes}</span></li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Status: <span className='text-zinc-100 font-semibold'>{animeDetail?.status}</span></li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Aired: {" "}
+                <span className='text-zinc-100 font-semibold'>
+                  {animeDetail?.aired.from ? moment(animeDetail?.aired.from).format("DD MMM, YYYY") : "N/A"}
+                  {" to "}
+                  {animeDetail?.aired.to ? moment(animeDetail?.aired.to).format("DD MMM, YYYY") : "N/A"}
+                </span>
+              </li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Premiered: {" "}
+                <span className='text-zinc-100 font-semibold'>{animeDetail?.season} {animeDetail?.year}</span>
+              </li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Duration: {" "}
+                <span className='text-zinc-100 font-semibold'>{animeDetail?.duration}</span>
+              </li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Source: {" "}
+                <span className='text-zinc-100 font-semibold'>{animeDetail?.source}</span>
+              </li>
+              <li className='text-zinc-400 font-medium text-xs my-1'>Rating: {" "}
+                <span className='text-zinc-100 font-semibold'>{animeDetail?.rating}</span>
+              </li>
+            </ul> */}
+    </div>
   )
 }
 
@@ -185,47 +230,7 @@ function AnimeDetail() {
               </div>
             </div>
           </div>
-          <div className='hidden min-[850px]:block w-[300px]'>
-            <div className='w-[300px] aspect-video bg-zinc-800'>
-              {/* Image Trailer */}
-              <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
-                <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
-                <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
-                  <PlayIcon className='w-10 h-10 text-white -mr-1' />
-                </div>
-              </div>
-            </div>
-            {/* Extra Info */}
-            {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
-              <li className='text-zinc-200 font-medium text-sm my-1'>Ranked <span className='text-white font-semibold'>#{animeDetail?.rank}</span></li>
-              <li className='text-zinc-200 font-medium text-sm my-1'>Popularity <span className='text-white font-semibold'>#{animeDetail?.popularity}</span></li>
-              <li className='text-zinc-200 font-medium text-sm my-1'>Members <span className='text-white font-semibold'>#{formatNumber(animeDetail?.members)}</span></li>
-            </ul> */}
-            {/* <ul className='px-2 py-1 w-full'>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Type: <span className='text-zinc-100 font-semibold'>{animeDetail?.type}</span></li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Episodes: <span className='text-zinc-100 font-semibold'>{animeDetail?.episodes}</span></li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Status: <span className='text-zinc-100 font-semibold'>{animeDetail?.status}</span></li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Aired: {" "}
-                <span className='text-zinc-100 font-semibold'>
-                  {animeDetail?.aired.from ? moment(animeDetail?.aired.from).format("DD MMM, YYYY") : "N/A"}
-                  {" to "}
-                  {animeDetail?.aired.to ? moment(animeDetail?.aired.to).format("DD MMM, YYYY") : "N/A"}
-                </span>
-              </li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Premiered: {" "}
-                <span className='text-zinc-100 font-semibold'>{animeDetail?.season} {animeDetail?.year}</span>
-              </li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Duration: {" "}
-                <span className='text-zinc-100 font-semibold'>{animeDetail?.duration}</span>
-              </li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Source: {" "}
-                <span className='text-zinc-100 font-semibold'>{animeDetail?.source}</span>
-              </li>
-              <li className='text-zinc-400 font-medium text-xs my-1'>Rating: {" "}
-                <span className='text-zinc-100 font-semibold'>{animeDetail?.rating}</span>
-              </li>
-            </ul> */}
-          </div>
+          <Trailer animeDetail={animeDetail} title={title} />
         </div>
 
         <LazyLoadComponent>
