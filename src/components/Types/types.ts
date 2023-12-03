@@ -1,6 +1,10 @@
 export interface Trailer {
   trailer?: {
-    images: { maximum_image_url: string }
+    images: {
+      maximum_image_url: string,
+      small_image_url: string,
+      image_url: string,
+    }
   }
 }
 

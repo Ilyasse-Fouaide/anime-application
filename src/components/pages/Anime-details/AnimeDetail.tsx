@@ -20,6 +20,15 @@ import Episodes from './Episodes';
 import 'react-tooltip/dist/react-tooltip.css'
 import { slug } from '../../functions/slug';
 
+function PlayIcon({ className }: { className: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+    </svg>
+
+  )
+}
+
 function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
 
@@ -52,7 +61,7 @@ function Decription({ animeDetail }: any) {
 function AnimeDetail() {
   const [animeDetail, setAnimeDtail] = React.useState<AnimeData | null>(null);
   const [loading, setLoading] = React.useState(true);
-  const { id } = useParams();
+  const { id, title } = useParams();
   const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
@@ -103,72 +112,90 @@ function AnimeDetail() {
       </div>
 
       <div className='max-w-5xl mx-auto p-6'>
-        <h1 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
-        {animeDetail?.title.length! >= 50 &&
-          <Tooltip id="my-tooltip" place='bottom' />
-        }
+        <div className='flex'>
+          <div className='w-full mr-5'>
+            <h1 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
+            {animeDetail?.title.length! >= 50 &&
+              <Tooltip id="my-tooltip" place='bottom' />
+            }
 
-        <div className='mt-2 mb-5 md:mb-16 flex items-start md:items-center space-x-2 text-xs sm:text-sm font-medium'>
-          <span className='text-zinc-400'>Japanese:</span>
-          <h2 className='text-zinc-50'>{animeDetail?.title_japanese}</h2>
-        </div>
+            <div className='mt-2 mb-5 md:mb-16 flex items-start md:items-center space-x-2 text-xs sm:text-sm font-medium'>
+              <span className='text-zinc-400'>Japanese:</span>
+              <h2 className='text-zinc-50'>{animeDetail?.title_japanese}</h2>
+            </div>
 
-        <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
-          <div className='flex items-center space-x-2'>
-            <span>{animeDetail?.score ? animeDetail?.score : "N/A"}</span>
-            <IoStar className="cursor-pointer" />
-            <span>{animeDetail?.scored_by ? `(${formatNumber(animeDetail?.scored_by!)})` : "N/A"}</span>
+            <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
+              <div className='flex items-center space-x-2'>
+                <span>{animeDetail?.score ? animeDetail?.score : "N/A"}</span>
+                <IoStar className="cursor-pointer" />
+                <span>{animeDetail?.scored_by ? `(${formatNumber(animeDetail?.scored_by!)})` : "N/A"}</span>
+              </div>
+              <div className='h-[10px] w-[1px] bg-zinc-400'></div>
+              <div className='space-x-1'>
+                <span className='text-zinc-400'>Favorites:</span>
+                <span>{animeDetail?.favorites ? formatNumber(animeDetail?.favorites!) : "N/A"}</span>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className='flex justify-start mt-4'>
+              <button className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)] hover:text-orange-400 hover:border-orange-400'>
+                <IoIosPlay className="mr-0 min-[320px]:mr-2 text-[23px]" />
+                <span className='hidden min-[320px]:block'>
+                  watch now
+                </span>
+              </button>
+              <button className='flex items-center uppercase py-[8px] px-[15px] bg-transparent text-zinc-400 font-semibold hover:text-zinc-100 hover:bg-zinc-800 cursor-pointer transition-colors'>
+                <IoBookmarkOutline className="mr-0 md:mr-2 text-[26px]" />
+                <span className='hidden md:block'>
+                  Add To Watch list
+                </span>
+              </button>
+            </div>
+
+
+            <Decription animeDetail={animeDetail} />
+
+            <div className='mt-5 flex flex-wrap items-center'>
+              {animeDetail?.genres.map(({ mal_id, name }, key) =>
+                <Link to={`/genre/${mal_id}/${slug(name)}`} className='py-1 px-2 mr-2 my-1 cursor-pointer transition-colors bg-slate-700 hover:bg-slate-600' key={key}>
+                  <div className='text-xs uppercase'>{name}</div>
+                </Link>
+              )}
+            </div>
+
+            <div className='mt-5 py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
+              <div>Producers</div>
+              <div className='text-xs max-w-[50%] text-right'>
+                {animeDetail?.producers.length === 0 && 'N/A'}
+                {animeDetail?.producers.map(({ name }, key) =>
+                  <span key={key}>{`${name}, `}</span>
+                )}
+              </div>
+            </div>
+
+            <div className='py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
+              <div>Studio</div>
+              <div className='text-xs max-w-[50%] text-right'>
+                {animeDetail?.studios.length === 0 && 'N/A'}
+                {animeDetail?.studios.map(({ name }, key) =>
+                  <span key={key}>{`${name}`}</span>
+                )}
+              </div>
+            </div>
           </div>
-          <div className='h-[10px] w-[1px] bg-zinc-400'></div>
-          <div className='space-x-1'>
-            <span className='text-zinc-400'>Favorites:</span>
-            <span>{animeDetail?.favorites ? formatNumber(animeDetail?.favorites!) : "N/A"}</span>
-          </div>
-        </div>
-
-        {/* Buttons */}
-        <div className='flex justify-start mt-4'>
-          <button className='flex items-center uppercase py-[8px] px-[15px] bg-zinc-950 font-semibold text-[var(--red)] cursor-pointer mr-2 border-2 border-[var(--red)] hover:text-orange-400 hover:border-orange-400'>
-            <IoIosPlay className="mr-0 min-[320px]:mr-2 text-[23px]" />
-            <span className='hidden min-[320px]:block'>
-              watch now
-            </span>
-          </button>
-          <button className='flex items-center uppercase py-[8px] px-[15px] bg-transparent text-zinc-400 font-semibold hover:text-zinc-100 hover:bg-zinc-800 cursor-pointer transition-colors'>
-            <IoBookmarkOutline className="mr-0 md:mr-2 text-[26px]" />
-            <span className='hidden md:block'>
-              Add To Watch list
-            </span>
-          </button>
-        </div>
-
-        <Decription animeDetail={animeDetail} />
-
-        <div className='mt-5 flex flex-wrap items-center'>
-          {animeDetail?.genres.map(({ mal_id, name }, key) =>
-            <Link to={`/genre/${mal_id}/${slug(name)}`} className='py-1 px-2 mr-2 my-1 cursor-pointer transition-colors bg-slate-700 hover:bg-slate-600' key={key}>
-              <div className='text-xs uppercase'>{name}</div>
-            </Link>
-          )}
-        </div>
-
-        <div className='mt-5 py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
-          <div>Producers</div>
-          <div className='text-xs max-w-[50%] text-right'>
-            {animeDetail?.producers.length === 0 && 'N/A'}
-            {animeDetail?.producers.map(({ name }, key) =>
-              <span key={key}>{`${name}, `}</span>
-            )}
-          </div>
-        </div>
-
-        <div className='py-3 border-b border-b-zinc-600 flex items-start justify-between text-zinc-50 font-medium'>
-          <div>Studio</div>
-          <div className='text-xs max-w-[50%] text-right'>
-            {animeDetail?.studios.length === 0 && 'N/A'}
-            {animeDetail?.studios.map(({ name }, key) =>
-              <span key={key}>{`${name}`}</span>
-            )}
+          <div className='hidden min-[800px]:block w-[300px]'>
+            <div className='w-[300px] aspect-video bg-zinc-800'>
+              <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer overflow-hidden'>
+                <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
+                <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+                  <PlayIcon className='w-10 h-10 text-white -mr-1' />
+                </div>
+                <div className='absolute bottom-0 right-0 bg-zinc-950 py-[1px] px-2'>
+                  <span className='text-[var(--red)] font-bold text-xs'>Trailer</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
