@@ -9,26 +9,46 @@ import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { Episode } from '../../Types/types';
 import SkeletonEpisodes from '../../Skeleton/SkeletonEpisodes';
 
+function ArrowUpDown({ className }: { className: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+    </svg>
+  )
+}
+
 function Thead() {
   return (
-    <div className='my-2 py-2 px-5 flex items-center text-zinc-400 divide-x divide-zinc-500 bg-zinc-900 cursor-pointer border-b border-b-zinc-500'>
-      <div className='pr-5 text-xs sm:text-sm w-[55px] flex items-center justify-center'>EP</div>
-      <div className='px-5 w-full flex-grow flex items-center'>
-        <h3 className='text-xs sm:text-sm md:text-base'>
+    <div className='my-2 py-2 px-5 flex items-center text-zinc-400  bg-zinc-900 cursor-pointer border-b border-b-zinc-500'>
+      <div className='pr-5 text-xs sm:text-sm w-[55px] flex items-center justify-center group hover:text-zinc-100'>
+        <span className='block group-hover:hidden'>
+          EP
+        </span>
+        <ArrowUpDown className={'hidden group-hover:block w-4 h-4 ml-1'} />
+      </div>
+      <div className='px-5 w-full flex-grow flex items-center group hover:text-zinc-100'>
+        <h3 className='text-xs sm:text-sm md:text-base inline-flex items-center'>
           Title
+          <ArrowUpDown className={'hidden group-hover:block w-4 h-4 ml-1'} />
         </h3>
       </div>
-      <div className='w-[150px] hidden flex-shrink-0 sm:block px-5 text-[13px] md:flex items-center justify-center'>
-        <span>Aired</span>
+      <div className='w-[150px] hidden flex-shrink-0 sm:block px-5 text-xs sm:text-sm md:flex items-center justify-center group hover:text-zinc-100'>
+        <span className='block group-hover:hidden'>Aired</span>
+        <ArrowUpDown className={'hidden group-hover:block w-4 h-4 ml-1'} />
       </div>
-      <div className='w-[90px] hidden flex-shrink-0 px-5 sm:flex items-center justify-center space-x-2'>Score</div>
+      <div className='w-[90px] hidden flex-shrink-0 px-5 sm:flex items-center justify-center space-x-2 group hover:text-zinc-100'>
+        <span className='block group-hover:hidden'>
+          Score
+        </span>
+        <ArrowUpDown className={'hidden group-hover:block w-4 h-4 ml-1'} />
+      </div>
     </div>
   )
 }
 
 function Ep({ mal_id, title, aired, score, }: Episode) {
   return (
-    <Link to={`/episode/${mal_id}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 odd:bg-zinc-950 even:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
+    <Link to={`/episode/${mal_id}/${title}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 odd:bg-zinc-950 even:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
       <div className='pr-5 text-xs sm:text-sm font-semibold w-[55px] flex items-center justify-center'>{mal_id}</div>
       <div className='px-5 w-full flex-grow flex items-center'>
         <div className='mr-2 flex items-center justify-center w-[16px] h-[16px] bg-[var(--red)] rounded-full'>
