@@ -46,9 +46,9 @@ function Thead() {
   )
 }
 
-function Ep({ mal_id, title, aired, score, }: Episode) {
+function Ep({ mal_id, title, aired, score, animeId, slug }: Episode & { animeId: string | undefined, slug: string | undefined }) {
   return (
-    <Link to={`/episode/${mal_id}/${title}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 odd:bg-zinc-950 even:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
+    <Link to={`/series/${animeId}/${slug}/episode/${mal_id}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 odd:bg-zinc-950 even:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
       <div className='pr-5 text-xs sm:text-sm font-semibold w-[55px] flex items-center justify-center'>{mal_id}</div>
       <div className='px-5 w-full flex-grow flex items-center'>
         <div className='mr-2 flex items-center justify-center w-[16px] h-[16px] bg-[var(--red)] rounded-full'>
@@ -81,7 +81,7 @@ const Episodes = () => {
   const [more, setMore] = React.useState<boolean>(true);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<boolean>(false);
-  const { id } = useParams<{ id: string | undefined }>();
+  const { id: animeId, title: slug } = useParams<{ id: string | undefined, title: string | undefined }>();
 
   React.useEffect(() => {
     setEpisodes([]);
@@ -91,7 +91,7 @@ const Episodes = () => {
   }, [page])
 
   React.useEffect(() => {
-    getRequest(`anime/${id}/episodes?page=${page}`)
+    getRequest(`anime/${animeId}/episodes?page=${page}`)
       .then(({ data }) => {
         setEpisodes(data.data);
         setLoading(false);
@@ -143,7 +143,7 @@ const Episodes = () => {
           <Thead />
 
           {episodes && episodes.sort((a, b) => b.mal_id - a.mal_id).map(({ mal_id, title, aired, score }, key) => {
-            return <Ep mal_id={mal_id} title={title} aired={aired} score={score} key={key} />
+            return <Ep mal_id={mal_id} title={title} aired={aired} score={score} key={key} animeId={animeId} slug={slug} />
           })}
         </div>
 
