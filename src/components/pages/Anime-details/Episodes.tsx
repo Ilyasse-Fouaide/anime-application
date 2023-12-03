@@ -9,9 +9,26 @@ import { IoIosPlay } from '@react-icons/all-files/io/IoIosPlay';
 import { Episode } from '../../Types/types';
 import SkeletonEpisodes from '../../Skeleton/SkeletonEpisodes';
 
+function Thead() {
+  return (
+    <div className='my-2 py-2 px-5 flex items-center text-zinc-400 divide-x divide-zinc-500 bg-zinc-900 cursor-pointer border-b border-b-zinc-500'>
+      <div className='pr-5 text-xs sm:text-sm w-[55px] flex items-center justify-center'>EP</div>
+      <div className='px-5 w-full flex-grow flex items-center'>
+        <h3 className='text-xs sm:text-sm md:text-base'>
+          Title
+        </h3>
+      </div>
+      <div className='w-[150px] hidden flex-shrink-0 sm:block px-5 text-[13px] md:flex items-center justify-center'>
+        <span>Aired</span>
+      </div>
+      <div className='w-[90px] hidden flex-shrink-0 px-5 sm:flex items-center justify-center space-x-2'>Score</div>
+    </div>
+  )
+}
+
 function Ep({ mal_id, title, aired, score, }: Episode) {
   return (
-    <Link to={`/episode/${mal_id}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 even:bg-zinc-950 odd:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
+    <Link to={`/episode/${mal_id}`} className='my-2 py-2 px-5 flex items-center text-white divide-x divide-zinc-500 odd:bg-zinc-950 even:bg-zinc-900 cursor-pointer hover:bg-zinc-800'>
       <div className='pr-5 text-xs sm:text-sm font-semibold w-[55px] flex items-center justify-center'>{mal_id}</div>
       <div className='px-5 w-full flex-grow flex items-center'>
         <div className='mr-2 flex items-center justify-center w-[16px] h-[16px] bg-[var(--red)] rounded-full'>
@@ -102,6 +119,8 @@ const Episodes = () => {
           <div className='mb-6'>
             <h3 className='text-white text-lg font-semibold'>Episodes</h3>
           </div>
+
+          <Thead />
 
           {episodes && episodes.sort((a, b) => b.mal_id - a.mal_id).map(({ mal_id, title, aired, score }, key) => {
             return <Ep mal_id={mal_id} title={title} aired={aired} score={score} key={key} />
