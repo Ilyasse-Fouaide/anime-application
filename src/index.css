@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'node_modules/react-modal-video/scss/modal-video.scss';
-
 :root {
   /* --red: #DD4854 */
   --red: #E06100
