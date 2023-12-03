@@ -40,6 +40,7 @@ export interface AnimeData extends Trailer, CardTypes {
   status: string,
   title_japanese: string
   favorites: number
+  rank: number
   producers: {
     name: string
   }[],
