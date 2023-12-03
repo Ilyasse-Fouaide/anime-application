@@ -31,26 +31,38 @@ function PlayIcon({ className }: { className: string }) {
 }
 
 function Trailer({ animeDetail, title }: { animeDetail: any, title: string | undefined }) {
-  const [isOpen, setOpen] = React.useState(false);
 
-  React.useLayoutEffect(() => {
+
+  const handleOpenClick = () => {
+    const dialog: HTMLDialogElement = document.getElementById("modal");
     const body = document.querySelector("body");
 
-    if (isOpen) {
-      body?.classList.add("overflow-hidden")
-    } else {
-      body?.classList.remove("overflow-hidden")
+    dialog?.showModal();
+    body?.classList.add("overflow-hidden")
+  }
+
+  const handleCloseClick = () => {
+    const dialog: HTMLDialogElement = document.getElementById("modal");
+    const body = document.querySelector("body");
+
+    dialog?.close();
+    body?.classList.remove("overflow-hidden")
+  }
+
+  const dialogClick = (event) => {
+    const dialog: HTMLDialogElement = document.getElementById("modal");
+
+    var rect = dialog.getBoundingClientRect();
+    var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+      dialog.close();
     }
-
-  }, [isOpen])
-
-  const handleClick = () => {
-    setOpen(false);
   }
 
   return (
     <>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOpen &&
           <>
             <div className='z-40 fixed inset-0 w-full h-[100vh] bg-black/70'></div>
@@ -60,20 +72,14 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <motion.div className='relative w-full h-full'>
-                <iframe className='w-full h-full' src={animeDetail.trailer.embed_url} frameBorder="0" allowFullScreen></iframe>
-                <div className='w-[36px] h-[36px] absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-[var(--red)] rounded-full flex items-center justify-center cursor-pointer' onClick={handleClick}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[26px] h-[26px] text-black">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-              </motion.div>
+              
             </motion.div>
           </>
         }
-      </AnimatePresence >
+      </AnimatePresence > */}
+
       <div className='hidden min-[850px]:block w-[300px]'>
-        <div className='w-[300px] aspect-video bg-zinc-800' onClick={() => setOpen(true)}>
+        <div className='w-[300px] aspect-video bg-zinc-800' onClick={handleOpenClick}>
           {/* Image Trailer */}
           <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
             <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
@@ -82,6 +88,18 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
             </div>
           </div>
         </div>
+
+        <dialog id='modal' className='relative w-[800px] aspect-video bg-zinc-800 overflow-hidden dialog' onClick={(event) => dialogClick(event)}>
+          <motion.div className='w-full h-full'>
+            <iframe className='w-full h-full' src={animeDetail.trailer.embed_url} frameBorder="0" allowFullScreen></iframe>
+          </motion.div>
+          <div className='z-50 w-[36px] h-[36px] absolute top-0 right-0 bg-[var(--red)] rounded-bl-full flex items-center justify-center cursor-pointer' onClick={handleCloseClick}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="-mt-1 -mr-1 w-[24px] h-[24px] text-black">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+        </dialog>
+
         {/* Extra Info */}
         {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
               <li className='text-zinc-200 font-medium text-sm my-1'>Ranked <span className='text-white font-semibold'>#{animeDetail?.rank}</span></li>

@@ -46,6 +46,16 @@ a.active {
   @apply cursor-pointer text-zinc-300 text-xs
 }
 
+.dialog {
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+}
+
+.dialog::backdrop {
+  @apply bg-black/70
+}
+
 @media (min-width: 1024px) {
   .hidden-bg {
     background-image: none
