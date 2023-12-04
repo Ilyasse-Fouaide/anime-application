@@ -77,11 +77,12 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
           {/* Image Trailer */}
           <div className='relative w-full h-full rounded-md overflow-hidden cursor-pointer'>
             <img src={animeDetail?.trailer?.images?.small_image_url} alt={title} className='w-full h-full object-cover object-center pointer-events-none' loading='lazy' />
-            <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
+            <div className='z-10 flex items-center justify-center rounded-full w-16 h-16 bg-black/60 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2'>
               <PlayIcon className='w-10 h-10 text-white -mr-1' />
             </div>
           </div>
         </div>
+        <button className='mt-4 py-2 bg-[var(--red)] text-zinc-950 text-sm uppercase font-semibold text-center cursor-pointer'>See More info</button>
 
         {/* Extra Info */}
         {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
