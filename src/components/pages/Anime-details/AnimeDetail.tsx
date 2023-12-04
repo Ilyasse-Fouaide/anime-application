@@ -40,9 +40,7 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
   }
 
   const handleCloseClick = () => {
-    const body = document.querySelector("body");
     setIsOpen(false);
-    body?.classList.remove("overflow-hidden")
   }
 
   return (
@@ -207,7 +205,7 @@ function AnimeDetail() {
 
       <div className='max-w-5xl mx-auto p-6'>
         <div className='flex'>
-          <div className='w-full mr-5'>
+          <div className='w-full mr-0 min-[850px]:mr-5'>
             <h1 className='max-w-xl text-[1.5rem] md:text-[30px] text-white font-[500] leading-8 md:leading-9' data-tooltip-id="my-tooltip" data-tooltip-content={`${animeDetail?.title}`}>{sliceText(animeDetail?.title!, 50)}</h1>
             {animeDetail?.title.length! >= 50 &&
               <Tooltip id="my-tooltip" place='bottom' />
@@ -218,7 +216,7 @@ function AnimeDetail() {
               <h2 className='text-zinc-50'>{animeDetail?.title_japanese}</h2>
             </div>
 
-            <div id='scrollto' className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
+            <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
               <div className='flex items-center space-x-2'>
                 <span>{animeDetail?.score ? animeDetail?.score : "N/A"}</span>
                 <IoStar className="cursor-pointer" />
