@@ -61,11 +61,11 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
                 <motion.div className='w-full h-full'>
                   <iframe className='w-full h-full' src={animeDetail.trailer.embed_url} frameBorder="0" allowFullScreen></iframe>
                 </motion.div>
-                <div className='z-50 w-[36px] h-[36px] absolute top-0 -translate-y-1/2 right-0 translate-x-1/2 bg-[var(--red)] rounded-full flex items-center justify-center cursor-pointer' onClick={handleCloseClick}>
+                <button className='z-50 w-[36px] h-[36px] absolute top-0 -translate-y-1/2 right-0 translate-x-1/2 bg-[var(--red)] rounded-full flex items-center justify-center cursor-pointer' onClick={handleCloseClick}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[26px] h-[26px] text-black">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                </div>
+                </button>
               </motion.div>
             </motion.div>
           </>
@@ -82,7 +82,7 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
             </div>
           </div>
         </div>
-        <button className='mt-4 py-2 bg-[var(--red)] text-zinc-950 text-sm uppercase font-semibold text-center cursor-pointer'>See More info</button>
+        <button className='w-full mt-4 py-2 bg-[var(--red)] text-zinc-950 text-sm uppercase font-semibold text-center cursor-pointer'>See More info</button>
 
         {/* Extra Info */}
         {/* <ul className='mt-3 px-2 py-1 w-full border-b border-b-zinc-700'>
@@ -123,7 +123,11 @@ function Decription({ animeDetail }: any) {
   const [detail, setDetail] = React.useState(true);
 
   const handleClick = () => {
+    const scroll = document.getElementById("scrollto");
     setDetail(!detail)
+    if (!detail) {
+      scroll?.scrollIntoView()
+    }
   }
 
   return (
@@ -136,9 +140,9 @@ function Decription({ animeDetail }: any) {
             </div>
             {detail && <div className='absolute bottom-0 w-full h-[50px] bg-gradient-to-t from-zinc-950'></div>}
           </div>
-          <div className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
+          <button className='mt-4 w-fit text-xs font-semibold text-zinc-400 hover:text-zinc-100 cursor-pointer transition-colors' onClick={handleClick}>
             {detail ? "MORE" : "LESS"}
-          </div>
+          </button>
         </>
         :
         <div className='mt-6 text-zinc-50 text-sm font-medium'>{animeDetail?.synopsis.split('\n').map((el: string, key: number) => <p className='my-5' key={key}>{el}</p>)}</div>
@@ -214,7 +218,7 @@ function AnimeDetail() {
               <h2 className='text-zinc-50'>{animeDetail?.title_japanese}</h2>
             </div>
 
-            <div className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
+            <div id='scrollto' className='flex items-center space-x-3 text-[13px] md:text-[15px] font-medium text-zinc-50'>
               <div className='flex items-center space-x-2'>
                 <span>{animeDetail?.score ? animeDetail?.score : "N/A"}</span>
                 <IoStar className="cursor-pointer" />
