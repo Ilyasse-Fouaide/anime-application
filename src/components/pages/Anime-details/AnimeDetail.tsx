@@ -40,7 +40,9 @@ function Trailer({ animeDetail, title }: { animeDetail: any, title: string | und
   }
 
   const handleCloseClick = () => {
+    const body = document.querySelector("body");
     setIsOpen(false);
+    body?.classList.remove("overflow-hidden")
   }
 
   return (

@@ -116,7 +116,9 @@ const Episodes = () => {
   const handlePageClick = (key: number) => {
     const episode = document.getElementById("episode");
     setPage(key);
-    episode?.scrollIntoView({ behavior: "smooth" });
+    if (!more) {
+      episode?.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   function delayClick(key: number) {
